@@ -1,0 +1,74 @@
+.layout-fixed .main-sidebar{
+    right: 0;
+}
+
+body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header{
+    margin-left: 0;
+    margin-right: 250px;
+    transition: margin-right .3s ease-in-out;
+}
+
+.sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer, .sidebar-mini.sidebar-collapse .main-header{
+    margin-left: 0 !important;
+    margin-right: 4.6rem !important;
+}
+
+.control-sidebar, .control-sidebar::before {
+    left: -250px;
+}
+
+.control-sidebar-slide-open .control-sidebar, .control-sidebar-slide-open .control-sidebar::before {
+    right: auto;
+    left: 0 ;
+    transition: left .3s ease-in-out,display .3s ease-in-out;
+}
+
+.small-box .icon > i{
+    right: auto;
+    left: 15px;
+}
+
+.nav-sidebar .nav-link > .right, .nav-sidebar .nav-link > p > .right{
+    right: auto;
+    left: 1rem;
+}
+
+.nav-sidebar .nav-link > .right:nth-child(2), .nav-sidebar .nav-link > p > .right:nth-child(2){
+    right: auto;
+}
+
+.user-panel .image{
+    padding-left:  0.2rem;
+    padding-right: 0.8rem;
+}
+
+.sidebar-mini.sidebar-collapse .main-sidebar.sidebar-focused .brand-image, .sidebar-mini.sidebar-collapse .main-sidebar:hover .brand-image {
+    margin-right: .8rem;
+}
+
+.brand-link .brand-image{
+    float: none;
+    margin-left: .5rem;
+    margin-right: .8rem;
+}
+
+.nav-sidebar > .nav-item .nav-icon{
+    margin-right: 0;
+    margin-left: 0.2rem;
+}
+
+.dropdown-item .media img{
+    margin-right: 0 !important;
+}
+
+.sidebar-menu .pull-right{
+    display: none;
+}
+
+.nav-sidebar .menu-open>.nav-link i.right{
+    transform: rotate(90deg);
+}
+
+.card .card-header .card-title {
+    float: right;
+}

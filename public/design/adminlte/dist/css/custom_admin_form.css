@@ -1,0 +1,132 @@
+.login-box{
+    width: 380px;
+}
+
+.auth-background .login-box-body {
+    border: 1px solid #ddd;
+}
+
+.login-logo a img {
+    height: 70px;
+}
+
+.login-box .login-box-body {
+    background-color: #fff;
+    padding: 30px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.login-box .login-box-body button[type="submit"] {
+    border-radius: 5px;
+}
+.login-box .login-box-body .forget,.login-box .login-box-body .signin{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.login-box .login-box-body .register {
+    display: block;
+    text-align: center;
+    margin: 25px 0 0;
+    color: #000;
+    opacity: 0.4;
+}
+
+.login-box .login-box-body .register:hover {
+    opacity: 1;
+}
+
+.input-group{
+    position: relative;
+}
+
+.input-group label {
+    position: absolute;
+    top: 6px;
+    left: 9px;
+    padding: 0px 6px;
+    background-color: #fff;
+    color: #999;
+    font-weight: 300 !important;
+    z-index: 3;
+    cursor: text;
+    transition: all 0.15s ease-in-out;
+}
+
+.input-group input{
+    border-radius: 5px;
+}
+
+.input-group input:focus ~ label {
+    top: -9px;
+    font-size: 12px;
+    font-weight: 300;
+    color: #3c8dbc;
+}
+
+/* class added by jquery for filled input*/
+.input-group .filled ~ label {
+    top: -9px;
+    font-size: 12px;
+    font-weight: 300;
+}
+
+
+.input-group label ~ .form-control-feedback{
+    top: 0;
+}
+
+.hr-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 15px 0;
+}
+
+.hr-container hr {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(191, 191, 191);
+    border-image: initial;
+}
+
+.hr-container label {
+    position: absolute;
+    top: 3px;
+    right: calc(50% - 17px);
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgb(255, 255, 255);
+    color: rgb(173, 173, 173);
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(191, 191, 191);
+    border-image: initial;
+    border-radius: 50%;
+    padding: 5px 9px;
+}
+
+.social .btn-face {
+    font-family: Raleway-Bold;
+    font-size: 16px;
+    line-height: 1.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #e6e6e6;
+    background-color: #3b5998;
+    color: #fff;
+}
+
+
+.social .btn-face i {
+    padding: 0 10px;
+}
