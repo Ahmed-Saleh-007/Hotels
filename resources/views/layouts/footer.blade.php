@@ -81,9 +81,10 @@
 				});
 			 }
 			 
-			$(document).on('click', '.del_all', function () {
-				$('#delete_all').submit();
-			});
+			// $(document).on('click', '.del_all', function () {
+			// 	$('#delete_all').submit();
+			// });
+            
 			$(document).on('click', '.delBtn', function () {
 				var item_checked = $('input.item_checkbox').filter(':checked').length;
 				if (item_checked > 0) {

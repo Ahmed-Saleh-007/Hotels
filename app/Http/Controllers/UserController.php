@@ -108,8 +108,7 @@ class UserController extends Controller
     public function destroyAll()
     {
         User::destroy(request('item'));
-		session()->flash('success', trans('admin.deleted_record'));
-		return redirect(route('users.index'));
+		return response()->json(['success' => trans('admin.deleted_record')]);
     }
 
 }

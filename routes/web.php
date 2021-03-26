@@ -25,7 +25,7 @@ Route::put('/users/{user}',[UserController::class, 'update'])->name('users.updat
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 // Route::post('/posts/{post}/restore',[PostController::class, 'restore'])->name('posts.restore');
 // Route::get('/posts/ajax/show', [PostController::class, 'ajaxShow'])->name('posts.ajax.show');
-Route::delete('/users/dstroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
+Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
 
 Route::get('/', function () {
     return view('index');
