@@ -23,11 +23,6 @@
                         <div class="info">
                             <a href="#" class="d-block">
                                 Admin
-                                {{-- @if (lang() == 'en')
-                                {{ admin()->user()->name_en }}
-                                @else
-                                {{ admin()->user()->name_ar }}
-                                @endif --}}
                             </a>
                         </div>
                     </div>
@@ -87,6 +82,13 @@
                                 <a href="{{ route('roles.index') }}" class="nav-link">
                                     <i class="nav-icon far fa-circle text-danger"></i>
                                     <p>{{ trans('admin.roles') }}</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route('permissions.index') }}" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-warning"></i>
+                                    <p>{{ trans('admin.permissions') }}</p>
                                 </a>
                             </li>
 

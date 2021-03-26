@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,7 @@ Route::post('/users',[UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
 
 //=====================================Routes of Roles==============================================//
 Route::get('/roles',               [RoleController::class, 'index'])     ->name('roles.index');     //
@@ -30,8 +32,21 @@ Route::post('/roles',              [RoleController::class, 'store'])     ->name(
 Route::get('/roles/{role}/edit',   [RoleController::class, 'edit'])      ->name('roles.edit');      //
 Route::put('/roles/{role}',        [RoleController::class, 'update'])    ->name('roles.update');    //
 Route::delete('/roles/{role}',     [RoleController::class, 'destroy'])   ->name('roles.destroy');   //
-Route::delete('/roles/dstroy/all', [RoleController::class, 'destroyAll'])->name('roles.destroyAll');//
+Route::delete('/roles/destroy/all', [RoleController::class, 'destroyAll'])->name('roles.destroyAll');//
 //==================================================================================================//
+
+
+//===========================================Routes of Permissions====================================================//
+Route::get('/permissions',               [PermissionController::class, 'index'])     ->name('permissions.index');     //
+Route::get('/permissions/{permission}',        [PermissionController::class, 'show'])      ->name('permissions.show');      //
+Route::post('/permissions',              [PermissionController::class, 'store'])     ->name('permissions.store');     //
+Route::get('/permissions/{permission}/edit',   [PermissionController::class, 'edit'])      ->name('permissions.edit');      //
+Route::put('/permissions/{permission}',        [PermissionController::class, 'update'])    ->name('permissions.update');    //
+Route::delete('/permissions/{permission}',     [PermissionController::class, 'destroy'])   ->name('permissions.destroy');   //
+Route::delete('/permissions/destroy/all', [PermissionController::class, 'destroyAll'])->name('permissions.destroyAll');//
+//====================================================================================================================//
+
+
 
 Route::get('/', function () {
     return view('index');
@@ -42,16 +57,6 @@ Route::get('lang/{lang}', function ($lang) {
     $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');
     return back();
 });
-
-
-// Route::get('/add-permission', function(){
-
-//     Permission::create(['name' => 'add post']);
-
-//     dd('permission added');
-
-
-// });
 
 
 Auth::routes();

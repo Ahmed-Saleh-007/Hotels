@@ -3,13 +3,12 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="card-title">Role Control</div>
+        <div class="card-title">Permission Control</div>
     </div>
     <div class="card-body">
         {!! $dataTable->table(['class' => 'dataTable table table-striped table-hover table-bordered'], true) !!}
     </div>
 </div>
-
 
 <!--
     create modal view using by ajax
@@ -20,7 +19,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Create Role</h4>
+          <h4 class="modal-title">Create Permission</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_create_content">
@@ -32,7 +31,7 @@
               <input type="text" name="name" class="form-control" id="name">
             </div>
            
-            <button class="btn btn-success" id="create" >Create Role</button>
+            <button class="btn btn-success" id="create" >Create Permission</button>
         </div>
       </div>
     </div>
@@ -47,7 +46,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">View Role</h4>
+          <h4 class="modal-title">View Permission</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_view_content">
@@ -66,7 +65,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit Role</h4>
+          <h4 class="modal-title">Edit Permission</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_edit_content">
@@ -85,14 +84,14 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Delete Role</h4>
+          <h4 class="modal-title">Delete Permission</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_delete_content">
             @csrf
             <h4 class="mb-3">{{ trans('admin.delete_this') }}</h4>
             <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
-            <button class="btn btn-danger" id="delete" >Delete Role</button>
+            <button class="btn btn-danger" id="delete" >Delete Permission</button>
           </div>
       </div>
     </div>
@@ -124,7 +123,7 @@
                 </div>
                 <div class="not_empty_record hidden">
                     @csrf
-                    <button type="button"         class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
                     <button class="btn btn-danger" id="ajax_delete_all" >{{ trans('admin.yes') }}</button>
                 </div>
             </div>
@@ -132,27 +131,11 @@
     </div>
 </div>
 
-
-
 @push('js')
 
 {!! $dataTable->scripts() !!}
 
 <script>
-
-    /*
-        How ajax work using jQuery
-
-        $.ajax({
-            url:  '',                                   // put you route here
-            type: 'get',                                // put your method get, post, put, delete
-            data: {},                                   // put your data that will send with request
-            success: function (data) {}                 // data from response if request success 2**
-            error: function (data) {}                   // error from response if request failed 4**, 5**
-        });
-
-    */
-
 
     ///////////////////////////
     // Ajax handler for store//
@@ -165,7 +148,7 @@
 
         $(document).on('click', '#ajax_create_content #create', function () {
             $.ajax({
-                url:  '{{route('roles.store')}}',
+                url:  '{{route('permissions.store')}}',
                 type: 'post',
                 data: {
                     _token:     $('#ajax_create_content [name=_token]').val(),
@@ -199,7 +182,7 @@
       $(document).on('click', '.show-ajax', function () {
         console.log($(this).data('ajax'));
         $.ajax({
-            url:  '{{url("")}}/roles/' + $(this).data('ajax'),
+            url:  '{{url("")}}/permissions/' + $(this).data('ajax'),
             type: 'get',
             success: function (data) {
               $('#ajax_view_content').html(data);
@@ -217,7 +200,7 @@
       $(document).on('click', '.edit-ajax', function () {
         console.log($(this).data('ajax'));
         $.ajax({
-            url:  '{{ url("") }}/roles/' + $(this).data('ajax') + '/edit',
+            url:  '{{ url("") }}/permissions/' + $(this).data('ajax') + '/edit',
             type: 'get',
             success: function (data) {
               $('#ajax_edit_content').html(data);
@@ -232,7 +215,7 @@
 
       $(document).on('click', '#ajax_edit_content #save', function () {
             $.ajax({
-                url:  '{{ url("") }}/roles/' + $('#ajax_edit_content #id').val(),
+                url:  '{{ url("") }}/permissions/' + $('#ajax_edit_content #id').val(),
                 type: 'put',
                 data: {
                     _token:     $('#ajax_edit_content [name=_token]').val(),
@@ -271,7 +254,7 @@
         });
         $(document).on('click', '#ajax_delete_content #delete', function () {
             $.ajax({
-                url:  '{{url("")}}/roles/' + _id,
+                url:  '{{url("")}}/permissions/' + _id,
                 type: 'delete',
                 data: {
                     _token: $('#ajax_delete_content [name=_token]').val(),
@@ -284,10 +267,9 @@
         });
     });
 
-
-    //============================//
-    //Ajax handler for delete all//
-    //===========================//
+    ////////////////////////////////
+    // Ajax handler for delete all//
+    ////////////////////////////////
     
     $(document).ready(function () {
         $(document).on('click', '#ajax_delete_all', function () {
@@ -296,7 +278,7 @@
                 items.push($(this).val());
             });
             $.ajax({
-                url:  '{{route('roles.destroyAll')}}',
+                url:  '{{route('permissions.destroyAll')}}',
                 type: 'delete',
                 data: {
                     _token: $('#mutlipleDelete [name=_token]').val(),

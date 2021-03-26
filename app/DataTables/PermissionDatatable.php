@@ -2,10 +2,10 @@
 
 namespace App\DataTables;
 
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Services\DataTable;
 
-class RoleDatatable extends DataTable
+class PermissionDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -32,7 +32,7 @@ class RoleDatatable extends DataTable
      */
     public function query()
     {
-        return Role::query();
+        return Permission::query();
     }
 
     /**
@@ -83,7 +83,6 @@ class RoleDatatable extends DataTable
      */
     protected function getColumns()
     {
-
         return [
             [
 				'name'          => 'checkbox',
@@ -129,6 +128,6 @@ class RoleDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'Role_' . date('YmdHis');
+        return 'Permission_' . date('YmdHis');
     }
 }

@@ -68,4 +68,6 @@ return [
     'Home'							=> 'Home',
 	'question_mark'                 => '?',
 	'roles'                 		=> 'Roles',
+	'permissions'                   => 'Permissions',
+	'date'	                        => 'Date',
 ];

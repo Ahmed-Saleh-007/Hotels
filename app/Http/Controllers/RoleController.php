@@ -66,8 +66,7 @@ class RoleController extends Controller
     public function destroyAll()
     {
         Role::destroy(request('item'));
-		session()->flash('success', trans('admin.deleted_record'));
-		return redirect(route('users.index'));
+		return response()->json(['success' => trans('admin.deleted_record')]);
 
     }//end of delete multi-roles
 

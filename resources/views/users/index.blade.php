@@ -308,7 +308,7 @@
     ////////////////////////////////
     // Ajax handler for delete all//
     ////////////////////////////////
-
+    
     $(document).ready(function () {
         $(document).on('click', '#ajax_delete_all', function () {
             var items = [];
