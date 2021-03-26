@@ -22,13 +22,6 @@ Route::post('/users',[UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-<<<<<<< HEAD
-Route::delete('/users/dstroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
-=======
-// Route::post('/posts/{post}/restore',[PostController::class, 'restore'])->name('posts.restore');
-// Route::get('/posts/ajax/show', [PostController::class, 'ajaxShow'])->name('posts.ajax.show');
-Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
->>>>>>> 4931a7c7125fcd7a748bc01843ef908b60aae8dc
 
 //=====================================Routes of Roles==============================================//
 Route::get('/roles',               [RoleController::class, 'index'])     ->name('roles.index');     //
