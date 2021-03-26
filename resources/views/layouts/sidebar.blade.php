@@ -71,14 +71,23 @@
                                         @endif
                                     </p>
                                 </a>
+
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="" class="nav-link">
+                                        <a href="{{ route('users.index') }}" class="nav-link">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>{{ trans('admin.users_account') }}</p>
                                         </a>
                                     </li>
                                 </ul>
+                            </li>
+
+
+                            <li class="nav-item">
+                                <a href="{{ route('roles.index') }}" class="nav-link">
+                                    <i class="nav-icon far fa-circle text-danger"></i>
+                                    <p>{{ trans('admin.roles') }}</p>
+                                </a>
                             </li>
 
                         </ul>

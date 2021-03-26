@@ -66,4 +66,6 @@ return [
 	'delete_this'                  	=> 'Do you want to delete this record ?',
     'sitename'                  	=> 'Hotels',
     'Home'							=> 'Home',
+	'question_mark'                 => '?',
+	'roles'                 		=> 'Roles',
 ];
