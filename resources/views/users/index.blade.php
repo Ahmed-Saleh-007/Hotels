@@ -513,16 +513,12 @@
     $(document).ready(function(){  
 
 
-        $(document).on('submit', '#ajax_edit_content #update_form', function(event){
-
+        $(document).on('submit', '#update_form', function(event){
 
             event.preventDefault(); 
-            console.log(new FormData(this));
-
             
-            alert('test clicked btn');
-            
-            alert('test');
+            dst = new FormData(this);
+            alert(dst.name);
 
             $.ajax({
                 url: '{{url("")}}/users/' + $('#ajax_edit_content #id').val(),

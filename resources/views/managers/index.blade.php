@@ -489,8 +489,8 @@
 
         $(document).on('submit', '#ajax_edit_content #update_form', function(event){
 
-
             event.preventDefault(); 
+
             console.log(new FormData(this));
 
             $.ajax({

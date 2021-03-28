@@ -17,14 +17,13 @@
 
 <form  id="update_form" class="form-horizontal" enctype="multipart/form-data">
     
-@csrf
+    @csrf
     
-
     <input type="text" name="id" class="hidden" id="id" value="{{$user->id}}">
 
     <div class="form-group">
-    <label for="name">Name</label>
-    <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}">
+        <label for="name">Name</label>
+        <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}">
     </div>
 
     <div class="form-group">

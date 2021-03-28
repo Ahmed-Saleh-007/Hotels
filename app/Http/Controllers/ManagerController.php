@@ -108,12 +108,12 @@ class ManagerController extends Controller
 
         dd($request->all());
 
-        $data = $request->validate([
+        // $data = $request->validate([
 
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users,email,'. $user->id,
-            'password' => 'sometimes|nullable|min:8',
-        ]);
+        //     'name'     => 'required',
+        //     'email'    => 'required|email|unique:users,email,'. $user->id,
+        //     'password' => 'sometimes|nullable|min:8',
+        // ]);
 
 
         //delete old image of post if exist

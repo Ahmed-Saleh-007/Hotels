@@ -95,18 +95,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
 
-        dd($request->all());
-
-        $data = $request->validate([
-
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users,email,'. $user->id,
-            'password' => 'sometimes|nullable|min:8',
-        ]);
-
+        dd(request()->all());
 
         //delete old image of post if exist
         if(!empty($user->avatar_image) && $user->avatar_image != 'avatar.png'){
