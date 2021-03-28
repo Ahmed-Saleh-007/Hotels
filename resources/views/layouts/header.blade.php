@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>@lang('admin.sitename')</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -62,6 +63,10 @@
         <!-- jstree -->
 		<link rel="stylesheet" href="{{ url('/') }}/design/adminlte/jstree/themes/default/style.css">
         
+        <!-- multi-choose checkbox  -->
+		<link rel="stylesheet" href="{{ url('/') }}/design/adminlte/dist/css/checkbox/vanillaSelectBox.css">
+
+
         <style>
             .hidden { display: none; }
 			.dataTable {width: 100% !important; }

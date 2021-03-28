@@ -70,10 +70,32 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         <a href="{{ route('users.index') }}" class="nav-link">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{ trans('admin.users_account') }}</p>
+                                            <i class="nav-icon fas fa-users text-success"></i>
+                                            <p>{{ trans('admin.all_users') }}</p>
                                         </a>
                                     </li>
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('managers.index') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-users text-warning"></i>
+                                            <p>{{ trans('admin.managers') }}</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('receptionists.index') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-users text-info"></i>
+                                            <p>{{ trans('admin.receptionists') }}</p>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a href="{{ route('clients.index') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-users text-default"></i>
+                                            <p>{{ trans('admin.clients') }}</p>
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </li>
 
@@ -91,6 +113,10 @@
                                     <p>{{ trans('admin.permissions') }}</p>
                                 </a>
                             </li>
+
+
+
+
 
                         </ul>
                     </nav>

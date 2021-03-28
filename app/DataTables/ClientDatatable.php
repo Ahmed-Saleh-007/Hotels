@@ -5,7 +5,7 @@ namespace App\DataTables;
 use App\Models\User;
 use Yajra\DataTables\Services\DataTable;
 
-class UserDatatable extends DataTable
+class ClientDatatable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -34,7 +34,7 @@ class UserDatatable extends DataTable
      */
     public function query()
     {
-        return User::query();
+        return User::query()->where('level', 'client');
     }
 
     /**
@@ -47,8 +47,6 @@ class UserDatatable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->addAction(['width' => '80px'])
-                    //->parameters($this->getBuilderParameters());
                     ->parameters([
                         'dom'        => 'Blfrtip',
                         'lengthMenu' => [[10, 25, 50, 100], [10, 25, 50, 100]],
@@ -95,11 +93,7 @@ class UserDatatable extends DataTable
 				'printable'     => false,
 				'orderable'     => false,
                 'searchable'    => false,
-			], [
-				'name'  => 'id',
-				'data'  => 'id',
-				'title' => trans('admin.id'),
-			], 
+			],  
             [
 				'name'  => 'name',
 				'data'  => 'name',
@@ -115,11 +109,6 @@ class UserDatatable extends DataTable
 				'data'  => 'gender',
 				'title' => trans('admin.gender'),
 			], 
-            [
-				'name'  => 'level',
-				'data'  => 'level',
-				'title' => trans('admin.level'),
-			], 
 
             [
 				'name'  => 'country',
@@ -132,26 +121,7 @@ class UserDatatable extends DataTable
 				'data'  => 'email',
 				'title' => trans('admin.email'),
 			],
-
-            [
-				'name'       => 'avatar_image',
-				'data'       => 'avatar_image',
-				'title'      => trans('admin.avatar_image'),
-				'exportable' => false,
-				'printable'  => false,
-				'orderable'  => false,
-				'searchable' => false,
-			],
-            
-            [
-				'name'  => 'created_at',
-				'data'  => 'created_at',
-				'title' => trans('admin.created_at'),
-			], [
-				'name'  => 'updated_at',
-				'data'  => 'updated_at',
-				'title' => trans('admin.updated_at'),
-			], [
+             [
 				'name'       => 'actions',
 				'data'       => 'actions',
 				'title'      => trans('admin.actions'),
@@ -171,6 +141,6 @@ class UserDatatable extends DataTable
      */
     protected function filename()
     {
-        return 'User_' . date('YmdHis');
+        return 'Client_' . date('YmdHis');
     }
 }

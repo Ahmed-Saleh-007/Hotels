@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\DataTables\PermissionDatatable;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class PermissionController extends Controller
 {
@@ -17,12 +18,25 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
-
+        
         $data = request()->validate([
             'name'     => 'required',
         ]);
 
-        Permission::create($data);
+        $permission = Permission::create($data);
+        
+        if(is_array($request->role_id) && !empty($request->role_id)){
+
+
+            foreach($request->role_id as $roleId){
+
+                $role = Role::find($roleId);
+                $role->givePermissionTo($permission);
+
+            }
+
+            
+        }
 
         return response()->json(['success' => trans('admin.record_added')]);
 
@@ -44,6 +58,9 @@ class PermissionController extends Controller
 
     public function update(Request $request, Permission $permission)
     {
+
+        dd($request->all());
+
         $data = $request->validate([
 
             'name'     => 'required',

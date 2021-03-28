@@ -1,0 +1,1 @@
+<img src="{{ url('storage/users_images/'. $avatar_image) }}" width="80" style="height: 45px" class="img-thumbnail" alt="user image">

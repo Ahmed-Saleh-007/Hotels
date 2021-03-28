@@ -70,6 +70,11 @@
         <script src="{{ url('design/adminlte/jstree/jstree.js') }}"></script>
 		<script src="{{ url('design/adminlte/jstree/jstree.wholerow.js') }}"></script>
 		<script src="{{ url('design/adminlte/jstree/jstree.checkbox.js') }}"></script>
+
+        <!-- multi-select box -->
+		<script src="{{ url('design/adminlte/dist/js/checkbox/vanillaSelectBox.js') }}"></script>
+        
+
         <script>
             function check_all() { 
 				$('input.item_checkbox').each(function () { 
@@ -153,7 +158,26 @@
             $("#imageUpload").change(function() {
                 readURL(this);
             });
+
+
+            //select multi roles 
+            $(document).ready(function () {
+                let mySelect = new vanillaSelectBox("#role_id",{
+
+                    search: true,
+                    placeHolder: "select role",
+                    stayOpen: false,
+                    maxWidth: 500,
+                    maxHeight: 400,
+                    minWidth: -1
+
+                });
+                
+            });
+
+            
         </script>
+
         @stack('js')
 
         @yield('footer')

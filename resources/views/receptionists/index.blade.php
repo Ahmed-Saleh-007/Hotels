@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="card-title">User Control</div>
+        <div class="card-title">Receptionists Control</div>
     </div>
     <div class="card-body">
         {!! $dataTable->table(['class' => 'dataTable table table-striped table-hover table-bordered'], true) !!}
@@ -20,7 +20,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Create User</h4>
+          <h4 class="modal-title">Create Receptionist</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_create_content">
@@ -52,7 +52,7 @@
             
             </div>
 
-            <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            {{-- <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
                 {!! Form::label('level' , trans('admin.level')) !!}
             
@@ -63,7 +63,7 @@
                 ]
                 ,old('level'),['class' => 'form-control', 'placeholder' => 'level']) !!}
             
-            </div>
+            </div> --}}
 
             <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
@@ -144,7 +144,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit User</h4>
+          <h4 class="modal-title">Edit Receptionist</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_edit_content">
@@ -164,14 +164,14 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Delete User</h4>
+          <h4 class="modal-title">Delete Receptionist</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_delete_content">
             @csrf
             <h4 class="mb-3">{{ trans('admin.delete_this') }}</h4>
             <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
-            <button class="btn btn-danger" id="delete" >Delete User</button>
+            <button class="btn btn-danger" id="delete" >Delete Receptionist</button>
           </div>
       </div>
     </div>
@@ -314,7 +314,7 @@
       $(document).on('click', '.show-ajax', function () {
         console.log($(this).data('ajax'));
         $.ajax({
-            url:  '{{url("")}}/users/' + $(this).data('ajax'),
+            url:  '{{url("")}}/receptionists/' + $(this).data('ajax'),
             type: 'get',
             //data: {user: $(this).data('ajax')},
             success: function (data) {
@@ -333,7 +333,7 @@
         $(document).on('click', '.edit-ajax', function () {
             console.log($(this).data('ajax'));
             $.ajax({
-                url:  '{{url("")}}/users/' + $(this).data('ajax') + '/edit',
+                url:  '{{url("")}}/receptionists/' + $(this).data('ajax') + '/edit',
                 type: 'get',
                 //data: {user: $(this).data('ajax')},
                 success: function (data) {
@@ -394,7 +394,7 @@
         });
         $(document).on('click', '#ajax_delete_content #delete', function () {
             $.ajax({
-                url:  '{{url("")}}/users/' + _id,
+                url:  '{{url("")}}/receptionists/' + _id,
                 type: 'delete',
                 data: {
                     _token: $('#ajax_delete_content [name=_token]').val(),
@@ -418,7 +418,7 @@
                 items.push($(this).val());
             });
             $.ajax({
-                url:  '{{route('users.destroyAll')}}',
+                url:  '{{route('receptionists.destroyAll')}}',
                 type: 'delete',
                 data: {
                     _token: $('#mutlipleDelete [name=_token]').val(),
@@ -467,7 +467,7 @@
             event.preventDefault();     
 
             $.ajax({
-                url:"{{route('users.store')}}",
+                url:"{{route('receptionists.store')}}",
                 method:"POST",
                 data: new FormData(this),
                 contentType: false,
@@ -519,13 +519,8 @@
             event.preventDefault(); 
             console.log(new FormData(this));
 
-            
-            alert('test clicked btn');
-            
-            alert('test');
-
             $.ajax({
-                url: '{{url("")}}/users/' + $('#ajax_edit_content #id').val(),
+                url: '{{url("")}}/receptionists/' + $('#ajax_edit_content #id').val(),
                 method:"put",
                 data: new FormData(this),
                 contentType: false,

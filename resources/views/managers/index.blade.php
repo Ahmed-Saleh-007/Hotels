@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        <div class="card-title">User Control</div>
+        <div class="card-title">Managers Control</div>
     </div>
     <div class="card-body">
         {!! $dataTable->table(['class' => 'dataTable table table-striped table-hover table-bordered'], true) !!}
@@ -20,7 +20,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Create User</h4>
+          <h4 class="modal-title">Create Manager</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_create_content">
@@ -49,19 +49,6 @@
                     'female'   => trans('admin.female')
                 ]
                 ,old('gender'),['class' => 'form-control', 'placeholder' => 'gender']) !!}
-            
-            </div>
-
-            <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
-
-                {!! Form::label('level' , trans('admin.level')) !!}
-            
-                {!! Form::select('level', [
-                    'manager'          => trans('admin.manager'),
-                    'receptionist'     => trans('admin.receptionist'),
-                    'client'           => trans('admin.client')
-                ]
-                ,old('level'),['class' => 'form-control', 'placeholder' => 'level']) !!}
             
             </div>
 
@@ -106,7 +93,7 @@
                 <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
               </div>
 
-            <button type="submit" class="btn btn-success" id="create_user" >Create User</button>
+            <button type="submit" class="btn btn-success" id="create_user" >Create Manager</button>
 
         </form>
         </div>
@@ -124,7 +111,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">View User</h4>
+          <h4 class="modal-title">View Manager</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_view_content">
@@ -144,7 +131,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edit User</h4>
+          <h4 class="modal-title">Edit Manager</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_edit_content">
@@ -164,14 +151,14 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Delete User</h4>
+          <h4 class="modal-title">Delete Manager</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
         <div class="modal-body" id="ajax_delete_content">
             @csrf
             <h4 class="mb-3">{{ trans('admin.delete_this') }}</h4>
             <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
-            <button class="btn btn-danger" id="delete" >Delete User</button>
+            <button class="btn btn-danger" id="delete" >Delete Manager</button>
           </div>
       </div>
     </div>
@@ -221,20 +208,7 @@
 
 <script>
 
-    /*
-        How ajax work using jQuery
-
-        $.ajax({
-            url:  '',                                   // put you route here
-            type: 'get',                                // put your method get, post, put, delete
-            data: {},                                   // put your data that will send with request
-            success: function (data) {}                 // data from response if request success 2**
-            error: function (data) {}                   // error from response if request failed 4**, 5**
-        });
-
-    */
-
-
+  
     ///////////////////////////
     // Ajax handler for store//
     ///////////////////////////
@@ -314,7 +288,7 @@
       $(document).on('click', '.show-ajax', function () {
         console.log($(this).data('ajax'));
         $.ajax({
-            url:  '{{url("")}}/users/' + $(this).data('ajax'),
+            url:  '{{url("")}}/managers/' + $(this).data('ajax'),
             type: 'get',
             //data: {user: $(this).data('ajax')},
             success: function (data) {
@@ -333,7 +307,7 @@
         $(document).on('click', '.edit-ajax', function () {
             console.log($(this).data('ajax'));
             $.ajax({
-                url:  '{{url("")}}/users/' + $(this).data('ajax') + '/edit',
+                url:  '{{url("")}}/managers/' + $(this).data('ajax') + '/edit',
                 type: 'get',
                 //data: {user: $(this).data('ajax')},
                 success: function (data) {
@@ -394,7 +368,7 @@
         });
         $(document).on('click', '#ajax_delete_content #delete', function () {
             $.ajax({
-                url:  '{{url("")}}/users/' + _id,
+                url:  '{{url("")}}/managers/' + _id,
                 type: 'delete',
                 data: {
                     _token: $('#ajax_delete_content [name=_token]').val(),
@@ -418,7 +392,7 @@
                 items.push($(this).val());
             });
             $.ajax({
-                url:  '{{route('users.destroyAll')}}',
+                url:  "{{ route('managers.destroyAll') }}",
                 type: 'delete',
                 data: {
                     _token: $('#mutlipleDelete [name=_token]').val(),
@@ -467,7 +441,7 @@
             event.preventDefault();     
 
             $.ajax({
-                url:"{{route('users.store')}}",
+                url:"{{route('managers.store')}}",
                 method:"POST",
                 data: new FormData(this),
                 contentType: false,
@@ -519,13 +493,8 @@
             event.preventDefault(); 
             console.log(new FormData(this));
 
-            
-            alert('test clicked btn');
-            
-            alert('test');
-
             $.ajax({
-                url: '{{url("")}}/users/' + $('#ajax_edit_content #id').val(),
+                url: '{{url("")}}/managers/' + $('#ajax_edit_content #id').val(),
                 method:"put",
                 data: new FormData(this),
                 contentType: false,

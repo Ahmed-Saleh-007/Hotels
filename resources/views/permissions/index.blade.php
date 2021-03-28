@@ -26,13 +26,25 @@
             <div id="ajax_create_errors"></div>
             @csrf
 
-            <div class="form-group">
+            <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
               <label for="name">name</label>
               <input type="text" name="name" class="form-control" id="name">
             </div>
+
+            <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
+
+                {!! Form::label('role_id' , trans('admin.role_id')) !!}
+
+                {!! Form::select('role_id', \Spatie\Permission\Models\Role::pluck('name','id'),1,['class' => 'form-control', 'multiple']) !!}
+
+            </div>
+            
            
             <button class="btn btn-success" id="create" >Create Permission</button>
-        </div>
+        </div>           
+            
+
+
       </div>
     </div>
 </div>
@@ -68,6 +80,7 @@
           <h4 class="modal-title">Edit Permission</h4>
           <button type="button" class="close" data-dismiss="modal">×</button>
         </div>
+
         <div class="modal-body" id="ajax_edit_content">
           
         </div>
@@ -153,10 +166,14 @@
                 data: {
                     _token:     $('#ajax_create_content [name=_token]').val(),
                     name:       $('#ajax_create_content #name').val(),
+                    role_id:       $('#ajax_create_content #role_id').val(),
                 },
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
                     $('#ajax_create_content #name').val('');
+                    $('#ajax_create_content #role_id').val('');
+                    let mySelected = new vanillaSelectBox("#role_id",{});
+                    mySelect.empty();
                     $('#ajax_create_content #ajax_create_errors').html('');
                 },
                 error: function (data) {
@@ -204,14 +221,15 @@
             type: 'get',
             success: function (data) {
               $('#ajax_edit_content').html(data);
+              
             }
         });
       });
 
 
-      //////////////////////////
-      // Ajax handler for save//
-      //////////////////////////
+      //========================//
+      // Ajax handler for update//
+      //========================//
 
       $(document).on('click', '#ajax_edit_content #save', function () {
             $.ajax({
@@ -220,10 +238,12 @@
                 data: {
                     _token:     $('#ajax_edit_content [name=_token]').val(),
                     name:       $('#ajax_edit_content #name').val(),
+                    role_id:    $('#ajax_create_content #role_id').val(),
                 },
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true})
                     $('#ajax_edit_content #name').val('')
+                    $('#ajax_edit_content #role_id').val('')
                     $('#ajax_edit_content #ajax_edit_errors').html('');
                     $('#ajax_edit').modal('toggle');
                 },
@@ -291,7 +311,6 @@
             });
         });
     });
-
 
 </script>
 

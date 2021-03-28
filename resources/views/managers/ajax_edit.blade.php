@@ -1,25 +1,9 @@
 <div id="ajax_edit_errors"></div>
-{{-- @csrf
-<input type="text" name="id" class="hidden" id="id" value="{{$user->id}}">
-<div class="form-group">
-    <label for="name">name</label>
-    <input type="text" name="name" class="form-control" id="name" value="{{$user->name}}">
-</div>
-<div class="form-group">
-    <label for="email">email</label>
-    <input type="text" name="email" class="form-control" id="email" value="{{$user->email}}">
-</div>
-<div class="form-group">
-    <label for="password">password</label>
-    <input type="password" name="password" class="form-control" id="password">
-</div>
-<button class="btn btn-success" id="save" >Save User</button> --}}
 
 <form  id="update_form" class="form-horizontal" enctype="multipart/form-data">
     
-@csrf
+    @csrf
     
-
     <input type="text" name="id" class="hidden" id="id" value="{{$user->id}}">
 
     <div class="form-group">
@@ -41,19 +25,6 @@
             'female'   => trans('admin.female')
         ]
         ,$user->gender,['class' => 'form-control', 'placeholder' => 'gender']) !!}
-
-    </div>
-
-    <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
-
-        {!! Form::label('level' , trans('admin.level')) !!}
-
-        {!! Form::select('level', [
-            'manager'          => trans('admin.manager'),
-            'receptionist'     => trans('admin.receptionist'),
-            'client'           => trans('admin.client')
-        ]
-        ,$user->level,['class' => 'form-control', 'placeholder' => 'level']) !!}
 
     </div>
 
@@ -97,7 +68,7 @@
         <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
     </div>
 
-    <button type="submit" class="btn btn-success" id="update_data" >Update User</button>
+    <button type="submit" class="btn btn-success" id="update_data" >Update Receptionist</button>
 
 </form>
 

@@ -1,7 +1,11 @@
 <?php
 
+
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReceptionistController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,27 +29,72 @@ Route::put('/users/{user}',[UserController::class, 'update'])->name('users.updat
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
 
-//=====================================Routes of Roles==============================================//
-Route::get('/roles',               [RoleController::class, 'index'])     ->name('roles.index');     //
-Route::get('/roles/{role}',        [RoleController::class, 'show'])      ->name('roles.show');      //
-Route::post('/roles',              [RoleController::class, 'store'])     ->name('roles.store');     //
-Route::get('/roles/{role}/edit',   [RoleController::class, 'edit'])      ->name('roles.edit');      //
-Route::put('/roles/{role}',        [RoleController::class, 'update'])    ->name('roles.update');    //
-Route::delete('/roles/{role}',     [RoleController::class, 'destroy'])   ->name('roles.destroy');   //
+//=====================================Routes of Roles===============================================//
+Route::get('/roles',                [RoleController::class, 'index'])     ->name('roles.index');     //
+Route::get('/roles/{role}',         [RoleController::class, 'show'])      ->name('roles.show');      //
+Route::post('/roles',               [RoleController::class, 'store'])     ->name('roles.store');     //
+Route::get('/roles/{role}/edit',    [RoleController::class, 'edit'])      ->name('roles.edit');      //
+Route::put('/roles/{role}',         [RoleController::class, 'update'])    ->name('roles.update');    //
+Route::delete('/roles/{role}',      [RoleController::class, 'destroy'])   ->name('roles.destroy');   //
 Route::delete('/roles/destroy/all', [RoleController::class, 'destroyAll'])->name('roles.destroyAll');//
-//==================================================================================================//
+//===================================================================================================//
 
 
-//===========================================Routes of Permissions====================================================//
-Route::get('/permissions',               [PermissionController::class, 'index'])     ->name('permissions.index');     //
+//===========================================Routes of Permissions==========================================================//
+Route::get('/permissions',                     [PermissionController::class, 'index'])     ->name('permissions.index');     //
 Route::get('/permissions/{permission}',        [PermissionController::class, 'show'])      ->name('permissions.show');      //
-Route::post('/permissions',              [PermissionController::class, 'store'])     ->name('permissions.store');     //
+Route::post('/permissions',                    [PermissionController::class, 'store'])     ->name('permissions.store');     //
 Route::get('/permissions/{permission}/edit',   [PermissionController::class, 'edit'])      ->name('permissions.edit');      //
 Route::put('/permissions/{permission}',        [PermissionController::class, 'update'])    ->name('permissions.update');    //
 Route::delete('/permissions/{permission}',     [PermissionController::class, 'destroy'])   ->name('permissions.destroy');   //
-Route::delete('/permissions/destroy/all', [PermissionController::class, 'destroyAll'])->name('permissions.destroyAll');//
-//====================================================================================================================//
+Route::delete('/permissions/destroy/all',      [PermissionController::class, 'destroyAll'])->name('permissions.destroyAll');//
+//==========================================================================================================================//
 
+
+//===========================================Routes of Receptionists==============================================================//
+Route::get('/receptionists',                     [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
+Route::get('/receptionists/{user}',              [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
+Route::post('/receptionists',                    [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
+Route::get('/receptionists/{user}/edit',         [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');      //
+Route::put('/receptionists/{user}',              [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
+Route::delete('/receptionists/{user}',           [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
+Route::delete('/receptionists/destroy/all',      [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
+//================================================================================================================================//
+
+//===========================================Routes of Clients==================================================//
+Route::get('/clients',                     [ClientController::class, 'index'])     ->name('clients.index');     //
+Route::get('/clients/{user}',              [ClientController::class, 'show'])      ->name('clients.show');      //
+Route::post('/clients',                    [ClientController::class, 'store'])     ->name('clients.store');     //
+Route::get('/clients/{user}/edit',         [ClientController::class, 'edit'])      ->name('clients.edit');      //
+Route::put('/clients/{user}',              [ClientController::class, 'update'])    ->name('clients.update');    //
+Route::delete('/clients/{user}',           [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
+Route::delete('/clients/destroy/all',      [ClientController::class, 'destroyAll'])->name('clients.destroyAll');//
+//==============================================================================================================//
+
+//===========================================Routes of Managers====================================================//
+Route::get('/managers',                     [ManagerController::class, 'index'])     ->name('managers.index');     //
+Route::get('/managers/{user}',              [ManagerController::class, 'show'])      ->name('managers.show');      //
+Route::post('/managers',                    [ManagerController::class, 'store'])     ->name('managers.store');     //
+Route::get('/managers/{user}/edit',         [ManagerController::class, 'edit'])      ->name('managers.edit');      //
+Route::put('/managers/{user}',              [ManagerController::class, 'update'])    ->name('managers.update');    //
+Route::delete('/managers/{user}',           [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
+Route::delete('/managers/destroy/all',      [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
+//=================================================================================================================//
+
+
+//===========testing only=============//
+Route::get('/egy', function () {
+    $egypt = countries();
+
+    $countries = array();
+    foreach($egypt as $e){
+       $countries[] = $e['name'];
+    }
+
+    dd($countries);
+    
+});
+//===================================//
 
 
 Route::get('/', function () {

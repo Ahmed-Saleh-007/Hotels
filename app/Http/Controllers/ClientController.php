@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ClientDatatable;
+use App\Http\Requests\ClientRequest;
 use App\Models\User;
-use App\DataTables\UserDatatable;
-use App\Http\Requests\ManagerRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(UserDatatable $user)
+    public function index(ClientDatatable $user)
     {
+        
+
         $contries_info = countries();
 
         $countries_names = array();
@@ -28,7 +30,7 @@ class UserController extends Controller
 
         }
 
-        return $user->render('users.index', ['countries' => $countries_names]);
+        return $user->render('clients.index', ['countries' => $countries_names]);
     }
 
     /**
@@ -37,8 +39,12 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ManagerRequest $request)
+    public function store(ClientRequest $request)
     {
+
+        $data = array();
+        
+        $data = $request->all();
 
         if($request->hasFile('avatar_image')){
 
@@ -52,6 +58,8 @@ class UserController extends Controller
 
         $data['password'] = Hash::make($data['password']);
 
+        $data['level'] = 'client';            //by default 'client'
+
         User::create($data);
         return response()->json(['success' => trans('admin.record_added')]);
     }
@@ -64,7 +72,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.ajax_show', compact('user'));
+        return view('clients.ajax_show', compact('user'));
     }
 
     /**
@@ -85,7 +93,7 @@ class UserController extends Controller
 
         }
 
-        return view('users.ajax_edit', compact('user', 'countries'));
+        return view('clients.ajax_edit', compact('user', 'countries'));
     }
 
     /**

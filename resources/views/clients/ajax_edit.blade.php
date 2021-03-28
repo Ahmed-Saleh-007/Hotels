@@ -46,19 +46,6 @@
 
     <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
 
-        {!! Form::label('level' , trans('admin.level')) !!}
-
-        {!! Form::select('level', [
-            'manager'          => trans('admin.manager'),
-            'receptionist'     => trans('admin.receptionist'),
-            'client'           => trans('admin.client')
-        ]
-        ,$user->level,['class' => 'form-control', 'placeholder' => 'level']) !!}
-
-    </div>
-
-    <div class="form-group col-md-12 col-lg-12 col-sm-12 col-xs-12">
-
         {!! Form::label('country' , trans('admin.country')) !!}
 
         {!! Form::select('country', $countries
@@ -97,7 +84,7 @@
         <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
     </div>
 
-    <button type="submit" class="btn btn-success" id="update_data" >Update User</button>
+    <button type="submit" class="btn btn-success" id="update_data" >Update Receptionist</button>
 
 </form>
 
