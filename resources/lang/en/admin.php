@@ -81,8 +81,8 @@ return [
 	'avatar_image'                  => 'Image',
 	'mobile'                        => 'Mobile',
 	'country'                       => 'Country',
-	'receptionists'                 => 'Receptionists',
-	'managers'                 		=> 'Managers',
-	'clients'                       => 'Clients',
+	'receptionists'                 => 'Manage Receptionists',
+	'managers'                 		=> 'Manage Managers',
+	'clients'                       => 'Manage Clients',
 	'all_users'                     => 'All Users',
 ];
