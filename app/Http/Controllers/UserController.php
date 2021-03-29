@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\DataTables\UserDatatable;
-use App\Http\Requests\ManagerRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -37,8 +37,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ManagerRequest $request)
+    public function store(StoreUserRequest $request)
     {
+
+        $data = $request->all();
 
         if($request->hasFile('avatar_image')){
 
@@ -95,26 +97,28 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(User $user)
+    public function update(UpdateUserRequest $request,  User $user)
     {
+        $data = $request->all();
 
-        dd(request()->all());
+        //delete old image of post if exist and not the default image
+        if($request->hasFile('avatar_image')){
 
-        //delete old image of post if exist
-        if(!empty($user->avatar_image) && $user->avatar_image != 'avatar.png'){
-            Storage::delete('users_images/' . $user->avatar_image );
-        }
+            if (!empty($user->avatar_image) && $user->avatar_image != 'avatar.png') {
+                Storage::delete('users_images/' . $user->avatar_image);
+            }
 
-        if(!empty($user->avatar_image)){
             $data['avatar_image'] = rand() . '.' . $request->avatar_image->getClientOriginalExtension();
-            $user->avatar_image->storeAs('users_images', $data['post_img']);
-        }
+            $request->avatar_image->storeAs('users_images', $data['avatar_image']);
 
+        } 
+        
         if ($request->filled('password')) {
             $data['password'] = Hash::make($data['password']);
         }else{
             $data['password'] = $user->password;
         }
+
         $user->update($data);
         return response()->json(['success' => trans('admin.updated_record')]);
     }

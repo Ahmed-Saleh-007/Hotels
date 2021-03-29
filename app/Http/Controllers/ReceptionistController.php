@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\DataTables\ReceptionistDatatable;
 use App\Models\User;
-use App\Http\Requests\ReceptionistRequest;
+use App\Http\Requests\StoreReceptionistRequest;
+use App\Http\Requests\UpdateReceptionistRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -39,11 +40,8 @@ class ReceptionistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ReceptionistRequest $request)
-    {
-
-        $data = array();
-        
+    public function store(StoreReceptionistRequest $request)
+    {        
         $data = $request->all();
 
         if($request->hasFile('avatar_image')){
@@ -104,28 +102,22 @@ class ReceptionistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateReceptionistRequest $request, User $user)
     {
 
-        dd($request->all());
+        $data = $request->all();
 
-        $data = $request->validate([
+        //delete old image of post if exist and not the default image
+        if($request->hasFile('avatar_image')){
 
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users,email,'. $user->id,
-            'password' => 'sometimes|nullable|min:8',
-        ]);
+            if (!empty($user->avatar_image) && $user->avatar_image != 'avatar.png') {
+                Storage::delete('users_images/' . $user->avatar_image);
+            }
 
-
-        //delete old image of post if exist
-        if(!empty($user->avatar_image) && $user->avatar_image != 'avatar.png'){
-            Storage::delete('users_images/' . $user->avatar_image );
-        }
-
-        if(!empty($user->avatar_image)){
             $data['avatar_image'] = rand() . '.' . $request->avatar_image->getClientOriginalExtension();
-            $user->avatar_image->storeAs('users_images', $data['post_img']);
-        }
+            $request->avatar_image->storeAs('users_images', $data['avatar_image']);
+
+        } 
 
         if ($request->filled('password')) {
             $data['password'] = Hash::make($data['password']);

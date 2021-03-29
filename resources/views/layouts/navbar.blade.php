@@ -180,7 +180,7 @@
                                         <a href="#" class="btn btn-primary btn-flat">Lock</a>
                                     </div>
                                     <div class="col-sm-4 text-center">
-                                        <a href="" class="btn btn-primary btn-flat">Logout</a>
+                                        <a href="{{ route('dashboard.logout') }}" class="btn btn-primary btn-flat">Logout</a>
                                     </div>
                                 </div>
                             </li>

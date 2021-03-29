@@ -6,8 +6,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,7 +25,10 @@ Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
 Route::post('/users',[UserController::class, 'store'])->name('users.store');
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
+// Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
+//===========for update user===========//
+Route::post('/users/{user}/update',[UserController::class, 'update'])->name('users.update');
+
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
 
@@ -56,7 +59,7 @@ Route::get('/receptionists',                     [ReceptionistController::class,
 Route::get('/receptionists/{user}',              [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
 Route::post('/receptionists',                    [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
 Route::get('/receptionists/{user}/edit',         [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');      //
-Route::put('/receptionists/{user}',              [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
+Route::post('/receptionists/{user}/update',      [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
 Route::delete('/receptionists/{user}',           [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
 Route::delete('/receptionists/destroy/all',      [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
 //================================================================================================================================//
@@ -66,36 +69,45 @@ Route::get('/clients',                     [ClientController::class, 'index'])  
 Route::get('/clients/{user}',              [ClientController::class, 'show'])      ->name('clients.show');      //
 Route::post('/clients',                    [ClientController::class, 'store'])     ->name('clients.store');     //
 Route::get('/clients/{user}/edit',         [ClientController::class, 'edit'])      ->name('clients.edit');      //
-Route::put('/clients/{user}',              [ClientController::class, 'update'])    ->name('clients.update');    //
+Route::post('/clients/{user}/update',      [ClientController::class, 'update'])    ->name('clients.update');    //
 Route::delete('/clients/{user}',           [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
 Route::delete('/clients/destroy/all',      [ClientController::class, 'destroyAll'])->name('clients.destroyAll');//
 //==============================================================================================================//
 
-//===========================================Routes of Managers====================================================//
-Route::get('/managers',                     [ManagerController::class, 'index'])     ->name('managers.index');     //
-Route::get('/managers/{user}',              [ManagerController::class, 'show'])      ->name('managers.show');      //
-Route::post('/managers',                    [ManagerController::class, 'store'])     ->name('managers.store');     //
-Route::get('/managers/{user}/edit',         [ManagerController::class, 'edit'])      ->name('managers.edit');      //
-Route::put('/managers/{user}',              [ManagerController::class, 'update'])    ->name('managers.update');    //
-Route::delete('/managers/{user}',           [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
-Route::delete('/managers/destroy/all',      [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
-//=================================================================================================================//
+//===========================================Routes of Managers===================================================//
+Route::group(['middleware' => 'auth'], function () {                                                              //
+    Route::get('/managers',                [ManagerController::class, 'index'])     ->name('managers.index');     //
+    Route::get('/managers/{user}',         [ManagerController::class, 'show'])      ->name('managers.show');      //
+    Route::post('/managers',               [ManagerController::class, 'store'])     ->name('managers.store');     //
+    Route::get('/managers/{user}/edit',    [ManagerController::class, 'edit'])      ->name('managers.edit');      //
+    Route::post('/managers/{user}/update', [ManagerController::class, 'update'])    ->name('managers.update');    //
+    Route::delete('/managers/{user}',      [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
+    Route::delete('/managers/destroy/all', [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
+});                                                                                                               //
+//================================================================================================================//
 
+
+//=====================================login & registeration & authentication routes==============================================//
+
+Route::get('/login',  [UserAuthentication::class , 'login'])->name('dashboard.login');
+Route::post('/login', [UserAuthentication::class , 'dologin'])->name('dashboard.login');
+
+Route::any('/logout', [UserAuthentication::class , 'logout'])->name('dashboard.logout');
+
+Route::get('/register',  [UserAuthentication::class , 'register'])->name('dashboard.register');
+Route::post('/register', [UserAuthentication::class , 'doregister'])->name('dashboard.register');
+
+Route::get('/forgot/password',  [UserAuthentication::class , 'forgot_password'])->name('dashboard.forgot_password');
+Route::post('/forgot/password', [UserAuthentication::class , 'forgot_password_post'])->name('dashboard.forgot_password');
+
+Route::get('/reset/password/{token}',  [UserAuthentication::class , 'reset_password'])->name('dashboard.reset_password');
+Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_password_post'])->name('dashboard.reset_password');
+
+//================================================================================================================================//
 
 //===========testing only=============//
-Route::get('/egy', function () {
-    $egypt = countries();
 
-    $countries = array();
-    foreach($egypt as $e){
-       $countries[] = $e['name'];
-    }
-
-    dd($countries);
-    
-});
 //===================================//
-
 
 Route::get('/', function () {
     return view('index');
@@ -106,8 +118,3 @@ Route::get('lang/{lang}', function ($lang) {
     $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');
     return back();
 });
-
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
