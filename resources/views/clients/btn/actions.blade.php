@@ -1,3 +1,12 @@
+
+@if (auth()->user()->level == 'receptionist')
+
+<!-- Trigger the show modal with a button -->
+<a href="" class="approve-ajax" data-toggle="modal" data-target="#ajax_approve" data-ajax="{{$id}}">
+  <i class="fa fa-check-circle" style="font-size: 18px; margin: auto ;color: #080;"></i>
+</a>
+    
+@else
 <div style="display:flex">
 
   <!-- Trigger the show modal with a button -->
@@ -16,3 +25,4 @@
   </a>
 
 </div>
+@endif

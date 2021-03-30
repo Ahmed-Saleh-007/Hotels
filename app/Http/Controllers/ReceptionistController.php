@@ -58,7 +58,10 @@ class ReceptionistController extends Controller
 
         $data['level'] = 'receptionist';
 
-        User::create($data);
+        $user = User::create($data);
+
+        $user->assignRole('receptionist');
+
         return response()->json(['success' => trans('admin.record_added')]);
         
     }
@@ -149,5 +152,20 @@ class ReceptionistController extends Controller
         User::destroy(request('item'));
 		return response()->json(['success' => trans('admin.deleted_record')]);
     }
+
+
+    public function approve(User $user)
+    {
+
+        $approved_by = auth()->user()->id;
+
+        $user->update([
+            'is_approved' => 1 ,
+            'approved_by' => $approved_by
+        ]);
+
+        return response()->json(['success' => trans('admin.client_approved_successfully')]);
+    
+    }//end of approve client
 
 }

@@ -16,8 +16,8 @@ class PermissionDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('checkbox', 'users.btn.checkbox')
-            ->addColumn('actions', 'users.btn.actions')
+            ->addColumn('checkbox', 'permissions.btn.checkbox')
+            ->addColumn('actions', 'permissions.btn.actions')
             ->rawColumns([
                 'checkbox',
                 'actions',

@@ -1,7 +1,13 @@
 <div class="card">
     <div class="card-body">
 
-      <img src="{{ url('storage/users_images') . '/' . $user->avatar_image }}" width="100" style="height: 60px" class="img-thumbnail" />
+      @if($user->avatar_image == 'avatar.png')
+        <img src="{{ url('images') . '/' . $user->avatar_image }}" width="100" style="height: 60px" class="img-thumbnail" />
+      @else
+        <img src="{{ url('storage/users_images') . '/' . $user->avatar_image }}" width="100" style="height: 60px" class="img-thumbnail" />
+      @endif
+
+      
       <br>
       <hr>
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -20,17 +21,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/users', [UserController::class, 'index'])->name('users.index');
-Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-Route::post('/users',[UserController::class, 'store'])->name('users.store');
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-// Route::put('/users/{user}',[UserController::class, 'update'])->name('users.update');
-//===========for update user===========//
-Route::post('/users/{user}/update',[UserController::class, 'update'])->name('users.update');
-
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
 
 //=====================================Routes of Roles===============================================//
 Route::get('/roles',                [RoleController::class, 'index'])     ->name('roles.index');     //
@@ -55,34 +45,57 @@ Route::delete('/permissions/destroy/all',      [PermissionController::class, 'de
 
 
 //===========================================Routes of Receptionists==============================================================//
-Route::get('/receptionists',                     [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
-Route::get('/receptionists/{user}',              [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
-Route::post('/receptionists',                    [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
-Route::get('/receptionists/{user}/edit',         [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');      //
-Route::post('/receptionists/{user}/update',      [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
-Route::delete('/receptionists/{user}',           [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
-Route::delete('/receptionists/destroy/all',      [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
+Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ], function () {
+    Route::get('/receptionists', [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
+    Route::get('/receptionists/{user}', [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
+    Route::post('/receptionists', [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
+    Route::get('/receptionists/{user}/edit', [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');      //
+    Route::post('/receptionists/{user}/update', [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
+    Route::delete('/receptionists/{user}', [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
+    Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
+
+    Route::post('/receptionists/{user}/approve', [ReceptionistController::class, 'approve'])->name('receptionists.approveClient');//
+});
+
 //================================================================================================================================//
 
 //===========================================Routes of Clients==================================================//
-Route::get('/clients',                     [ClientController::class, 'index'])     ->name('clients.index');     //
-Route::get('/clients/{user}',              [ClientController::class, 'show'])      ->name('clients.show');      //
-Route::post('/clients',                    [ClientController::class, 'store'])     ->name('clients.store');     //
-Route::get('/clients/{user}/edit',         [ClientController::class, 'edit'])      ->name('clients.edit');      //
-Route::post('/clients/{user}/update',      [ClientController::class, 'update'])    ->name('clients.update');    //
-Route::delete('/clients/{user}',           [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
-Route::delete('/clients/destroy/all',      [ClientController::class, 'destroyAll'])->name('clients.destroyAll');//
+
+Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], function () {  
+    
+    Route::get('/', [HomeController::class , 'index']);
+    
+    Route::get('/clients', [ClientController::class, 'index'])            ->name('clients.index');     //
+    Route::get('/clients/{user}', [ClientController::class, 'show'])      ->name('clients.show');      //
+    Route::post('/clients', [ClientController::class, 'store'])           ->name('clients.store');     //
+    Route::get('/clients/{user}/edit', [ClientController::class, 'edit'])      ->name('clients.edit');      //
+    Route::post('/clients/{user}/update', [ClientController::class, 'update'])    ->name('clients.update');    //
+    Route::delete('/clients/{user}', [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
+    Route::delete('/clients/destroy/all', [ClientController::class, 'destroyAll'])->name('clients.destroyAll');
+});
+
 //==============================================================================================================//
 
 //===========================================Routes of Managers===================================================//
-Route::group(['middleware' => 'auth'], function () {                                                              //
-    Route::get('/managers',                [ManagerController::class, 'index'])     ->name('managers.index');     //
-    Route::get('/managers/{user}',         [ManagerController::class, 'show'])      ->name('managers.show');      //
-    Route::post('/managers',               [ManagerController::class, 'store'])     ->name('managers.store');     //
-    Route::get('/managers/{user}/edit',    [ManagerController::class, 'edit'])      ->name('managers.edit');      //
+Route::group(['middleware' => ['auth', 'role:admin' ] ], function () {                                             //
+
+    Route::get('/managers', [ManagerController::class, 'index'])     ->name('managers.index');     //
+    Route::get('/managers/{user}', [ManagerController::class, 'show'])      ->name('managers.show');      //
+    Route::post('/managers', [ManagerController::class, 'store'])     ->name('managers.store');     //
+    Route::get('/managers/{user}/edit', [ManagerController::class, 'edit'])      ->name('managers.edit');      //
     Route::post('/managers/{user}/update', [ManagerController::class, 'update'])    ->name('managers.update');    //
-    Route::delete('/managers/{user}',      [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
+    Route::delete('/managers/{user}', [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
     Route::delete('/managers/destroy/all', [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
+
+    //=============================all users routes=========================//
+    Route::get('/users',                [UserController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}',         [UserController::class, 'show'])->name('users.show');
+    Route::post('/users',               [UserController::class, 'store'])->name('users.store');
+    Route::get('/users/{user}/edit',    [UserController::class, 'edit'])->name('users.edit');
+    Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}',      [UserController::class, 'destroy'])->name('users.destroy');
+    Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
+    
 });                                                                                                               //
 //================================================================================================================//
 
@@ -109,9 +122,7 @@ Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_passw
 
 //===================================//
 
-Route::get('/', function () {
-    return view('index');
-});
+
 
 Route::get('lang/{lang}', function ($lang) {
     session()->has('lang') ? session()->forget('lang') : '';

@@ -16,9 +16,9 @@ class ClientDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('checkbox', 'users.btn.checkbox')
-            ->addColumn('actions', 'users.btn.actions')
-            ->addColumn('avatar_image', 'users.btn.avatar_image')
+            ->addColumn('checkbox', 'clients.btn.checkbox')
+            ->addColumn('actions', 'clients.btn.actions')
+            ->addColumn('avatar_image', 'clients.btn.avatar_image')
             ->rawColumns([
                 'checkbox',
                 'actions',
@@ -34,6 +34,12 @@ class ClientDatatable extends DataTable
      */
     public function query()
     {
+        if(auth()->user()->level == 'receptionist'){
+
+            return User::query()->where('level', 'client')->where('is_approved', 0);
+
+        }
+        
         return User::query()->where('level', 'client');
     }
 

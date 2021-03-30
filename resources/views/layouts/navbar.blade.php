@@ -127,60 +127,54 @@
                     <!-- User Account -->
                     <li class="nav-item dropdown user user-menu">
                         <a class="nav-link" data-toggle="dropdown" href="#">
-                            <img src="{{url('/design/adminlte')}}/dist/img/avatar5.png" class="user-image" alt="User Image">
-                            {{-- @if (!empty(admin()->user()->image))
-                            <img src="{{ Storage::url(admin()->user()->image) }}" style="width: 35px; height: 35px;" class="user-image" alt="User Image"/>
-                            @else
-                            <img src="{{url('/design/adminlte')}}/dist/img/avatar5.png" class="user-image" alt="User Image">
-                            @endif --}}
+
+                            @if (isset(auth()->user()->avatar_image))
+
+                                @if(auth()->user()->avatar_image == 'avatar.png')
+                                
+                                    <img src="{{url('images/' . auth()->user()->avatar_image )}}" class="img-circle elevation-2" style="height: 28px"   alt="User Image">
+                                    
+                                @else
+
+                                    <img src="{{url('/storage/users_images/' . auth()->user()->avatar_image )}}" class="img-circle elevation-2" style="height: 28px"  alt="User Image">
+                                @endif
+
+                            @endif
+                            
                         <span class="hidden-xs"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{url('/design/adminlte')}}/dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                {{-- @if (!empty(admin()->user()->image))
-                                <img src="{{ Storage::url(admin()->user()->image) }}" style="" class="img-circle" alt="User Image"/>
-                                @else
-                                <img src="{{url('/design/adminlte')}}/dist/img/avatar5.png" class="img-circle" alt="User Image">
-                                @endif
+                                
+                                @if (isset(auth()->user()->avatar_image))
 
-                                <p>
-                                    @if (lang() == 'en')
-                                    {{ admin()->user()->name_en }}
+                                    @if(auth()->user()->avatar_image == 'avatar.png')
+                                
+                                        <img src="{{url('images/' . auth()->user()->avatar_image )}}" class="img-circle elevation-2" alt="User Image">
+                                    
                                     @else
-                                    {{ admin()->user()->name_ar }}
+
+                                        <img src="{{url('/storage/users_images/' . auth()->user()->avatar_image )}}" class="img-circle elevation-2" alt="User Image">
+                                    
                                     @endif
                                     
-                                    <small>@lang('admin.Member Since') {{admin()->user()->created_at->format('d/m/Y')}}</small>
-                                </p> --}}
+                                @endif
+                             
                             </li>
-                            <!-- Menu Body -->
-                           <li class="user-body">
-                                <div class="row">
-                                    <div class="col-sm-4 text-center">
-                                        <a href="#">Followers</a>
-                                    </div>
-                                    <div class="col-sm-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-sm-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
-                                </div>
-                                <!-- /.row -->
-                            </li>
+                       
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="row">
                                     <div class="col-sm-4 text-center">
-                                        <a href="" class="btn btn-primary btn-flat">Profile</a>
+                                        <a href="" class="btn btn-primary btn-sm">Edit Profile</a>
                                     </div>
+
                                     <div class="col-sm-4 text-center">
-                                        <a href="#" class="btn btn-primary btn-flat">Lock</a>
                                     </div>
+                                  
                                     <div class="col-sm-4 text-center">
-                                        <a href="{{ route('dashboard.logout') }}" class="btn btn-primary btn-flat">Logout</a>
+                                        <a href="{{ route('dashboard.logout') }}" class="btn btn-dark btn-sm">Logout</a>
                                     </div>
                                 </div>
                             </li>

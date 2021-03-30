@@ -55,11 +55,6 @@
         <label for="avatar_image">Image</label>
         <input type="file" name="avatar_image" class="form-control" id="avatar_image">
 
-        {{-- <label for="avatar_image">
-
-        <img src="{{ url('storage/users_images/' . $user->avatar_image) }}" class="img-thumbnail" alt="" width="80" id="post_user_image_">
-        </label> --}}
-
     </div>
 
     <div class="form-group">

@@ -60,7 +60,10 @@ class ClientController extends Controller
 
         $data['level'] = 'client';            //by default 'client'
 
-        User::create($data);
+        $user = User::create($data);
+
+        $user->assignRole('client');
+
         return response()->json(['success' => trans('admin.record_added')]);
     }
 

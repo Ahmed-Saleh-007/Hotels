@@ -31,6 +31,8 @@ national_id
         'level',
         'avatar_image',
         'is_approved',
+        'approved_by',
+        'created_by',
         'national_id',
         'country',
         'email',

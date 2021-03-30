@@ -166,6 +166,29 @@
 
 
 <!--
+    approve modal view using by ajax
+-->
+
+<div id="ajax_approve" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Approve Client</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body" id="ajax_approve_content">
+            @csrf
+            <h4 class="mb-3">{{ trans('admin.approve_this_client') }}</h4>
+            <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
+            <button class="btn btn-danger" id="approve" >Approve Client</button>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<!--
     delete all modal view using by ajax
 -->
 
@@ -264,6 +287,32 @@
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
                     $('#ajax_delete').modal('toggle');
+                    $('.buttons-reload').trigger("click");
+                }
+            });
+        });
+    });
+
+    //================================//
+    // Ajax handler for approve client//
+    //================================//
+
+    $(document).ready(function () {
+        var _id = 0;
+        $(document).on('click', '.approve-ajax', function () {
+            console.log($(this).data('ajax'));
+            _id = $(this).data('ajax');
+        });
+        $(document).on('click', '#ajax_approve_content #approve', function () {
+            $.ajax({
+                url:  '{{url("")}}/receptionists/' + _id + '/approve',
+                type: 'post',
+                data: {
+                    _token: $('#ajax_approve_content [name=_token]').val(),
+                },
+                success: function (data) {
+                    toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                    $('#ajax_approve').modal('toggle');
                     $('.buttons-reload').trigger("click");
                 }
             });

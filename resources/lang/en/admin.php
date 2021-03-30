@@ -91,5 +91,12 @@ return [
 	'invalid_email'                    => 'Invalid E-mail',
 	'register'                         => 'Register',
 	'reset_password'                   => 'Reset Password',
-	'forgot_password'                  => 'Forgot Password'
+	'forgot_password'                  => 'Forgot Password',
+	'managers_'                        => 'Managers',
+	'clients_'                         => 'Clients',
+	'receptionists_'                   => 'Receptionists',
+	'approve_this_client'              => 'Are you sure you want to approve this client?',
+	'client_approved_successfully'     => 'Client approved successfully',
+	'my_approved_clients'              => 'My Approved Clients',
+
 ];

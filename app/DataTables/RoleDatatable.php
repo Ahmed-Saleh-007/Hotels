@@ -16,8 +16,8 @@ class RoleDatatable extends DataTable
     public function dataTable($query)
     {
         return datatables($query)
-            ->addColumn('checkbox', 'users.btn.checkbox')
-            ->addColumn('actions', 'users.btn.actions')
+            ->addColumn('checkbox', 'roles.btn.checkbox')
+            ->addColumn('actions', 'roles.btn.actions')
             ->rawColumns([
                 'checkbox',
                 'actions',

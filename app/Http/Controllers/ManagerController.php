@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ManagerDatatable;
-use App\Http\Requests\ManagerRequest;
 use App\Http\Requests\StoreManagerRequest;
 use App\Http\Requests\UpdateManagerRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Role;
 
 class ManagerController extends Controller
 {
@@ -18,6 +18,7 @@ class ManagerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(ManagerDatatable $user)
     {
         
@@ -57,9 +58,12 @@ class ManagerController extends Controller
 
         $data['password'] = Hash::make($data['password']);
 
-        $data['level'] = 'manager';            //by default 'client'
+        $data['level'] = 'manager';            
 
-        User::create($data);
+        $user = User::create($data);
+
+        $user->assignRole('manager');
+
         return response()->json(['success' => trans('admin.record_added')]);
     }
 

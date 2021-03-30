@@ -20,11 +20,6 @@ use Illuminate\Support\Facades\Hash;
 class UserAuthentication extends Controller
 {
 
-    public function index()
-    {
-        return view('dashboard.home');
-    }
-
     public function login(){
 
         return view('dashboard.auth.login');
@@ -68,7 +63,6 @@ class UserAuthentication extends Controller
 
     public function dologin(Request $request){
 
-
         $request->validate([
             'email'     => 'required',
             'password'  => 'required'
@@ -78,9 +72,9 @@ class UserAuthentication extends Controller
 
         if( auth()->attempt(['email' => $request->email , 'password' => $request->password], $rememberme)){
 
-            $is_approved = User::where('email', $request->email)->first()->is_approved;
+            $user = User::where('email', $request->email)->first();
 
-            if( $is_approved == 0 ){
+            if( $user->is_approved == 0 && $user->level == 'client'){
 
                 session()->flash('error', trans('admin.you_are_not_approved_yet'));
                 return redirect()->route('dashboard.login');
