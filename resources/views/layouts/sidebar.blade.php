@@ -100,18 +100,67 @@
                             </li>
 
 
-                            <li class="nav-item">
-                                <a href="{{ route('roles.index') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-danger"></i>
-                                    <p>{{ trans('admin.roles') }}</p>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user-shield"></i>
+                                    <p>
+                                        {{ trans('admin.authorization') }}
+                                        @if (direction() == 'rtl')
+                                        <i class="right fas fa-angle-right"></i>
+                                        @else
+                                        <i class="right fas fa-angle-left"></i>
+                                        @endif
+                                    </p>
                                 </a>
+
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('roles.index') }}" class="nav-link">
+                                            <i class="nav-icon far fa-circle text-danger"></i>
+                                            <p>{{ trans('admin.roles') }}</p>
+                                        </a>
+                                    </li>
+        
+                                    <li class="nav-item">
+                                        <a href="{{ route('permissions.index') }}" class="nav-link">
+                                            <i class="nav-icon far fa-circle text-warning"></i>
+                                            <p>{{ trans('admin.permissions') }}</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="{{ route('permissions.index') }}" class="nav-link">
-                                    <i class="nav-icon far fa-circle text-warning"></i>
-                                    <p>{{ trans('admin.permissions') }}</p>
+
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-building"></i>
+                                    <p>
+                                        {{ trans('admin.floor_room') }}
+                                        @if (direction() == 'rtl')
+                                        <i class="right fas fa-angle-right"></i>
+                                        @else
+                                        <i class="right fas fa-angle-left"></i>
+                                        @endif
+                                    </p>
                                 </a>
+
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('floors.index') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-stream"></i>
+                                            <p>{{ trans('admin.floors') }}</p>
+                                        </a>
+                                    </li>
+        
+                                    <li class="nav-item">
+                                        <a href="{{ route('rooms.index') }}" class="nav-link">
+                                            <i class="nav-icon fas fa-person-booth"></i>
+                                            <p>{{ trans('admin.rooms') }}</p>
+                                        </a>
+                                    </li>
+
+                                </ul>
                             </li>
 
 
