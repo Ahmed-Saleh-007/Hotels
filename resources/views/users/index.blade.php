@@ -177,7 +177,6 @@
     </div>
 </div>
 
-
 <!--
     delete all modal view using by ajax
 -->
@@ -221,91 +220,6 @@
 
 <script>
 
-    /*
-        How ajax work using jQuery
-
-        $.ajax({
-            url:  '',                                   // put you route here
-            type: 'get',                                // put your method get, post, put, delete
-            data: {},                                   // put your data that will send with request
-            success: function (data) {}                 // data from response if request success 2**
-            error: function (data) {}                   // error from response if request failed 4**, 5**
-        });
-
-    */
-
-
-    ///////////////////////////
-    // Ajax handler for store//
-    ///////////////////////////
-
-    // $(document).ready(function () {
-    //     $('.ajax-create').attr("data-toggle", "modal");
-    //     $('.ajax-create').attr("data-target", "#ajax_create");
-    //     $(document).on('click', '#ajax_create_content #create', function (event) {
-
-    //         event.preventDefault();
-
-    //         var avatar_image =      $('#ajax_create_content #avatar_image').get(0).files[0];
-
-
-    //         // var formData = new FormData($('#storeForm').val());
-    //         // console.log(formData);
-
-    //         // var _token =  $('#csrf-token').val();
-    //         // totalFormData.append('_token', _token);
-    //         // console.log(totalFormData);
-
-    //         // alert($('#ajax_create_content #name').val());
-
-    //         // $.ajaxSetup({
-    //         //     headers: {
-    //         //         'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-    //         //     }
-    //         // });
-
-
-
-
-    //         // $.ajax({
-    //         //     url:  '{{route('users.store')}}',
-    //         //     type: 'post',
-    //         //     data: {
-    //         //         name         : $('#ajax_create_content #name').val(),
-    //         //         mobile       : $('#ajax_create_content #mobile').val(),
-    //         //         gender       : $('#ajax_create_content #gender').val(),
-    //         //         avatar_image : avatar_image,
-    //         //         level        : $('#ajax_create_content #level').val(),
-    //         //         national_id  : $('#ajax_create_content #national_id').val(),
-    //         //         email        : $('#ajax_create_content #email').val(),
-    //         //         password     : $('#ajax_create_content #password').val(),
-    //         //         password_confirmation:  $('#ajax_create_content #password_confirmation').val(),
-    //         //     },
-    //         //     // processData: false,
-    //         //     // contentData : false,
-    //         //     // cache: false,
-    //         //     success: function (data) {
-    //         //         toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
-    //         //         $('#ajax_create_content #name').val('');
-    //         //         $('#ajax_create_content #email').val('');
-    //         //         $('#ajax_create_content #password').val('');
-    //         //         $('#ajax_create_content #ajax_create_errors').html('');
-    //         //     },
-    //         //     error: function (data) {
-    //         //         var errors = data.responseJSON;
-    //         //         console.log(errors);
-    //         //         var errorsHtml = '<div class="alert alert-danger"><ul class="mb-0">';
-    //         //         $.each( errors.errors, function( key, value ) {
-    //         //             errorsHtml += '<li>'+ value[0] + '</li>';
-    //         //         });
-    //         //         errorsHtml += '</ul></div>';
-    //         //         $('#ajax_create_content #ajax_create_errors').html(errorsHtml);
-    //         //     }
-    //         // });
-    //     });
-    // });
-    
-
     //////////////////////////
     // Ajax handler for show//
     //////////////////////////
@@ -324,7 +238,6 @@
       });
     });
 
-
     //////////////////////////
     // Ajax handler for edit//
     //////////////////////////
@@ -342,45 +255,6 @@
             });
         });
     });
-
-    //=========================//
-    // Ajax handler for update //
-    //=========================//
-
-    // $(document).ready(function () {
-    //     $(document).on('click', '#ajax_edit_content #update_data', function () {
-            
-    //         $.ajax({
-    //             url:  '{{url("")}}/users/' + $('#ajax_edit_content #id').val(),
-    //             type: 'put',
-    //             data: {
-    //                 _token:     $('#ajax_edit_content [name=_token]').val(),
-    //                 name:       $('#ajax_edit_content #name').val(),
-    //                 email:      $('#ajax_edit_content #email').val(),
-    //                 password:   $('#ajax_edit_content #password').val(),
-    //             },
-    //             success: function (data) {
-    //                 toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true})
-    //                 $('#ajax_edit_content #name').val('')
-    //                 $('#ajax_edit_content #email').val('')
-    //                 $('#ajax_edit_content #password').val('')
-    //                 $('#ajax_edit_content #ajax_edit_errors').html('');
-    //                 $('#ajax_edit').modal('toggle');
-    //             },
-    //             error: function (data) {
-    //                 var errors = data.responseJSON;
-    //                 console.log(errors);
-    //                 var errorsHtml = '<div class="alert alert-danger"><ul class="mb-0">';
-    //                 $.each( errors.errors, function( key, value ) {
-    //                     errorsHtml += '<li>'+ value[0] + '</li>';
-    //                 });
-    //                 errorsHtml += '</ul></div>';
-    //                 $('#ajax_edit_content #ajax_edit_errors').html(errorsHtml);
-    //             }
-    //         });
-    //     });
-    // });
-
 
     ////////////////////////////
     // Ajax handler for delete//
@@ -402,6 +276,9 @@
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
                     $('#ajax_delete').modal('toggle');
+
+                    $('.buttons-reload').trigger("click");
+
                 }
             });
         });
@@ -427,35 +304,17 @@
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
                     $('#mutlipleDelete').modal('toggle');
+                    
+                    $('.buttons-reload').trigger("click");
+
                 }
             });
         });
     });
 
-    //==========================//
-    //for showing selected image//
-    //==========================//
-    function doAfterSelectImage(input){
-        readURL(input);
-    }
-
-    function readURL(input){
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#post_user_image_').attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-
-        }
-    }
-    //===========================//
-
-
-    //=====================================//
-    //store user data with image using AJAX//
-    //=====================================// 
+    //=======================//
+    // Store user using AJAX //
+    //=======================//
 
     $(document).ready(function(){   
 
@@ -477,16 +336,8 @@
 
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
-                    $('#ajax_create_content #name').val('');
-                    $('#ajax_create_content #email').val('');
-                    $('#ajax_create_content #avatar_img').val('');
-                    $('#ajax_create_content #mobile').val('');
-                    $('#ajax_create_content #national_id').val('');
-                    $('#ajax_create_content #level').val('');
-                    $('#ajax_create_content #gender').val('');
-                    $('#ajax_create_content #password_confirmation').val('');
-                    $('#ajax_create_content #password').val('');
-                    $('#ajax_create_content #ajax_create_errors').html('');
+                    
+                    clearFields();
                 },
                 error: function (data) {
                     var errors = data.responseJSON;
@@ -505,24 +356,21 @@
 
     });
 
-
-    //=====================================//
-    //store user data with image using AJAX//
-    //=====================================// 
+    //======================================//
+    //update user data with image using AJAX//
+    //======================================// 
 
     $(document).ready(function(){  
 
-
         $(document).on('submit', '#update_form', function(event){
 
-            event.preventDefault(); 
-            
-            dst = new FormData(this);
-            alert(dst.name);
+            event.preventDefault();
+
+            console.log(new FormData(this)); 
 
             $.ajax({
-                url: '{{url("")}}/users/' + $('#ajax_edit_content #id').val(),
-                method:"put",
+                url: '{{url("")}}/users/' + $('#ajax_edit_content #id').val() + '/update',
+                method:"post",
                 data: new FormData(this),
                 contentType: false,
                 cache:false,
@@ -531,16 +379,8 @@
 
                 success: function (data) {
                     toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
-                    $('#ajax_create_content #name').val('');
-                    $('#ajax_create_content #email').val('');
-                    $('#ajax_create_content #avatar_img').val('');
-                    $('#ajax_create_content #mobile').val('');
-                    $('#ajax_create_content #national_id').val('');
-                    $('#ajax_create_content #level').val('');
-                    $('#ajax_create_content #gender').val('');
-                    $('#ajax_create_content #password_confirmation').val('');
-                    $('#ajax_create_content #password').val('');
-                    $('#ajax_create_content #ajax_create_errors').html('');
+                    
+                    clearFields();
                 },
                 error: function (data) {
                     var errors = data.responseJSON;
@@ -550,7 +390,7 @@
                         errorsHtml += '<li>'+ value[0] + '</li>';
                     });
                     errorsHtml += '</ul></div>';
-                    $('#ajax_create_content #ajax_create_errors').html(errorsHtml);
+                    $('#ajax_edit_content #ajax_edit_errors').html(errorsHtml);
                 }
                 
             });//end of ajax request
@@ -558,6 +398,43 @@
         });
 
     });
+
+
+    //==========================//
+    //for showing selected image//
+    //==========================//
+    function doAfterSelectImage(input){
+        readURL(input);
+    }
+
+    function readURL(input){
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $('#post_user_image_').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+    //===========================//
+
+    //=========clear fields function=========//
+    function clearFields(){
+        $('#ajax_create_content #name').val('');
+        $('#ajax_create_content #email').val('');
+        $('#ajax_create_content #avatar_img').val('');
+        $('#ajax_create_content #mobile').val('');
+        $('#ajax_create_content #national_id').val('');
+        $('#ajax_create_content #level').val('');
+        $('#ajax_create_content #gender').val('');
+        $('#ajax_create_content #password_confirmation').val('');
+        $('#ajax_create_content #password').val('');
+        $('#ajax_create_content #ajax_create_errors').html('');
+        //==============for reload datatables========//
+        $('.buttons-reload').trigger("click");
+    }//end of clear fields
 
 </script>
 

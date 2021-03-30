@@ -1,11 +1,12 @@
 <?php
 
+//there is no lang yet
 if (!function_exists('lang')) {
     function lang() {
         $lang = session()->has('lang') ? session('lang') : session()->put('lang', 'en');
         return $lang;
     }
-}
+}//end of lang
 
 if (!function_exists('direction')) {
     function direction() {
@@ -44,3 +45,22 @@ if (!function_exists('datatableLang')) {
         ];
     }
 }
+
+if (!function_exists('get_countries')) {
+
+    function get_countries() {
+
+        $contries_info = countries();
+
+        $countries = array();
+
+        foreach($contries_info as $country){
+
+            $countries[$country['name']] = $country['name'];
+
+        }
+
+        return $countries;
+    }
+
+}//end of get all countries

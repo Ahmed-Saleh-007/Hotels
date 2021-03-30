@@ -50,9 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name'         => ['required', 'string', 'max:255'],
+            'avatar_image' => ['required', 'image', 'mimes:jpeg,jpg'],
+            'country'      => ['required'],
+            'gender'       => ['required', 'in:male,female'],
+            'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'     => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -64,10 +67,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
+        if(request()->hasFile('avatar_image')){
+
+            $data['avatar_image'] = rand() . '.' . request()->avatar_image->getClientOriginalExtension();
+            request()->avatar_image->storeAs('users_images', $data['avatar_image']);
+
+        }
+
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name'         => $data['name'],
+            'email'        => $data['email'],
+            'level'        => 'client',
+            'country'      => $data['country'],
+            'gender'       => $data['gender'],
+            'avatar_image' => $data['avatar_image'],
+            'password'     => Hash::make($data['password']),
+            
         ]);
+
+        session()->flash('success' , 'Account registered successfully, we will send approved message to you soon');
+
+        return back();
+
     }
 }

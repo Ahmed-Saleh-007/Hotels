@@ -7,56 +7,67 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# Hotel System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is a team project that features an online Hotel system with different roles and permissions(Admin, Manager,Reciptionist, Client) using Laravel framework. 
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Team Members:
+	Ahmed Saleh - Bassam Saad - Hossam Salah - Islam Shabaan - Khaled Elgaml - Mohamed Egila
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Prerequisites
 
-## Learning Laravel
+You should have  `composer` installed. If you don't install composer from [here](https://getcomposer.org/download/).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Installing
+1. Download the zipped file and unzip it or Clone it
+		```sh
+		git clone https://github.com/Ahmed-Saleh-007/Hotels.git
+		```
+2. cd inside the project
+    ```sh
+    cd Hotels
+    ```
+3.  Run this command to download composer packages
+    ```sh
+    composer install
+    ```
+4. Run this command to update composer packages
+    ```sh
+    composer update
+    ```
+5. Create a copy of your .env file
+    ```sh
+    cp .env.example .env
+    ```
+6. Generate an app encryption key
+    ```sh
+    php artisan key:generate
+    ```
+7. Create an empty database for our application in your DBMS
+8. In the .env file, add database information to allow Laravel to connect to the database
+9. Migrate the database
+    ```sh
+    php artisan migrate
+    ```
+10. Seed the database
+    ```sh
+    php artisan db:seed
+    ```
+11. Generate Storage folder in your public directory to store uploaded files or images
+    ```sh
+    php artisan storage:link
+    ```
+12. Open up the server
+    ```sh
+    php artisan serve
+    ```
+13. Open your browser on this url ``` http://localhost:8000```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### License
+MIT License
 
-## Laravel Sponsors
+Copyright (c) 2021 OS41
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.

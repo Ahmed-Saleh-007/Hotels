@@ -85,4 +85,11 @@ return [
 	'managers'                 		=> 'Manage Managers',
 	'clients'                       => 'Manage Clients',
 	'all_users'                     => 'All Users',
+	'invalid_email_or_password'     => 'Invalid E-mail Or Password',
+	'you_are_not_approved_yet'      => 'You are not approved yet, check your email we will send you a message soon',
+	'the_reset_link_sent_successfully' => 'The reset link sent successfully',
+	'invalid_email'                    => 'Invalid E-mail',
+	'register'                         => 'Register',
+	'reset_password'                   => 'Reset Password',
+	'forgot_password'                  => 'Forgot Password'
 ];
