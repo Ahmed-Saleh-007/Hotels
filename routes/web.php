@@ -8,6 +8,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FloorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -85,6 +86,16 @@ Route::group(['middleware' => 'auth'], function () {                            
     Route::delete('/managers/destroy/all', [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
 });                                                                                                               //
 //================================================================================================================//
+
+
+Route::get('/floors', [FloorController::class, 'index'])->name('floors.index');
+Route::get('/floors/{floor}', [FloorController::class, 'show'])->name('floors.show');
+Route::post('/floors',[FloorController::class, 'store'])->name('floors.store');
+Route::get('/floors/{floor}/edit', [FloorController::class, 'edit'])->name('floors.edit');
+Route::put('/floors/{floor}',[FloorController::class, 'update'])->name('floors.update');
+Route::delete('/floors/{floor}', [FloorController::class, 'destroy'])->name('floors.destroy');
+Route::delete('/floors/destroy/all', [FloorController::class, 'destroyAll'])->name('floors.destroyAll');
+
 
 
 //=====================================login & registeration & authentication routes==============================================//
