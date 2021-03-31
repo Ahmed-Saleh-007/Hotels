@@ -42,6 +42,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/receptionists/{user}/unban',  [ReceptionistController::class, 'unban_receptionist'])->name('receptionists.unban');  //
         //================================================================================================================================//
 
+        //================================================Client Statistics Routes ===========================================//
+        Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])      ->name('clients.statistics');       //
+        Route::get('/get-client-count', [ClientStatisticsController::class,'clientData']) ->name('clients.data');             //
+        Route::get('/get-country-count',[ClientStatisticsController::class,'countryData'])->name('clients.countryData');      //
+        //====================================================================================================================//
+
     });
 
     Route::group(['middleware' => ['role:admin|manager|receptionist' ] ], function () {  
@@ -134,31 +140,18 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 //=====================================login & registeration & authentication routes==============================================//
-
-Route::get('/login', [UserAuthentication::class , 'login'])->name('dashboard.login');
-Route::post('/login', [UserAuthentication::class , 'dologin'])->name('dashboard.login');
-
-Route::get('/register', [RegisterController::class , 'create'])->name('dashboard.registration.create');
-Route::post('/register', [RegisterController::class , 'store'])->name('dashboard.registration.store');
-
-Route::get('/forgot/password', [UserAuthentication::class , 'forgot_password'])->name('dashboard.forgot_password');
-Route::post('/forgot/password', [UserAuthentication::class , 'forgot_password_post'])->name('dashboard.forgot_password');
-
-Route::get('/reset/password/{token}', [UserAuthentication::class , 'reset_password'])->name('dashboard.reset_password');
-Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_password_post'])->name('dashboard.reset_password');
-
+Route::get('/login',                   [UserAuthentication::class , 'login'])               ->name('dashboard.login');            //
+Route::post('/login',                  [UserAuthentication::class , 'dologin'])             ->name('dashboard.login');            //
+Route::get('/forgot/password',         [UserAuthentication::class , 'forgot_password'])     ->name('dashboard.forgot_password');  //
+Route::post('/forgot/password',        [UserAuthentication::class , 'forgot_password_post'])->name('dashboard.forgot_password');  //
+Route::get('/reset/password/{token}',  [UserAuthentication::class , 'reset_password'])      ->name('dashboard.reset_password');   //
+Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_password_post']) ->name('dashboard.reset_password');   //
+                                                                                                                                  //
+Route::get('/register',  [RegisterController::class , 'create'])->name('dashboard.registration.create');                          //
+Route::post('/register', [RegisterController::class , 'store']) ->name('dashboard.registration.store');                           //
 //================================================================================================================================//
 
-//================================================Client Statistics Routes ======================================================//
-
-Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])->name('clients.statistics');
-Route::get('/get-client-count', [ClientStatisticsController::class,'clientData'])->name('clients.data');
-
-Route::get('/get-country-count', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');
-
-//===============================================================================================================================//
-
-//===========testing only=============//
+//===========testing only============//
 
 //===================================//
 
