@@ -190,6 +190,28 @@
                             </li>
                             @endrole
 
+                            @role('admin|manager')
+
+                                <li class="nav-item">
+                                    
+                                    <a href="{{ route('clients.statistics') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-chart-pie"></i>
+                                        <p>{{ __('admin.statistics_chart') }}</p>
+                                    </a>
+
+                                </li>
+
+                                {{-- <li class="nav-item">
+                                    
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-chart-pie text-cyan"></i>
+                                        <p>{{ __('admin.line_chart') }}</p>
+                                    </a>
+
+                                </li> --}}
+
+                            @endrole
+
 
                         </ul>
                     </nav>

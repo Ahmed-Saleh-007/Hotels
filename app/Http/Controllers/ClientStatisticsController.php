@@ -15,72 +15,70 @@ class ClientStatisticsController extends Controller
 
     public function clientData()
     {
-        $test =  User::select(DB::raw("COUNT(*) as count,gender as gender"))
+
+        $users =  User::select(DB::raw("COUNT(*) as count,gender as gender"))
         ->where('level', 'client')
         ->groupBy('gender')
         ->pluck('count', 'gender');
         
-        $test = json_decode($test);
+        $users = json_decode($users);
+
         $data = array();
-        $C = array();
-        $v = array();
-        foreach ($test as $key => $value) {
-            $C[] = $key;
-            $v[] = $value;
+
+        $labels    = array();
+        $content    = array();
+
+        foreach ($users as $key => $value) {
+            $labels[] = $key;
+            $content[] = $value;
         }
 
         $data = [
             'id'      => 'myChart',
             'colors'  => ['rgb(' . rand(0,255) . ',' . rand(0,255) . ','  . rand(0,255) . ')','blue'],
-            'labels'  => $C,
-            'data'   => $v
+            'labels'  => $labels,
+            'data'    => $content
         ];
-        return $data;
-    }
-    
 
+        return $data;
+
+    }//end of client data function
 
     public function countryData()
     {
-        $test =  User::select(DB::raw("COUNT(*) as count,country as country"))
+
+        $users =  User::select(DB::raw("COUNT(*) as count,country as country"))
         ->where('level', 'client')
         ->groupBy('country')
         ->pluck('count', 'country');
 
-        
         $colors_array = array();
 
-        for($i = 0 ; $i < $test->count() ; $i++){
+        for($i = 0 ; $i < $users->count() ; $i++){
             $colors_array[] = 'rgb(' . rand(0,255) . ',' . rand(0,255) . ','  . rand(0,255) . ')';
         }
-        
 
-        $test = json_decode($test);
+        $users = json_decode($users);
 
         $data = array();
-        $C = array();
-        $v = array();
-        foreach ($test as $key => $value) {
-            $C[] = $key;
-            $v[] = $value;
+
+        $labels  = array();
+        $content = array();
+
+        foreach ($users as $key => $value) {
+            $labels[]  = $key;
+            $content[] = $value;
         }
-
-
-        
 
         $data = [
             'id'      => 'myChart_1',
-            'colors'  =>
-
-            
-            // ['gray','blue','yellow']
-            $colors_array
-            
-            
-            ,
-            'labels'  => $C,
-            'data'    => $v
+            'colors'  => $colors_array,
+            'labels'  => $labels,
+            'data'    => $content
         ];
+
         return $data;
-    }
-}
+
+    }//end of country data function
+
+}//end of controller

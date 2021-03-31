@@ -127,4 +127,7 @@ return [
 	'banned_successfully'               => 'Receptionist has banned successfully',
 	'unbanned_successfully'             => 'Receptionist un-banned successfully',
 	'something_went_wrong'              => 'Something went wrong!',
+	'statistics_chart'                  => 'Statistics Chart',
+	'charts'                            => 'Charts',
+	'line_chart'                        => 'Line Chart',
 ];
