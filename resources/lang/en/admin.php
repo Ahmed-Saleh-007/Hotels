@@ -121,4 +121,5 @@ return [
 	'approve_this_client'               => 'Are you sure you want to approve this client?',
 	'client_approved_successfully'      => 'Client approved successfully',
 	'my_approved_clients'               => 'My Approved Clients',
+	'manager_name'                      => 'Manager Name',
 ];

@@ -57,12 +57,16 @@ class ReceptionistController extends Controller
 
         $data['level'] = 'receptionist';
 
-        $user = User::create($data);
+        //assign created receptionist to manager, if logged in user is Manager
+        if( auth()->user()->level == 'manager'){
+            $data['created_by'] = auth()->user()->id;
+        }
 
+        $user = User::create($data);
         $user->assignRole('receptionist');
 
         return response()->json(['success' => trans('admin.record_added')]);
-        
+    
     }
 
     /**

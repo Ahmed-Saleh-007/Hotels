@@ -19,10 +19,12 @@ class ReceptionistDatatable extends DataTable
             ->addColumn('checkbox', 'receptionists.btn.checkbox')
             ->addColumn('actions', 'receptionists.btn.actions')
             ->addColumn('avatar_image', 'receptionists.btn.avatar_image')
+            ->addColumn('created_by', 'receptionists.btn.created_by')                 //show manager's name who created the receptionist 
             ->rawColumns([
                 'checkbox',
                 'actions',
                 'avatar_image',
+                'created_by',
             ]);
     }
 
@@ -60,7 +62,7 @@ class ReceptionistDatatable extends DataTable
                             ['extend' => 'reload', 'className' => 'btn btn-default', 'text' => '<i class="fas fa-sync-alt"></i>'],
                         ],
                         'initComplete' => ' function () {
-                            this.api().columns([2,3,4,5]).every(function () {
+                            this.api().columns([1,2]).every(function () {
                                 var column = this;
                                 var input = document.createElement("input");
                                 $(input).appendTo($(column.footer()).empty())
@@ -84,6 +86,61 @@ class ReceptionistDatatable extends DataTable
     protected function getColumns()
     {
 
+        if (auth()->user()->level == 'admin') {
+            return [
+                [
+                    'name'          => 'checkbox',
+                    'data'          => 'checkbox',
+                    'title'         => '<input type="checkbox" class="check_all" onclick="check_all()" style="width:20px"/>',
+                    'exportable'    => false,
+                    'printable'     => false,
+                    'orderable'     => false,
+                    'searchable'    => false,
+                ],
+                [
+                    'name'  => 'name',
+                    'data'  => 'name',
+                    'title' => trans('admin.name'),
+                ],
+                [
+                    'name'  => 'email',
+                    'data'  => 'email',
+                    'title' => trans('admin.email'),
+                ],
+                [
+                    'name'  => 'created_by',
+                    'data'  => 'created_by',
+                    'title' => trans('admin.manager_name'),
+                ],
+                [
+                    'name'  => 'mobile',
+                    'data'  => 'mobile',
+                    'title' => trans('admin.mobile'),
+                ],
+                [
+                    'name'  => 'gender',
+                    'data'  => 'gender',
+                    'title' => trans('admin.gender'),
+                ],
+
+                [
+                    'name'  => 'country',
+                    'data'  => 'country',
+                    'title' => trans('admin.country'),
+                ],
+                [
+                    'name'       => 'actions',
+                    'data'       => 'actions',
+                    'title'      => trans('admin.actions'),
+                    'exportable' => false,
+                    'printable'  => false,
+                    'orderable'  => false,
+                    'searchable' => false,
+                ],
+
+            ];
+        }
+
         return [
             [
 				'name'          => 'checkbox',
@@ -100,28 +157,16 @@ class ReceptionistDatatable extends DataTable
 				'title' => trans('admin.name'),
 			], 
             [
-				'name'  => 'mobile',
-				'data'  => 'mobile',
-				'title' => trans('admin.mobile'),
-			], 
-            [
-				'name'  => 'gender',
-				'data'  => 'gender',
-				'title' => trans('admin.gender'),
-			], 
-
-            [
-				'name'  => 'country',
-				'data'  => 'country',
-				'title' => trans('admin.country'),
-			], 
-
-            [
 				'name'  => 'email',
 				'data'  => 'email',
 				'title' => trans('admin.email'),
 			],
-             [
+            [
+				'name'  => 'created_at',
+				'data'  => 'created_at',
+				'title' => trans('admin.date'),
+			],
+            [
 				'name'       => 'actions',
 				'data'       => 'actions',
 				'title'      => trans('admin.actions'),
