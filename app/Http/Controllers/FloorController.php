@@ -41,6 +41,7 @@ class FloorController extends Controller
         ]);
         
         $data['number']     = rand(1000, 9999);
+<<<<<<< HEAD
 
         if(auth()->user()->level == 'manager'){
         
@@ -48,6 +49,9 @@ class FloorController extends Controller
 
         }
 
+=======
+        $data['manager_id'] = 2;
+>>>>>>> 2ae89983754fb7c431d61bfec79cc92be35de286
         Floor::create($data);
         return response()->json(['success' => trans('admin.record_added')]);
     }
@@ -106,6 +110,6 @@ class FloorController extends Controller
     public function destroyAll()
     {
         Floor::destroy(request('item'));
-		return response()->json(['success' => trans('admin.deleted_record')]);
+        return response()->json(['success' => trans('admin.deleted_record')]);
     }
 }

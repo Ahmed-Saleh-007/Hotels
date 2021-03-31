@@ -5,6 +5,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ClientStatisticsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::group(['middleware' => ['auth']], function () {
 
@@ -131,20 +133,28 @@ Route::group(['middleware' => ['auth']], function () {
 
 //=====================================login & registeration & authentication routes==============================================//
 
-Route::get('/login',  [UserAuthentication::class , 'login'])->name('dashboard.login');
+Route::get('/login', [UserAuthentication::class , 'login'])->name('dashboard.login');
 Route::post('/login', [UserAuthentication::class , 'dologin'])->name('dashboard.login');
 
-
-Route::get('/register',  [RegisterController::class , 'create'])->name('dashboard.registration.create');
+Route::get('/register', [RegisterController::class , 'create'])->name('dashboard.registration.create');
 Route::post('/register', [RegisterController::class , 'store'])->name('dashboard.registration.store');
 
-Route::get('/forgot/password',  [UserAuthentication::class , 'forgot_password'])->name('dashboard.forgot_password');
+Route::get('/forgot/password', [UserAuthentication::class , 'forgot_password'])->name('dashboard.forgot_password');
 Route::post('/forgot/password', [UserAuthentication::class , 'forgot_password_post'])->name('dashboard.forgot_password');
 
-Route::get('/reset/password/{token}',  [UserAuthentication::class , 'reset_password'])->name('dashboard.reset_password');
+Route::get('/reset/password/{token}', [UserAuthentication::class , 'reset_password'])->name('dashboard.reset_password');
 Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_password_post'])->name('dashboard.reset_password');
 
 //================================================================================================================================//
+
+//================================================Client Statistics Routes ======================================================//
+
+Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])->name('clients.statistics');
+Route::get('/get-client-count', [ClientStatisticsController::class,'clientData'])->name('clients.data');
+
+Route::get('/get-country-count', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');
+
+//===============================================================================================================================//
 
 //===========testing only=============//
 
