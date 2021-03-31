@@ -39,8 +39,15 @@ class FloorController extends Controller
         $data = $request->validate([
             'name'     => 'required|unique:floors'
         ]);
+        
         $data['number']     = rand(1000, 9999);
-        $data['manager_id'] = 39;
+
+        if(auth()->user()->level == 'manager'){
+        
+            $data['manager_id'] = auth()->user()->id;
+
+        }
+
         Floor::create($data);
         return response()->json(['success' => trans('admin.record_added')]);
     }

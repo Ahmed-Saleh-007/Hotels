@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ReceptionistController;
@@ -25,113 +24,116 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//=====================================Routes of Roles===============================================//
-Route::get('/roles',                [RoleController::class, 'index'])     ->name('roles.index');     //
-Route::get('/roles/{role}',         [RoleController::class, 'show'])      ->name('roles.show');      //
-Route::post('/roles',               [RoleController::class, 'store'])     ->name('roles.store');     //
-Route::get('/roles/{role}/edit',    [RoleController::class, 'edit'])      ->name('roles.edit');      //
-Route::put('/roles/{role}',         [RoleController::class, 'update'])    ->name('roles.update');    //
-Route::delete('/roles/{role}',      [RoleController::class, 'destroy'])   ->name('roles.destroy');   //
-Route::delete('/roles/destroy/all', [RoleController::class, 'destroyAll'])->name('roles.destroyAll');//
-//===================================================================================================//
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::group(['middleware' =>    ['role:admin|manager' ] ], function () {
+
+        //===========================================Routes of Receptionists==============================================================//
+        Route::get('/receptionists',                [ReceptionistController::class, 'index'])     ->name('receptionists.index');          //
+        Route::get('/receptionists/{user}',         [ReceptionistController::class, 'show'])      ->name('receptionists.show');           //
+        Route::post('/receptionists',               [ReceptionistController::class, 'store'])     ->name('receptionists.store');          //
+        Route::get('/receptionists/{user}/edit',    [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');           //
+        Route::post('/receptionists/{user}/update', [ReceptionistController::class, 'update'])    ->name('receptionists.update');         //
+        Route::delete('/receptionists/{user}',      [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');        //
+        Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');     //
+        //================================================================================================================================//
+
+    });
+
+    Route::group(['middleware' => ['role:admin|manager|receptionist' ] ], function () {  
+
+        Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
+        //===============================================Routes of Clients=============================================================//
+        Route::get('/clients',                 [ClientController::class, 'index'])            ->name('clients.index');                 //
+        Route::get('/clients/{user}',          [ClientController::class, 'show'])      ->name('clients.show');                         //
+        Route::post('/clients',                [ClientController::class, 'store'])           ->name('clients.store');                  //
+        Route::get('/clients/{user}/edit',     [ClientController::class, 'edit'])      ->name('clients.edit');                         //
+        Route::post('/clients/{user}/update',  [ClientController::class, 'update'])    ->name('clients.update');                       //
+        Route::delete('/clients/{user}',       [ClientController::class, 'destroy'])   ->name('clients.destroy');                      //
+        Route::delete('/clients/destroy/all',  [ClientController::class, 'destroyAll'])->name('clients.destroyAll');                   //
+        Route::post('/clients/{user}/approve', [ClientController::class, 'approve_client'])->name('clients.approveClient');            //
+        Route::get('/approved-clients',        [ClientController::class, 'get_approved_clients'])         ->name('clients.approved');  //
+        //=============================================================================================================================//
+
+    });
 
 
-//===========================================Routes of Permissions==========================================================//
-Route::get('/permissions',                     [PermissionController::class, 'index'])     ->name('permissions.index');     //
-Route::get('/permissions/{permission}',        [PermissionController::class, 'show'])      ->name('permissions.show');      //
-Route::post('/permissions',                    [PermissionController::class, 'store'])     ->name('permissions.store');     //
-Route::get('/permissions/{permission}/edit',   [PermissionController::class, 'edit'])      ->name('permissions.edit');      //
-Route::put('/permissions/{permission}',        [PermissionController::class, 'update'])    ->name('permissions.update');    //
-Route::delete('/permissions/{permission}',     [PermissionController::class, 'destroy'])   ->name('permissions.destroy');   //
-Route::delete('/permissions/destroy/all',      [PermissionController::class, 'destroyAll'])->name('permissions.destroyAll');//
-//==========================================================================================================================//
+    Route::group(['middleware' => ['role:admin' ] ], function () {               
 
+        //===========================================Routes of Managers===================================================//
+        Route::get('/managers',                [ManagerController::class, 'index'])     ->name('managers.index');         //
+        Route::get('/managers/{user}',         [ManagerController::class, 'show'])      ->name('managers.show');          //
+        Route::post('/managers',               [ManagerController::class, 'store'])     ->name('managers.store');         //
+        Route::get('/managers/{user}/edit',    [ManagerController::class, 'edit'])      ->name('managers.edit');          //
+        Route::post('/managers/{user}/update', [ManagerController::class, 'update'])    ->name('managers.update');        //
+        Route::delete('/managers/{user}',      [ManagerController::class, 'destroy'])   ->name('managers.destroy');       //
+        Route::delete('/managers/destroy/all', [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');    //
+        //================================================================================================================//
 
-//===========================================Routes of Receptionists==============================================================//
-Route::group(['middleware' =>    ['auth', 'role:admin|manager' ] ], function () {
-    Route::get('/receptionists', [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
-    Route::get('/receptionists/{user}', [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
-    Route::post('/receptionists', [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
-    Route::get('/receptionists/{user}/edit', [ReceptionistController::class, 'edit'])      ->name('receptionists.edit');      //
-    Route::post('/receptionists/{user}/update', [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
-    Route::delete('/receptionists/{user}', [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
-    Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
+        //==============================================All Users Routes==============================================//
+        Route::get('/users',                [UserController::class, 'index'])->name('users.index');                   //
+        Route::get('/users/{user}',         [UserController::class, 'show'])->name('users.show');                     //
+        Route::post('/users',               [UserController::class, 'store'])->name('users.store');                   //
+        Route::get('/users/{user}/edit',    [UserController::class, 'edit'])->name('users.edit');                     //
+        Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');                 //
+        Route::delete('/users/{user}',      [UserController::class, 'destroy'])->name('users.destroy');               //
+        Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');         //
+        //============================================================================================================//
+
+        //=====================================Routes of Roles===============================================//
+        Route::get('/roles',                [RoleController::class, 'index'])     ->name('roles.index');     //
+        Route::get('/roles/{role}',         [RoleController::class, 'show'])      ->name('roles.show');      //
+        Route::post('/roles',               [RoleController::class, 'store'])     ->name('roles.store');     //
+        Route::get('/roles/{role}/edit',    [RoleController::class, 'edit'])      ->name('roles.edit');      //
+        Route::put('/roles/{role}',         [RoleController::class, 'update'])    ->name('roles.update');    //
+        Route::delete('/roles/{role}',      [RoleController::class, 'destroy'])   ->name('roles.destroy');   //
+        Route::delete('/roles/destroy/all', [RoleController::class, 'destroyAll'])->name('roles.destroyAll');//
+        //===================================================================================================//
+
+        //===========================================Routes of Permissions==========================================================//
+        Route::get('/permissions',                     [PermissionController::class, 'index'])     ->name('permissions.index');     //
+        Route::get('/permissions/{permission}',        [PermissionController::class, 'show'])      ->name('permissions.show');      //
+        Route::post('/permissions',                    [PermissionController::class, 'store'])     ->name('permissions.store');     //
+        Route::get('/permissions/{permission}/edit',   [PermissionController::class, 'edit'])      ->name('permissions.edit');      //
+        Route::put('/permissions/{permission}',        [PermissionController::class, 'update'])    ->name('permissions.update');    //
+        Route::delete('/permissions/{permission}',     [PermissionController::class, 'destroy'])   ->name('permissions.destroy');   //
+        Route::delete('/permissions/destroy/all',      [PermissionController::class, 'destroyAll'])->name('permissions.destroyAll');//
+        //==========================================================================================================================//
+
+    }); 
+
+    Route::group(['middleware' => ['role:admin|manager' ] ], function () {
+        //===========================================Routes of Floors====================================================//
+        Route::get('/floors',                [FloorController::class, 'index'])     ->name('floors.index');              //        
+        Route::get('/floors/{floor}',        [FloorController::class, 'show'])      ->name('floors.show');               //
+        Route::post('/floors',               [FloorController::class, 'store'])     ->name('floors.store');              //
+        Route::get('/floors/{floor}/edit',   [FloorController::class, 'edit'])      ->name('floors.edit');               //
+        Route::put('/floors/{floor}',        [FloorController::class, 'update'])    ->name('floors.update');             // 
+        Route::delete('/floors/{floor}',     [FloorController::class, 'destroy'])   ->name('floors.destroy');            //
+        Route::delete('/floors/destroy/all', [FloorController::class, 'destroyAll'])->name('floors.destroyAll');         //
+        //===============================================================================================================//
+
+        //===========================================Routes of rooms=====================================================//
+        Route::get('/rooms',                 [RoomController::class, 'index'])->name('rooms.index');                     //
+        Route::get('/rooms/{room}',          [RoomController::class, 'show'])->name('rooms.show');                       //
+        Route::post('/rooms',                [RoomController::class, 'store'])->name('rooms.store');                     //
+        Route::get('/rooms/{room}/edit',     [RoomController::class, 'edit'])->name('rooms.edit');                       //
+        Route::put('/rooms/{room}',          [RoomController::class, 'update'])->name('rooms.update');                   //
+        Route::delete('/rooms/{room}',       [RoomController::class, 'destroy'])->name('rooms.destroy');                 //
+        Route::delete('/rooms/destroy/all',  [RoomController::class, 'destroyAll'])->name('rooms.destroyAll');           //
+        //===============================================================================================================//
+    });
+
+    Route::any('/logout', [UserAuthentication::class , 'logout'])->name('dashboard.logout');
 
 });
 
-//================================================================================================================================//
-
-//===========================================Routes of Clients==================================================//
-
-Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], function () {  
-    
-    Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
-    
-    Route::get('/clients', [ClientController::class, 'index'])            ->name('clients.index');     //
-    Route::get('/clients/{user}', [ClientController::class, 'show'])      ->name('clients.show');      //
-    Route::post('/clients', [ClientController::class, 'store'])           ->name('clients.store');     //
-    Route::get('/clients/{user}/edit', [ClientController::class, 'edit'])      ->name('clients.edit');      //
-    Route::post('/clients/{user}/update', [ClientController::class, 'update'])    ->name('clients.update');    //
-    Route::delete('/clients/{user}', [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
-    Route::delete('/clients/destroy/all', [ClientController::class, 'destroyAll'])->name('clients.destroyAll');
-
-    Route::post('/clients/{user}/approve', [ClientController::class, 'approve_client'])->name('clients.approveClient');//
-    Route::get('/approved-clients', [ClientController::class, 'get_approved_clients'])         ->name('clients.approved');     //
-
-
-});
-
-//==============================================================================================================//
-
-//===========================================Routes of Managers===================================================//
-Route::group(['middleware' => ['auth', 'role:admin' ] ], function () {                                             //
-
-    Route::get('/managers', [ManagerController::class, 'index'])     ->name('managers.index');     //
-    Route::get('/managers/{user}', [ManagerController::class, 'show'])      ->name('managers.show');      //
-    Route::post('/managers', [ManagerController::class, 'store'])     ->name('managers.store');     //
-    Route::get('/managers/{user}/edit', [ManagerController::class, 'edit'])      ->name('managers.edit');      //
-    Route::post('/managers/{user}/update', [ManagerController::class, 'update'])    ->name('managers.update');    //
-    Route::delete('/managers/{user}', [ManagerController::class, 'destroy'])   ->name('managers.destroy');   //
-    Route::delete('/managers/destroy/all', [ManagerController::class, 'destroyAll'])->name('managers.destroyAll');//
-
-    //=============================all users routes=========================//
-    Route::get('/users',                [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/{user}',         [UserController::class, 'show'])->name('users.show');
-    Route::post('/users',               [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{user}/edit',    [UserController::class, 'edit'])->name('users.edit');
-    Route::post('/users/{user}/update', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}',      [UserController::class, 'destroy'])->name('users.destroy');
-    Route::delete('/users/destroy/all', [UserController::class, 'destroyAll'])->name('users.destroyAll');
-    
-});                                                                                                               //
-//================================================================================================================//
-
-//===========================================Routes of Floors====================================================//
-Route::get('/floors', [FloorController::class, 'index'])->name('floors.index');
-Route::get('/floors/{floor}', [FloorController::class, 'show'])->name('floors.show');
-Route::post('/floors',[FloorController::class, 'store'])->name('floors.store');
-Route::get('/floors/{floor}/edit', [FloorController::class, 'edit'])->name('floors.edit');
-Route::put('/floors/{floor}',[FloorController::class, 'update'])->name('floors.update');
-Route::delete('/floors/{floor}', [FloorController::class, 'destroy'])->name('floors.destroy');
-Route::delete('/floors/destroy/all', [FloorController::class, 'destroyAll'])->name('floors.destroyAll');
-//================================================================================================================//
-
-//===========================================Routes of rooms====================================================//
-Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
-Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
-Route::post('/rooms',[RoomController::class, 'store'])->name('rooms.store');
-Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
-Route::put('/rooms/{room}',[RoomController::class, 'update'])->name('rooms.update');
-Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
-Route::delete('/rooms/destroy/all', [RoomController::class, 'destroyAll'])->name('rooms.destroyAll');
-//===============================================================================================================//
 
 //=====================================login & registeration & authentication routes==============================================//
 
 Route::get('/login',  [UserAuthentication::class , 'login'])->name('dashboard.login');
 Route::post('/login', [UserAuthentication::class , 'dologin'])->name('dashboard.login');
 
-Route::any('/logout', [UserAuthentication::class , 'logout'])->name('dashboard.logout');
 
 Route::get('/register',  [RegisterController::class , 'create'])->name('dashboard.registration.create');
 Route::post('/register', [RegisterController::class , 'store'])->name('dashboard.registration.store');
@@ -148,12 +150,10 @@ Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_passw
 
 //===================================//
 
-
-
-//===========================================Routes to change language====================================================//
-Route::get('lang/{lang}', function ($lang) {
-    session()->has('lang') ? session()->forget('lang') : '';
-    $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');
-    return back();
-});
-//========================================================================================================================//
+//===============================Routes to change language============================//
+Route::get('lang/{lang}', function ($lang) {                                          //
+    session()->has('lang') ? session()->forget('lang') : '';                          //
+    $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');      //
+    return back();                                                                    //
+});                                                                                   //
+//====================================================================================//
