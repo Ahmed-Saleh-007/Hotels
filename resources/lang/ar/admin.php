@@ -86,5 +86,6 @@ return [
 	'floors'						=> 'الطوابق',
 	'rooms'							=> 'الغرف',
 	'floor_room'					=> 'الطوابق والغرف',
+	'manager_name'                  => 'اسم المدير',
     
 ];
