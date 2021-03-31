@@ -155,7 +155,7 @@
                     reader.readAsDataURL(input.files[0]);
                 }
             }
-            $("#imageUpload").change(function() {
+            $("#avatar_image").change(function() {
                 readURL(this);
             });
 
