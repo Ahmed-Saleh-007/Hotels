@@ -29,5 +29,8 @@ class DatabaseSeeder extends Seeder
               Role::create(['name' => $role]);
          }
 
+         $user = User::where('level','admin')->first();
+         $user->assignRole('admin');
+
     }
 }
