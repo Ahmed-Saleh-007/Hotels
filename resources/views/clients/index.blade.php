@@ -305,7 +305,7 @@
         });
         $(document).on('click', '#ajax_approve_content #approve', function () {
             $.ajax({
-                url:  '{{url("")}}/receptionists/' + _id + '/approve',
+                url:  '{{url("")}}/clients/' + _id + '/approve',
                 type: 'post',
                 data: {
                     _token: $('#ajax_approve_content [name=_token]').val(),

@@ -6,7 +6,6 @@ use App\DataTables\ReceptionistDatatable;
 use App\Models\User;
 use App\Http\Requests\StoreReceptionistRequest;
 use App\Http\Requests\UpdateReceptionistRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -58,12 +57,16 @@ class ReceptionistController extends Controller
 
         $data['level'] = 'receptionist';
 
-        $user = User::create($data);
+        //assign created receptionist to manager, if logged in user is Manager
+        if( auth()->user()->level == 'manager'){
+            $data['created_by'] = auth()->user()->id;
+        }
 
+        $user = User::create($data);
         $user->assignRole('receptionist');
 
         return response()->json(['success' => trans('admin.record_added')]);
-        
+    
     }
 
     /**
@@ -153,19 +156,5 @@ class ReceptionistController extends Controller
 		return response()->json(['success' => trans('admin.deleted_record')]);
     }
 
-
-    public function approve(User $user)
-    {
-
-        $approved_by = auth()->user()->id;
-
-        $user->update([
-            'is_approved' => 1 ,
-            'approved_by' => $approved_by
-        ]);
-
-        return response()->json(['success' => trans('admin.client_approved_successfully')]);
-    
-    }//end of approve client
 
 }

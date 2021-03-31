@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use App\Models\Admin;
-
-use App\Mail\AdminResetPassword;
 use App\Mail\UserResetPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,7 +11,6 @@ use DB;
 use Illuminate\Support\Facades\Mail;
 
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash;
 
 class UserAuthentication extends Controller
@@ -23,41 +19,6 @@ class UserAuthentication extends Controller
     public function login(){
 
         return view('dashboard.auth.login');
-
-    }
-
-    public function register(){
-
-        return view('dashboard.auth.register');
-
-    }
-
-    public function doregister(RegisterRequest $request){
-
-      
-        $data = $request->all();
-
-        if(request()->hasFile('avatar_image')){
-
-            $data['avatar_image'] = rand() . '.' . request()->avatar_image->getClientOriginalExtension();
-            request()->avatar_image->storeAs('users_images', $data['avatar_image']);
-
-        }
-
-        User::create([
-            'name'         => $data['name'],
-            'email'        => $data['email'],
-            'level'        => 'client',
-            'country'      => $data['country'],
-            'gender'       => $data['gender'],
-            'avatar_image' => $data['avatar_image'],
-            'password'     => Hash::make($data['password']),
-            
-        ]);
-
-        session()->flash('success' , 'Account registered successfully, we will send approved message to you soon');
-
-        return redirect()->route('dashboard.register');
 
     }
 
@@ -178,7 +139,7 @@ class UserAuthentication extends Controller
         if (!empty($check_token))
         {
 
-            $admin = Admin::where('email', $check_token->email)->update([
+            $admin = User::where('email', $check_token->email)->update([
                 'email' => $check_token->email,
                 'password'  => bcrypt(request('password'))
             ]);

@@ -11,6 +11,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FloorController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +49,7 @@ Route::delete('/permissions/destroy/all', [PermissionController::class, 'destroy
 
 
 //===========================================Routes of Receptionists==============================================================//
-Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ], function () {
+Route::group(['middleware' =>    ['auth', 'role:admin|manager' ] ], function () {
     Route::get('/receptionists', [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
     Route::get('/receptionists/{user}', [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
     Route::post('/receptionists', [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
@@ -56,16 +57,16 @@ Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ],
     Route::post('/receptionists/{user}/update', [ReceptionistController::class, 'update'])    ->name('receptionists.update');    //
     Route::delete('/receptionists/{user}', [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
     Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
-
-    Route::post('/receptionists/{user}/approve', [ReceptionistController::class, 'approve'])->name('receptionists.approveClient');//
 });
 
 //================================================================================================================================//
 
 //===========================================Routes of Clients==================================================//
 
+
 Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], function () {
-    Route::get('/', [HomeController::class , 'index']);
+    Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
+
     
     Route::get('/clients', [ClientController::class, 'index'])            ->name('clients.index');     //
     Route::get('/clients/{user}', [ClientController::class, 'show'])      ->name('clients.show');      //
@@ -74,6 +75,9 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], fu
     Route::post('/clients/{user}/update', [ClientController::class, 'update'])    ->name('clients.update');    //
     Route::delete('/clients/{user}', [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
     Route::delete('/clients/destroy/all', [ClientController::class, 'destroyAll'])->name('clients.destroyAll');
+
+    Route::post('/clients/{user}/approve', [ClientController::class, 'approve_client'])->name('clients.approveClient');//
+    Route::get('/approved-clients', [ClientController::class, 'get_approved_clients'])         ->name('clients.approved');     //
 });
 
 //==============================================================================================================//
@@ -127,8 +131,10 @@ Route::post('/login', [UserAuthentication::class , 'dologin'])->name('dashboard.
 
 Route::any('/logout', [UserAuthentication::class , 'logout'])->name('dashboard.logout');
 
-Route::get('/register', [UserAuthentication::class , 'register'])->name('dashboard.register');
-Route::post('/register', [UserAuthentication::class , 'doregister'])->name('dashboard.register');
+
+Route::get('/register', [RegisterController::class , 'create'])->name('dashboard.registration.create');
+Route::post('/register', [RegisterController::class , 'store'])->name('dashboard.registration.store');
+
 
 Route::get('/forgot/password', [UserAuthentication::class , 'forgot_password'])->name('dashboard.forgot_password');
 Route::post('/forgot/password', [UserAuthentication::class , 'forgot_password_post'])->name('dashboard.forgot_password');

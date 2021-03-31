@@ -91,13 +91,16 @@
                                     </li>
                                 @endrole
 
+                                @role('admin|manager')
                                     <li class="nav-item">
                                         <a href="{{ route('receptionists.index') }}" class="nav-link">
                                             <i class="nav-icon fas fa-users text-info"></i>
                                             <p>{{ trans('admin.receptionists') }}</p>
                                         </a>
                                     </li>
+                                @endrole
 
+                                
                                     <li class="nav-item">
                                         <a href="{{ route('clients.index') }}" class="nav-link">
                                             <i class="nav-icon fas fa-users text-default"></i>
@@ -108,14 +111,16 @@
                                 </ul>
                             </li>
 
+                            @role('receptionist')
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{ route('clients.approved') }}" class="nav-link">
                                     <i class="nav-icon fas fa-user-check text-default"></i>
                                     <p>{{ trans('admin.my_approved_clients') }}</p>
                                 </a>
                             </li>
+                            @endrole
 
-
+                            @role('admin')
                             <li class="nav-item has-treeview">
 
                                 <a href="#" class="nav-link">
@@ -150,8 +155,9 @@
 
 
                             </li>
+                            @endrole
 
-
+                            @role('admin|manager')
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-building"></i>
@@ -182,6 +188,7 @@
 
                                 </ul>
                             </li>
+                            @endrole
 
 
                         </ul>

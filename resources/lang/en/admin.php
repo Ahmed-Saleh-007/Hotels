@@ -6,7 +6,7 @@ return [
 	'ar'                           		=> 'Arabic',
 	'en'                           		=> 'English',
 	'main_lang'                    		=> 'Main language',
-	'adminpanel'                   		=> 'Admin Panel',					//AdminLTE 3 | Dashboard
+	'adminpanel'                   		=> 'Admin Panel',					
     'incorrect_information_login'   	=> 'Invalid Email Or Password',
 	'forgot_password'               	=> 'Forgot Password',
 	'reset_password'               		=> 'Reset Password',
@@ -121,4 +121,5 @@ return [
 	'approve_this_client'               => 'Are you sure you want to approve this client?',
 	'client_approved_successfully'      => 'Client approved successfully',
 	'my_approved_clients'               => 'My Approved Clients',
+	'manager_name'                      => 'Manager Name',
 ];

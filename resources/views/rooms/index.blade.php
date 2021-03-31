@@ -40,7 +40,7 @@
             </div>
             <div class="form-group">
                 {!! Form::label('floor_id', trans('admin.floor_name')) !!}
-                {!! Form::select('floor_id', App\Models\Floor::where('manager_id', 1)->pluck('name', 'id'), old('floor_id'), ['class' => 'form-control']) !!}
+                {!! Form::select('floor_id', App\Models\Floor::where('manager_id', 39)->pluck('name', 'id'), old('floor_id'), ['class' => 'form-control', 'placeholder' => '...']) !!}
             </div>
             {!! Form::submit(trans('admin.add'), ['class'=>'btn btn-primary']) !!}
             {!! Form::close() !!}
