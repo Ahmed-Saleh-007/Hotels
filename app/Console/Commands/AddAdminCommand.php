@@ -61,6 +61,7 @@ class AddAdminCommand extends Command
                     'password' => Hash::make($this->option('password')),
                     'level' => 'admin',
                 ]);
+                $admin->assignRole('admin');
                 
                 $this->info('Admin with name: '. $admin->name .' created successfully'); 
             }
