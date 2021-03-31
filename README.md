@@ -9,7 +9,7 @@
 
 # Hotel System
 
-This is a team project that features an online Hotel system with different roles and permissions(Admin, Manager,Reciptionist, Client) using Laravel framework. 
+This is a project has features an online Hotel system with different roles and permissions(Admin, Manager,Reciptionist, Client) using Laravel framework. 
 
 ### Team Members:
 	Ahmed Saleh - Bassam Saad - Hossam Salah - Islam Shabaan - Khaled Elgaml - Mohamed Egila
