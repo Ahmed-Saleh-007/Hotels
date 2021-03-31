@@ -15,7 +15,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('floor_id', trans('admin.floor_name')) !!}
-    {!! Form::select('floor_id', App\Models\Floor::where('manager_id', 1)->pluck('name', 'id'), $room->floor_id, ['class' => 'form-control']) !!}
+    {!! Form::select('floor_id', (auth()->user()->level != 'admin') ? App\Models\Floor::where('manager_id', auth()->user()->id)->pluck('name', 'id') : App\Models\Floor::pluck('name', 'id'), $room->floor_id, ['class' => 'form-control']) !!}
 </div>
 {!! Form::submit(trans('admin.save'), ['class'=>'btn btn-primary']) !!}
 {!! Form::close() !!}

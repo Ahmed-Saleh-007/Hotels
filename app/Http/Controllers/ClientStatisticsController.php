@@ -31,7 +31,7 @@ class ClientStatisticsController extends Controller
 
         $data = [
             'id'      => 'myChart',
-            'colors'  => ['black','blue'],
+            'colors'  => ['rgb(' . rand(0,255) . ',' . rand(0,255) . ','  . rand(0,255) . ')','blue'],
             'labels'  => $C,
             'data'   => $v
         ];
@@ -46,7 +46,15 @@ class ClientStatisticsController extends Controller
         ->where('level', 'client')
         ->groupBy('country')
         ->pluck('count', 'country');
+
         
+        $colors_array = array();
+
+        for($i = 0 ; $i < $test->count() ; $i++){
+            $colors_array[] = 'rgb(' . rand(0,255) . ',' . rand(0,255) . ','  . rand(0,255) . ')';
+        }
+        
+
         $test = json_decode($test);
 
         $data = array();
@@ -57,11 +65,21 @@ class ClientStatisticsController extends Controller
             $v[] = $value;
         }
 
+
+        
+
         $data = [
             'id'      => 'myChart_1',
-            'colors'  => ['black','blue','yellow'],
+            'colors'  =>
+
+            
+            // ['gray','blue','yellow']
+            $colors_array
+            
+            
+            ,
             'labels'  => $C,
-            'data'   => $v
+            'data'    => $v
         ];
         return $data;
     }

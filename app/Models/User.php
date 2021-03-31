@@ -31,6 +31,7 @@ national_id
         'level',
         'avatar_image',
         'is_approved',
+        'is_banned',
         'approved_by',
         'created_by',
         'national_id',

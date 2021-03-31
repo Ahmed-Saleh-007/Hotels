@@ -166,6 +166,51 @@
 
 
 <!--
+    ban modal view using by ajax
+-->
+
+<div id="ajax_ban" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Ban Receptionist</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body" id="ajax_ban_content">
+            @csrf
+            <h4 class="mb-3">{{ trans('admin.ban_this_receptionist') }}</h4>
+            <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
+            <button class="btn btn-danger" id="ban" >Ban Receptionist</button>
+          </div>
+      </div>
+    </div>
+</div>
+
+<!--
+    un-ban modal view using by ajax
+-->
+
+<div id="ajax_unban" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Un-ban Receptionist</h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body" id="ajax_unban_content">
+            @csrf
+            <h4 class="mb-3">{{ trans('admin.unban_this_receptionist') }}</h4>
+            <button type="button" class="btn btn-info" data-dismiss="modal">{{ trans('admin.no') }}</button>
+            <button class="btn btn-danger" id="unban" >Un-ban Receptionist</button>
+          </div>
+      </div>
+    </div>
+</div>
+
+
+<!--
     delete all modal view using by ajax
 -->
 
@@ -269,6 +314,60 @@
             });
         });
     });
+
+
+    //===================================//
+    // Ajax handler for ban receptionist //
+    //===================================//
+
+    $(document).ready(function () {
+        var _id = 0;
+        $(document).on('click', '.ban-ajax', function () {
+            console.log($(this).data('ajax'));
+            _id = $(this).data('ajax');
+        });
+        $(document).on('click', '#ajax_ban_content #ban', function () {
+            $.ajax({
+                url:  '{{url("")}}/receptionists/' + _id + '/ban',
+                type: 'post',
+                data: {
+                    _token: $('#ajax_ban_content [name=_token]').val(),
+                },
+                success: function (data) {
+                    toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                    $('#ajax_ban').modal('toggle');
+                    $('.buttons-reload').trigger("click");
+                }
+            });
+        });
+    });
+
+    //===================================//
+    // Ajax handler for un-ban receptionist //
+    //===================================//
+
+    $(document).ready(function () {
+        var _id = 0;
+        $(document).on('click', '.unban-ajax', function () {
+            console.log($(this).data('ajax'));
+            _id = $(this).data('ajax');
+        });
+        $(document).on('click', '#ajax_unban_content #unban', function () {
+            $.ajax({
+                url:  '{{url("")}}/receptionists/' + _id + '/unban',
+                type: 'post',
+                data: {
+                    _token: $('#ajax_unban_content [name=_token]').val(),
+                },
+                success: function (data) {
+                    toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                    $('#ajax_unban').modal('toggle');
+                    $('.buttons-reload').trigger("click");
+                }
+            });
+        });
+    });
+
 
     ////////////////////////////////
     // Ajax handler for delete all//

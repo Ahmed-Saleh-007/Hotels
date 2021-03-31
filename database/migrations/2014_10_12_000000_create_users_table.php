@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->enum('level', [ 'admin','manager', 'receptionist', 'client' ])->default('client');
             $table->string('avatar_image')->default('avatar.png');
             $table->boolean('is_approved')->default(0);
+            $table->boolean('is_banned')->default(0);
             $table->integer('approved_by')->nullable();
             $table->integer('created_by')->nullable();
             $table->string('national_id')->nullable();

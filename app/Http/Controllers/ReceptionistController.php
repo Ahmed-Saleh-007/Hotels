@@ -157,4 +157,39 @@ class ReceptionistController extends Controller
     }
 
 
+    public function ban_receptionist(User $user)
+    {
+
+        $is_banned = $user->update(['is_banned' => 1]);
+
+        if($is_banned){
+
+		    return response()->json(['success' => trans('admin.banned_successfully')]);
+
+        }else{
+
+            return response()->json(['error' => trans('admin.something_went_wrong')]);
+        
+        }
+
+    }
+
+    public function unban_receptionist(User $user)
+    {
+
+        $is_banned = $user->update(['is_banned' => 0]);
+
+        if($is_banned){
+
+		    return response()->json(['success' => trans('admin.unbanned_successfully')]);
+
+        }else{
+
+            return response()->json(['error' => trans('admin.something_went_wrong')]);
+        
+        }
+
+    }
+
+
 }

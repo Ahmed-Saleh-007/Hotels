@@ -122,4 +122,9 @@ return [
 	'client_approved_successfully'      => 'Client approved successfully',
 	'my_approved_clients'               => 'My Approved Clients',
 	'manager_name'                      => 'Manager Name',
+	'ban_this_receptionist'             => 'Are you sure you want to ban this receptionist',
+	'unban_this_receptionist'           => 'Are you sure you want to un-ban this receptionist',
+	'banned_successfully'               => 'Receptionist has banned successfully',
+	'unbanned_successfully'             => 'Receptionist un-banned successfully',
+	'something_went_wrong'              => 'Something went wrong!',
 ];

@@ -38,6 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/receptionists/{user}/update', [ReceptionistController::class, 'update'])    ->name('receptionists.update');         //
         Route::delete('/receptionists/{user}',      [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');        //
         Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');     //
+        Route::post('/receptionists/{user}/ban',    [ReceptionistController::class, 'ban_receptionist'])->name('receptionists.ban');      //
+        Route::post('/receptionists/{user}/unban',  [ReceptionistController::class, 'unban_receptionist'])->name('receptionists.unban');  //
         //================================================================================================================================//
 
     });
