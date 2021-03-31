@@ -66,6 +66,11 @@
                                     @endif
                                     
                                 @endif
+
+                                <p>
+                                    {{auth()->user()->name}} <br>
+                                    @lang('admin.Member Since') {{auth()->user()->created_at->format('d/m/Y')}}
+                                </p>
                              
                             </li>
                        
@@ -73,7 +78,7 @@
                             <li class="user-footer">
                                 <div class="row">
                                     <div class="col-sm-4 text-center">
-                                        <a href="" class="btn btn-primary btn-sm">Edit Profile</a>
+                                        <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">Edit Profile</a>
                                     </div>
 
                                     <div class="col-sm-4 text-center">
