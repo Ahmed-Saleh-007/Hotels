@@ -43,7 +43,7 @@ class FloorController extends Controller
         $data['number']     = rand(1000, 9999);
 
         $data['manager_id'] = auth()->user()->id;
-        
+    
         Floor::create($data);
         return response()->json(['success' => trans('admin.record_added')]);
     }
