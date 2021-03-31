@@ -40,7 +40,7 @@ class FloorController extends Controller
             'name'     => 'required|unique:floors'
         ]);
         $data['number']     = rand(1000, 9999);
-        $data['manager_id'] = 1;
+        $data['manager_id'] = 39;
         Floor::create($data);
         return response()->json(['success' => trans('admin.record_added')]);
     }
