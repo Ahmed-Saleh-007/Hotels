@@ -9,6 +9,8 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserAuthentication;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FloorController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -99,6 +101,25 @@ Route::group(['middleware' => ['auth', 'role:admin' ] ], function () {          
 });                                                                                                               //
 //================================================================================================================//
 
+//===========================================Routes of Floors====================================================//
+Route::get('/floors', [FloorController::class, 'index'])->name('floors.index');
+Route::get('/floors/{floor}', [FloorController::class, 'show'])->name('floors.show');
+Route::post('/floors',[FloorController::class, 'store'])->name('floors.store');
+Route::get('/floors/{floor}/edit', [FloorController::class, 'edit'])->name('floors.edit');
+Route::put('/floors/{floor}',[FloorController::class, 'update'])->name('floors.update');
+Route::delete('/floors/{floor}', [FloorController::class, 'destroy'])->name('floors.destroy');
+Route::delete('/floors/destroy/all', [FloorController::class, 'destroyAll'])->name('floors.destroyAll');
+//================================================================================================================//
+
+//===========================================Routes of rooms====================================================//
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+Route::get('/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+Route::post('/rooms',[RoomController::class, 'store'])->name('rooms.store');
+Route::get('/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
+Route::put('/rooms/{room}',[RoomController::class, 'update'])->name('rooms.update');
+Route::delete('/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
+Route::delete('/rooms/destroy/all', [RoomController::class, 'destroyAll'])->name('rooms.destroyAll');
+//===============================================================================================================//
 
 //=====================================login & registeration & authentication routes==============================================//
 
@@ -124,8 +145,10 @@ Route::post('/reset/password/{token}', [UserAuthentication::class , 'reset_passw
 
 
 
+//===========================================Routes to change language====================================================//
 Route::get('lang/{lang}', function ($lang) {
     session()->has('lang') ? session()->forget('lang') : '';
     $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');
     return back();
 });
+//========================================================================================================================//
