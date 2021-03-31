@@ -66,7 +66,7 @@ Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ],
 
 Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], function () {  
     
-    Route::get('/', [HomeController::class , 'index']);
+    Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
     
     Route::get('/clients', [ClientController::class, 'index'])            ->name('clients.index');     //
     Route::get('/clients/{user}', [ClientController::class, 'show'])      ->name('clients.show');      //

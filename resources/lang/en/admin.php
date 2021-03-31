@@ -6,7 +6,7 @@ return [
 	'ar'                           		=> 'Arabic',
 	'en'                           		=> 'English',
 	'main_lang'                    		=> 'Main language',
-	'adminpanel'                   		=> 'Admin Panel',					//AdminLTE 3 | Dashboard
+	'adminpanel'                   		=> 'Admin Panel',					
     'incorrect_information_login'   	=> 'Invalid Email Or Password',
 	'forgot_password'               	=> 'Forgot Password',
 	'reset_password'               		=> 'Reset Password',
