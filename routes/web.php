@@ -48,7 +48,7 @@ Route::delete('/permissions/destroy/all',      [PermissionController::class, 'de
 
 
 //===========================================Routes of Receptionists==============================================================//
-Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ], function () {
+Route::group(['middleware' =>    ['auth', 'role:admin|manager' ] ], function () {
     Route::get('/receptionists', [ReceptionistController::class, 'index'])     ->name('receptionists.index');     //
     Route::get('/receptionists/{user}', [ReceptionistController::class, 'show'])      ->name('receptionists.show');      //
     Route::post('/receptionists', [ReceptionistController::class, 'store'])     ->name('receptionists.store');     //
@@ -57,7 +57,6 @@ Route::group(['middleware' =>    ['auth', 'role:admin|manager|receptionist' ] ],
     Route::delete('/receptionists/{user}', [ReceptionistController::class, 'destroy'])   ->name('receptionists.destroy');   //
     Route::delete('/receptionists/destroy/all', [ReceptionistController::class, 'destroyAll'])->name('receptionists.destroyAll');//
 
-    Route::post('/receptionists/{user}/approve', [ReceptionistController::class, 'approve'])->name('receptionists.approveClient');//
 });
 
 //================================================================================================================================//
@@ -75,6 +74,11 @@ Route::group(['middleware' => ['auth', 'role:admin|manager|receptionist' ] ], fu
     Route::post('/clients/{user}/update', [ClientController::class, 'update'])    ->name('clients.update');    //
     Route::delete('/clients/{user}', [ClientController::class, 'destroy'])   ->name('clients.destroy');   //
     Route::delete('/clients/destroy/all', [ClientController::class, 'destroyAll'])->name('clients.destroyAll');
+
+    Route::post('/clients/{user}/approve', [ClientController::class, 'approve_client'])->name('clients.approveClient');//
+    Route::get('/approved-clients', [ClientController::class, 'get_approved_clients'])         ->name('clients.approved');     //
+
+
 });
 
 //==============================================================================================================//

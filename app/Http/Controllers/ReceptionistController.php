@@ -6,7 +6,6 @@ use App\DataTables\ReceptionistDatatable;
 use App\Models\User;
 use App\Http\Requests\StoreReceptionistRequest;
 use App\Http\Requests\UpdateReceptionistRequest;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -153,19 +152,5 @@ class ReceptionistController extends Controller
 		return response()->json(['success' => trans('admin.deleted_record')]);
     }
 
-
-    public function approve(User $user)
-    {
-
-        $approved_by = auth()->user()->id;
-
-        $user->update([
-            'is_approved' => 1 ,
-            'approved_by' => $approved_by
-        ]);
-
-        return response()->json(['success' => trans('admin.client_approved_successfully')]);
-    
-    }//end of approve client
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\ApprovedClientDatatable;
 use App\DataTables\ClientDatatable;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\StoreClientRequest;
@@ -153,5 +154,25 @@ class ClientController extends Controller
         User::destroy(request('item'));
 		return response()->json(['success' => trans('admin.deleted_record')]);
     }
+
+    public function get_approved_clients(ApprovedClientDatatable $approved_clients)
+    {
+        return $approved_clients->render('clients.approved_clients');
+    }
+
+    public function approve_client(User $user)
+    {
+
+        $approved_by = auth()->user()->id;
+
+        $user->update([
+            'is_approved' => 1 ,
+            'approved_by' => $approved_by
+        ]);
+
+        return response()->json(['success' => trans('admin.client_approved_successfully')]);
+    
+    }//end of approve client
+
 
 }
