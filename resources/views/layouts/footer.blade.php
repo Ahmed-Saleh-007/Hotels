@@ -181,7 +181,6 @@
 
         {{-- include Chart JS --}}
 
-        <script src="{{url( 'vendor/jquery.min.js' )}}"></script>
 
         <script src="{{url( 'vendor/Chart.min.js' )}}"></script>
     

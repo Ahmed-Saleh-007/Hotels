@@ -99,6 +99,6 @@ class FloorController extends Controller
     public function destroyAll()
     {
         Floor::destroy(request('item'));
-		return response()->json(['success' => trans('admin.deleted_record')]);
+        return response()->json(['success' => trans('admin.deleted_record')]);
     }
 }
