@@ -18,7 +18,8 @@ class RoomResource extends JsonResource
             'id'        => $this->id,
             'number'    => $this->number,
             'capacity'  => $this->capacity,
-            'floor' => new floorResource($this->floor)
+            'price'     => $this->price/100,
+            'floor' => new FloorResource($this->floor)
         ];
     }
 }
