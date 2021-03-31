@@ -77,7 +77,7 @@
 
     <a href="{{ route('dashboard.forgot_password')}}" class="forget">I forgot my password</a><br>
 
-    <a href="{{ route('dashboard.register')}}" class="register">Create new account <i class="fa fa-arrow-right"></i> </a>
+    <a href="{{ route('dashboard.registration.create')}}" class="register">Create new account <i class="fa fa-arrow-right"></i> </a>
 
 </div>
 <!-- /.login-box-body -->

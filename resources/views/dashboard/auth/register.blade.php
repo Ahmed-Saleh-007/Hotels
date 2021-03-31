@@ -16,13 +16,13 @@
             
         @endif
         
-        <form method="POST" action="{{ route('dashboard.register') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.registration.store') }}" enctype="multipart/form-data">
 
             @csrf
 
             <div class="input-group mb-3">
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" autocomplete="off">
-                <label for="name">Name In English</label>
+                <label for="name">Name (in English)</label>
                 <div class="input-group-append">
                     <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -30,6 +30,23 @@
                 </div>
 
                 @error('name')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+
+            </div>
+
+            <div class="input-group mb-3">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="off">
+                <label for="email">Email</label>
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                    <span class="fas fa-envelope"></span>
+                    </div>
+                </div>
+
+                @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
@@ -82,34 +99,6 @@
             
             </div>
             
-            <div class="form-group">
-
-                <input type="file" name="avatar_image" class="form-control" id="avatar_image" onchange="doAfterSelectImage(this)" style="display: none">
-
-                <label for="avatar_image">
-
-                    <img src="{{ url('images/image.png') }}" class="img-thumbnail" alt="" width="80" id="post_user_image_">
-                </label>
-                
-            </div>
-
-            <div class="input-group mb-3">
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" autocomplete="off">
-                <label for="email">Email</label>
-                <div class="input-group-append">
-                    <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                    </div>
-                </div>
-
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
-
-            </div>
-
             <div class="input-group mb-3">
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password">
                 <label for="password">Password</label>

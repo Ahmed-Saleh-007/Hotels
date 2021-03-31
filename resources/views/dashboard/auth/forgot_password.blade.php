@@ -40,9 +40,8 @@
           <!-- /.col -->
         </div>
       </form>
-
   
-      I have not account <a href="{{ route('dashboard.register') }}" class="text-center">Sign up</a>
+      I have not account <a href="{{ route('dashboard.registration.create') }}" class="text-center">Sign up</a>
 
     </div>
     <!-- /.login-box-body -->

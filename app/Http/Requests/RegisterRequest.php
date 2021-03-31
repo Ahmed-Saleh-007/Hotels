@@ -25,7 +25,6 @@ class RegisterRequest extends FormRequest
     {
         $register_rules = [
             'name'         => ['required', 'string', 'max:255'],
-            'avatar_image' => ['required', 'image', 'mimes:jpeg,jpg'],
             'country'      => ['required'],
             'gender'       => ['required', 'in:male,female'],
             'email'        => ['required', 'string', 'email', 'max:255', 'unique:users'],
