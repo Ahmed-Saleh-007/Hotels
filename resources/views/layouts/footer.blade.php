@@ -178,6 +178,17 @@
             
         </script>
 
+
+        {{-- include Chart JS --}}
+
+        <script src="{{url( 'vendor/jquery.min.js' )}}"></script>
+
+        <script src="{{url( 'vendor/Chart.min.js' )}}"></script>
+    
+        <script src="{{url( 'vendor/create-charts.js' )}}"></script>
+
+        {{-- end chart js --}}
+
         @stack('js')
 
         @yield('footer')

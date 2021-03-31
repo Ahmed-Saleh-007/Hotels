@@ -9,15 +9,15 @@ use Cerbero\CommandValidator\ValidatesInput;
 
 class AddAdminCommand extends Command
 {
-    use ValidatesInput;
-    protected function rules()
-    {
-        return [
-            'name'     => 'required',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6'
-        ];
-    }
+    // use ValidatesInput;
+    // protected function rules()
+    // {
+    //     return [
+    //         'name'     => 'required',
+    //         'email'    => 'required|email|unique:users',
+    //         'password' => 'required|min:6'
+    //     ];
+    // }
     /**
      * The name and signature of the console command.
      *
@@ -49,12 +49,12 @@ class AddAdminCommand extends Command
      */
     public function handle()
     {
-        if($this->confirm('Are you sure you want to create a new admin?')){
+        if ($this->confirm('Are you sure you want to create a new admin?')) {
             $this->info('Your Name: '.$this->option('name'));
             $this->info('Your Email: '.$this->option('email'));
             $this->info('Your Password: '.$this->option('password'));
             
-            if($this->confirm('Do you confirm that the email and password are correct?')){
+            if ($this->confirm('Do you confirm that the email and password are correct?')) {
                 $admin = User::create([
                     'name' => $this->option('name'),
                     'email' => $this->option('email'),
@@ -62,8 +62,8 @@ class AddAdminCommand extends Command
                     'level' => 'admin',
                 ]);
                 
-                $this->info('Admin with name: '. $admin->name .' created successfully'); 
+                $this->info('Admin with name: '. $admin->name .' created successfully');
             }
-        }   
+        }
     }
 }
