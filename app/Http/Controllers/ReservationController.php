@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\DataTables\ReservationDataTable;
+use App\Models\Room;
+use Form;
 
 class ReservationController extends Controller
 {
@@ -42,5 +44,17 @@ class ReservationController extends Controller
     public function cancel(Reservation $reserv) {
         $reserv->delete();
         return response()->json(['success' => trans('admin.deleted_record')]);
+    }
+
+
+    public function create()
+    {
+        if(request()->has('acc_no')){
+
+            $select=request()->has('select')?request('select'):'';
+
+            return Form::select('room' ,Room::where('capacity' , '>=', request('acc_no'))
+            ->pluck('number','price'),$select,['class' => 'form-control','id' => 'room', 'placeholder'=>'...']);
+        }
     }
 }

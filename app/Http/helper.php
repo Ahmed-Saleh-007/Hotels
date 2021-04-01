@@ -1,6 +1,5 @@
 <?php
 
-//there is no lang yet
 if (!function_exists('lang')) {
     function lang() {
         $lang = session()->has('lang') ? session('lang') : session()->put('lang', 'en');
@@ -64,3 +63,6 @@ if (!function_exists('get_countries')) {
     }
 
 }//end of get all countries
+
+
+

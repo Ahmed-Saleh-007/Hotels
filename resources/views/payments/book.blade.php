@@ -18,11 +18,9 @@
           </div>
         <div class="form-group col-md-6">
           {!! Form::label('room_no' , trans('admin.room_no')) !!}
-          <select class="form-control" id="room" name="room">
-            @foreach (App\Models\Room::select('number', 'price')->get() as $room)
-                <option value='{{$room->price}}'>{{$room->number}}</option>
-            @endforeach
-          </select>
+
+          <span id="room_selector"></span>
+
         </div>
       </div>
     <div class="form-row">
@@ -45,6 +43,7 @@
 </div>
 @push('js')
 <script>
+
       $( document ).ready(function() {
         $('#end_date').change(function(){   
           var start = new Date($('#start_date').val());
@@ -57,6 +56,28 @@
           $('#price').val(room_price * days);
        });
       });
+
+
+      $(document).on('change','#acc_no',function(){
+
+        var acc_no = $('#acc_no').val();
+        if(acc_no > 0){
+            $.ajax({
+                url: '{{ route('reserv.create')}}',
+                type:'get',
+                datatype:'html',
+                data:{acc_no: acc_no, select: ''},
+                success:function(data){
+                    $('#room_selector').html(data);
+                }
+            });
+
+        }else{
+        $('#room_selector').html('');
+        }
+
+      });
+
 </script>    
 @endpush
 @endsection

@@ -159,6 +159,7 @@ Route::post('/register', [RegisterController::class , 'store']) ->name('dashboar
 
 //===========================================Routes of Reservations====================================================//
 Route::get('/reservations/book', [ReservationController::class, 'book'])->name('reserv.book');
+Route::get('/related-rooms', [ReservationController::class, 'create'])->name('reserv.create');
 Route::get('/all-reservations', [ReservationController::class, 'index'])->name('reserv.all');
 Route::delete('/all-reservations/{reserv}', [ReservationController::class, 'cancel'])->name('reserv.cancel');
 //=====================================================================================================================//
