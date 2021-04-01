@@ -212,6 +212,34 @@
 
                             @endrole
 
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>
+                                        {{ trans('admin.reserv') }}
+                                        @if (direction() == 'rtl')
+                                        <i class="right fas fa-angle-right"></i>
+                                        @else
+                                        <i class="right fas fa-angle-left"></i>
+                                        @endif
+                                    </p>
+                                </a>
+
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{ route('reserv.all') }}" class="nav-link">
+                                            <i class="fa fa-list" aria-hidden="true"></i>
+                                            <p>{{ trans('admin.myreserv') }}</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{ route('reserv.book') }}" class="nav-link">
+                                            <i class='fas fa-ticket-alt'></i>
+                                            <p>{{ trans('admin.book') }}</p>
+                                        </a>
+                                    </li> 
+                                </ul>
+                            </li>
 
                         </ul>
                     </nav>

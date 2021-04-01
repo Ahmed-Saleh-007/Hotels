@@ -17,6 +17,7 @@
         "laravelcollective/html": "^6.2",
         "rinvex/countries": "^7.3",
         "spatie/laravel-permission": "^4.0",
+        "stripe/stripe-php": "^7.76",
         "yajra/laravel-datatables": "1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
