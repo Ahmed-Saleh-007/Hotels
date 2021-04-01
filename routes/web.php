@@ -12,6 +12,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -155,6 +157,18 @@ Route::get('/register',  [RegisterController::class , 'create'])->name('dashboar
 Route::post('/register', [RegisterController::class , 'store']) ->name('dashboard.registration.store');                           //
 //================================================================================================================================//
 
+//===========================================Routes of Reservations====================================================//
+Route::get('/reservations/book', [ReservationController::class, 'book'])->name('reserv.book');
+Route::get('/related-rooms', [ReservationController::class, 'create'])->name('reserv.create');
+Route::get('/all-reservations', [ReservationController::class, 'index'])->name('reserv.all');
+Route::get('/all-reservations/{reserv}', [ReservationController::class, 'show'])->name('reserv.show');
+Route::delete('/all-reservations/{reserv}', [ReservationController::class, 'cancel'])->name('reserv.cancel');
+//=====================================================================================================================//
+
+//==========================================Routes of Payments=========================================================//
+Route::post('/checkout', [StripeController::class, 'stripe'])->name('stripe.get');
+Route::post('/myreservations', [StripeController::class, 'stripepost'])->name('stripe.post');
+//=====================================================================================================================//
 //===========testing only============//
 
 //===================================//
