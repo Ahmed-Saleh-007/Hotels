@@ -42,6 +42,7 @@ class ReservationController extends Controller
     }
 
     public function cancel(Reservation $reserv) {
+        Room::find($reserv->room_id)->update(['is_available' => 1]);
         $reserv->delete();
         return response()->json(['success' => trans('admin.deleted_record')]);
     }
