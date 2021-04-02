@@ -21,6 +21,16 @@
             </div>
           </div>
         </div>
+
+        <div class="col mb-4">
+          <div class="card">
+           
+            <div class="card-body">
+              <h5 class="card-title text-center mb-2">Client Country Chart</h5>
+              <canvas id="myChart_2" width="200" height="200"></canvas>
+            </div>
+          </div>
+        </div>
        
       </div>
 
