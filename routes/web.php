@@ -187,4 +187,8 @@ Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from
 
 
 
+Route::get('/site', function () {
+    return view('site');
+});
+
 
