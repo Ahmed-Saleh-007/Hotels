@@ -101,12 +101,14 @@
                                 @endrole
 
                                 
+                                @role('admin|receptionist|manager')
                                     <li class="nav-item">
                                         <a href="{{ route('clients.index') }}" class="nav-link">
                                             <i class="nav-icon fas fa-users text-default"></i>
                                             <p>{{ trans('admin.clients') }}</p>
                                         </a>
                                     </li>
+                                @endrole
 
                                 </ul>
                             </li>
@@ -229,7 +231,13 @@
                                     <li class="nav-item">
                                         <a href="{{ route('reserv.all') }}" class="nav-link">
                                             <i class="fa fa-list" aria-hidden="true"></i>
-                                            <p>{{ trans('admin.myreserv') }}</p>
+                                            <p>
+                                                @if (auth()->user()->level == 'client')
+                                                    {{ trans('admin.myreserv') }}
+                                                @else
+                                                    {{ trans('admin.all_reserv') }}
+                                                @endif
+                                            </p>
                                         </a>
                                     </li>
                                     <li class="nav-item">

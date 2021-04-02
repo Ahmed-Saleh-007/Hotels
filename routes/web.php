@@ -171,6 +171,9 @@ Route::post('/myreservations', [StripeController::class, 'stripepost'])->name('s
 //=====================================================================================================================//
 //===========testing only============//
 
+Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
+
+
 //===================================//
 
 //===============================Routes to change language============================//

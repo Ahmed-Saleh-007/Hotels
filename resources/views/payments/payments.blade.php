@@ -42,7 +42,7 @@
                         </div>
                     @endif
   
-                    <form role="form" action="{{route('stripe.post')}}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                    <form role="form" action="{{route('stripe.post')}}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}">
                         @csrf
                         <input type="text" value="{{request()->room}}"    name="room" hidden>
                         <input type="text" value="{{request()->acc_no}}"  name="acc_no" hidden>

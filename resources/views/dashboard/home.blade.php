@@ -2,6 +2,7 @@
 
 @section('content')
     
+@role('admin|manager')
 <div class="row"> 
     <div class="col-lg-3 col-6">
       <!-- small box -->
@@ -66,5 +67,6 @@
   </div>
 
 
-      
+@endrole      
+
 @endsection

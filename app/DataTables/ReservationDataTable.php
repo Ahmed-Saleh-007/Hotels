@@ -21,9 +21,10 @@ class ReservationDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
+            ->addColumn('price_in_dollar', 'reservations.btn.price_in_dollar')
             ->addColumn('actions', 'reservations.btn.actions')
             ->rawColumns([
-                'checkbox',
+                'price_in_dollar',
                 'actions',
             ]);
     }
@@ -36,13 +37,12 @@ class ReservationDataTable extends DataTable
      */
     public function query()
     {
-        if($this->client_id){
-            return Reservation::where('client_id', $this->client_id)->with(['user','room']);
+        if(auth()->user()->level != 'client' ){
+
+            return Reservation::query()->with(['user', 'room']);
+        }else{
+            return Reservation::where('client_id', auth()->id() )->with(['user','room']);
         }
-        if($this->room_id){
-            return Reservation::where('room_id', $this->room_id)->with(['user','room']);
-        }
-        return Reservation::query()->with(['user', 'room']);
     }
 
     /**
@@ -64,7 +64,7 @@ class ReservationDataTable extends DataTable
                             ['extend' => 'reload', 'className' => 'btn btn-default', 'text' => '<i class="fas fa-sync-alt"></i>'],
                         ],                
                         'initComplete' => ' function () {
-                            this.api().columns([1,2,3,4,5,6,7]).every(function () {
+                            this.api().columns([0,1,2,3,4,5]).every(function () {
                                 var column = this;
                                 var input = document.createElement("input");
                                 $(input).appendTo($(column.footer()).empty())
@@ -112,8 +112,8 @@ class ReservationDataTable extends DataTable
 				'data'  => 'to',
 				'title' => trans('admin.to'),
 			],[
-				'name'  => 'price',
-				'data'  => 'price',
+				'name'  => 'price_in_dollar',
+				'data'  => 'price_in_dollar',
 				'title' => 'Price',
 			], [
 				'name'       => 'actions',

@@ -143,4 +143,5 @@ return [
 	'to'								=> 'To',
 	'from'								=> 'Start From',
 	'book_room'							=> 'Book Room',
+	'all_reserv'                        => 'All Reservations'
 ];
