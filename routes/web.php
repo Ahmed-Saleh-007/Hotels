@@ -1,12 +1,10 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
-use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\StripeController;
