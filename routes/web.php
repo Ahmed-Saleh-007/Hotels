@@ -176,24 +176,7 @@ Route::post('/checkout', [StripeController::class, 'stripe'])->name('stripe.get'
 Route::post('/myreservations', [StripeController::class, 'stripepost'])->name('stripe.post');
 //=====================================================================================================================//
 //===========testing only============//
-<<<<<<< HEAD
-// Route::get('/mnotify',function() {
-//         $delay = now()->addSeconds(3);
-//         $client = User::find(1);
-//         $client->notify((new ClientMissing())->delay($delay));
-//     return 'missing';
-// });
-// Route::get('/gnotify',function() {
-//     $delay = now()->addSeconds(3);
-//     User::find(1)->notify((new ClientGreeting)->delay($delay));
-//     return 'greeting';
-// });
-=======
-
 Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
-
-
->>>>>>> 3d48de2e5ba0e782bd384b0b6687821b60955d34
 //===================================//
 
 //===============================Routes to change language============================//
