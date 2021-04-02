@@ -3,6 +3,9 @@
 @section('title') {{ trans('admin.forgot_password')}} @endsection
 
 @section('content')
+    <div class="login-logo">
+      <a href="{{ url('')}}"><img src="{{ url('')}}/design/adminlte/dist/img/logo.png" alt="logo"></a>
+    </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
       <p class="login-box-msg">Reset Account</p>
