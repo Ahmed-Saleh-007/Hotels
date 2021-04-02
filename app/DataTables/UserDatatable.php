@@ -144,13 +144,9 @@ class UserDatatable extends DataTable
 			],
             
             [
-				'name'  => 'created_at',
+				'name'  =>  'created_at',
 				'data'  => 'created_at',
 				'title' => trans('admin.created_at'),
-			], [
-				'name'  => 'updated_at',
-				'data'  => 'updated_at',
-				'title' => trans('admin.updated_at'),
 			], [
 				'name'       => 'actions',
 				'data'       => 'actions',

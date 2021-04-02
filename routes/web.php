@@ -11,6 +11,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserAuthentication;
@@ -159,7 +163,20 @@ Route::get('/register',  [RegisterController::class , 'create'])->name('dashboar
 Route::post('/register', [RegisterController::class , 'store']) ->name('dashboard.registration.store');                           //
 //================================================================================================================================//
 
+//===========================================Routes of Reservations====================================================//
+Route::get('/reservations/book', [ReservationController::class, 'book'])->name('reserv.book');
+Route::get('/related-rooms', [ReservationController::class, 'create'])->name('reserv.create');
+Route::get('/all-reservations', [ReservationController::class, 'index'])->name('reserv.all');
+Route::get('/all-reservations/{reserv}', [ReservationController::class, 'show'])->name('reserv.show');
+Route::delete('/all-reservations/{reserv}', [ReservationController::class, 'cancel'])->name('reserv.cancel');
+//=====================================================================================================================//
+
+//==========================================Routes of Payments=========================================================//
+Route::post('/checkout', [StripeController::class, 'stripe'])->name('stripe.get');
+Route::post('/myreservations', [StripeController::class, 'stripepost'])->name('stripe.post');
+//=====================================================================================================================//
 //===========testing only============//
+<<<<<<< HEAD
 // Route::get('/mnotify',function() {
 //         $delay = now()->addSeconds(3);
 //         $client = User::find(1);
@@ -171,6 +188,12 @@ Route::post('/register', [RegisterController::class , 'store']) ->name('dashboar
 //     User::find(1)->notify((new ClientGreeting)->delay($delay));
 //     return 'greeting';
 // });
+=======
+
+Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
+
+
+>>>>>>> 3d48de2e5ba0e782bd384b0b6687821b60955d34
 //===================================//
 
 //===============================Routes to change language============================//

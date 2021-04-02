@@ -130,4 +130,18 @@ return [
 	'statistics_chart'                  => 'Statistics Chart',
 	'charts'                            => 'Charts',
 	'line_chart'                        => 'Line Chart',
+	'acc_no'							=> 'Accompany No.',
+	'room_no'							=> 'Room No.',
+	'reserv'							=> 'Reservations',
+	'myreserv'							=> 'My Reservations',
+	'reservid'							=> 'Reservation ID',
+	'book'								=> 'Book A Room',
+	'client'							=> 'Client',
+	'client_name'						=> 'Client Name',
+	'acc_no'							=> 'Accompany No.',
+	'room_no'							=> 'Room No.',
+	'to'								=> 'To',
+	'from'								=> 'Start From',
+	'book_room'							=> 'Book Room',
+	'all_reserv'                        => 'All Reservations'
 ];
