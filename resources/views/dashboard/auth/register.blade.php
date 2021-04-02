@@ -3,7 +3,10 @@
 @section('title') {{ trans('admin.register')}} @endsection
 
 @section('content')
-    
+    <div class="login-logo">
+        <a href="{{ url('')}}"><img src="{{ url('')}}/design/adminlte/dist/img/logo.png" alt="logo"></a>
+    </div>
+    <!-- /.login-logo -->
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign up to create new account</p>

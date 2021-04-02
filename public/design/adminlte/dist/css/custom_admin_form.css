@@ -7,14 +7,14 @@
 }
 
 .login-logo a img {
-    height: 70px;
+    height: 100px;
 }
 
 .login-box .login-box-body {
     background-color: #fff;
     padding: 30px;
-    border-top-left-radius: 40px;
-    border-bottom-right-radius: 40px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
 .login-box .login-box-body button[type="submit"] {

@@ -5,8 +5,11 @@
 
 @section('content')
 
-<div class="login-logo"></div>
+<div class="login-logo">
+  <a href="{{ url('')}}"><img src="{{ url('')}}/design/adminlte/dist/img/logo.png" alt="logo"></a>
+</div>
 <!-- /.login-logo -->
+
 <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
     @if(session()->has('error'))

@@ -24,7 +24,7 @@
         <link rel="icon" href="" />
         
     </head>
-    <body class="hold-transition login-page auth-background" style="background-image:url('{{url('/design/adminlte/dist/img/auth-background.jpg')}}')">
+    <body class="hold-transition login-page auth-background" style="background-image:url('{{url('/design/adminlte/dist/img/hotel55.png')}}'); background-size:cover;">
         <div class="login-box">
 
             @yield('content')
