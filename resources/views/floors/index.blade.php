@@ -144,20 +144,6 @@
 
 <script>
 
-    /*
-        How ajax work using jQuery
-
-        $.ajax({
-            url:  '',                                   // put you route here
-            type: 'get',                                // put your method get, post, put, delete
-            data: {},                                   // put your data that will send with request
-            success: function (data) {}                 // data from response if request success 2**
-            error: function (data) {}                   // error from response if request failed 4**, 5**
-        });
-
-    */
-
-
     ///////////////////////////
     // Ajax handler for store//
     ///////////////////////////
@@ -280,9 +266,20 @@
                     _token: $('#ajax_delete_content [name=_token]').val(),
                 },
                 success: function (data) {
-                    toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
-                    $('#ajax_delete').modal('toggle');
-                    $('.buttons-reload').trigger("click");
+
+                    if(data.success){
+
+                        toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                        $('#ajax_delete').modal('toggle');
+                        $('.buttons-reload').trigger("click");
+
+                    }else{
+
+                        toastr.error(data.error, 'Error Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                        $('#ajax_delete').modal('toggle');
+
+                    }
+                    
                 }
             });
         });

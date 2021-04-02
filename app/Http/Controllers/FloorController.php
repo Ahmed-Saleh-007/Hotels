@@ -95,8 +95,17 @@ class FloorController extends Controller
      */
     public function destroy(Floor $floor)
     {
-        $floor->delete();
-        return response()->json(['success' => trans('admin.deleted_record')]);
+        if(!empty($floor->rooms[0])){                   //floor has rooms
+
+            return response()->json(['error' => trans('admin.can_not_delete_this_floor')]);
+        
+        }else{ 
+                                                     //floor has no rooms
+            $floor->delete();
+            return response()->json(['success' => trans('admin.deleted_record')]);
+       
+        }
+        
     }
 
     public function destroyAll()
