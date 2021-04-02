@@ -35,8 +35,6 @@ class StripeController extends Controller
      */
     public function stripePost(Request $request)
     {  
-
-
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create([
                 "amount" => floatval(request('totalprice')),
@@ -54,10 +52,8 @@ class StripeController extends Controller
             "price"     => intval(request('totalprice'))*100
         ]);
 
-        Room::find(request('room'))->update(['is_available' => 0 ]);
-
-        Session::flash('success', 'Payment successful!');
-       
+        $room = Room::find(request('room'))->update(['is_available' => 0 ]);
+        Session::flash('success', 'Payment successful!');       
         return redirect()->route('reserv.all');
     }
 }

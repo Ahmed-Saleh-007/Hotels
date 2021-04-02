@@ -51,19 +51,8 @@ class ReservationController extends Controller
     public function create()
     {
         if(request()->has('acc_no')){
-
-            // $select=request()->has('select')?request('select'):'';
-
-
-            $rooms = Room::where('capacity' , '>=', request('acc_no'))->get();
-            
-
+            $rooms = Room::where('capacity' , '>=', request('acc_no'))->where('is_available', 1)->get();
             return response()->json($rooms);
-
-            //  Form::select('room' ,Room::where('capacity' , '>=', request('acc_no'))
-            // ->pluck('number','price'),$select,['class' => 'form-control','id' => 'room', 'data-room_number' => Room::where('capacity' , '>=', request('acc_no'))
-            // ->pluck('number'), 'placeholder'=>'...']);
-
         }
 
     }

@@ -14,7 +14,8 @@ class Room extends Model
         'number',
         'capacity',
         'price',
-        'floor_id'
+        'floor_id',
+        'is_available'
     ];
 
     public function floor()
