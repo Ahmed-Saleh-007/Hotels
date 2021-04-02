@@ -156,35 +156,6 @@
 
 <script>
 
-    /*
-        How ajax work using jQuery
-
-        $.ajax({
-            url:  '',                                   // put you route here
-            type: 'get',                                // put your method get, post, put, delete
-            data: $(this).serialize(),                  // put your data that will send with request
-            success: function (data) {}                 // data from response if request success 2**
-            error: function (data) {}                   // error from response if request failed 4**, 5**
-        });
-
-        To send data:
-
-        data: $(this).serialize(),
-
-        or
-
-        data: new FormData(this),
-        contentType: false,
-        cache:false,
-        processData: false,
-        dataType:"json",
-
-        if you use fle you should take second type, and use POST in store and update
-
-
-    */
-
-
     ///////////////////////////
     // Ajax handler for store//
     ///////////////////////////
@@ -310,9 +281,15 @@
                     _token: $('#ajax_delete_content [name=_token]').val(),
                 },
                 success: function (data) {
-                    toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
-                    $('#ajax_delete').modal('toggle');
-                    $('.buttons-reload').trigger("click");
+                    if(data.success){
+                        toastr.success(data.success, 'Success Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                        $('#ajax_delete').modal('toggle');
+                        $('.buttons-reload').trigger("click");
+                    }else{
+                        toastr.error(data.error, 'Error Alert', {timeOut: 10000, closeButton: true, progressBar: true});
+                        $('#ajax_delete').modal('toggle');
+                    }
+                    
                 }
             });
         });

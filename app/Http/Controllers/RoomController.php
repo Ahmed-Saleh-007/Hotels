@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Room;
 use App\DataTables\RoomDatatable;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
@@ -97,8 +98,19 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
-        $room->delete();
-        return response()->json(['success' => trans('admin.deleted_record')]);
+        $is_reserved = Reservation::where('room_id', $room->id)->first();
+
+        if($is_reserved){
+
+            return response()->json(['error' => trans('admin.can_not_delete_this_room')]);
+        
+        }else{
+
+            $room->delete();
+            return response()->json(['success' => trans('admin.deleted_record')]);
+        
+        }
+        
     }
 
     public function destroyAll()
