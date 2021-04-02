@@ -32,7 +32,7 @@ class UserAuthentication extends Controller
         
         $rememberme = $request->rememberme == 1 ? true : false;
 
-        if( auth()->attempt(['email' => $request->email , 'password' => $request->password], $rememberme)){
+        if( Auth::attempt(['email' => $request->email , 'password' => $request->password], $rememberme)){
 
             $user = User::where('email', $request->email)->first();
             $user->update(['last_login' => now()]);
@@ -56,7 +56,7 @@ class UserAuthentication extends Controller
 
     public function logout()
     {
-        auth()->logout();
+        Auth::logout();
         return redirect()->route('dashboard.login');
     }//end of logout
 
@@ -116,7 +116,7 @@ class UserAuthentication extends Controller
 
         } else {
 
-            return redirect()->route('forgotpassword');
+            return redirect()->route('dashboard.reset_password');
 
         }
     }
@@ -151,11 +151,11 @@ class UserAuthentication extends Controller
             //auto login after reseting password
             Auth::attempt(['email' => $check_token->email , 'password' => request('password')], true);
 
-            return redirect('/dashboard/home');
+            return redirect('/');
             
         } else {
 
-            return redirect()->route('forgotpassword');
+            return redirect()->route('dashboard.reset_password');
 
         }
 

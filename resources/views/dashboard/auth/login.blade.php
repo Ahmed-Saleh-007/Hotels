@@ -86,14 +86,8 @@
     </div>
     
     <div class="social row">
-        <div class="col-sm-6">
-            <a href="" class="btn-face m-b-10">
-                <i class="fab fa-facebook-square"></i>
-                Facebook
-            </a>
-        </div>
-        <div class="col-sm-6">
-          <a href="" class="btn-google m-b-10">
+        <div class="col-sm-12">
+          <a href="{{route('dashboard.google_redirect')}}" class="btn-google m-b-10">
               <i class="fab fa-google-plus-square"></i>
               Google
           </a>

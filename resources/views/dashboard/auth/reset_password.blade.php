@@ -4,15 +4,15 @@
 
 @section('content')
 
-  <div class="login-logo">
-    <a href="#"><b>Admin</b>LTE</a>
-  </div>
+
+<div class="login-logo">
+  <a href="{{ url('')}}"><img src="{{ url('')}}/design/adminlte/dist/img/logo.png" alt="logo"></a>
+</div>
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Reset Password Now</p>
 
-    @include('dashboard.partials._success')
-    @include('dashboard.partials._error')
+    
 
     <form action="{{ route('dashboard.reset_password', $data->token) }}" method="post"> 
 
@@ -45,7 +45,7 @@
 
     <hr>
     
-    I have an account <a href="{{ route('login') }}" class="text-center">Sign in</a>
+    I have an account <a href="{{ route('dashboard.login') }}" class="text-center">Sign in</a>
 
   </div>
   <!-- /.login-box-body -->

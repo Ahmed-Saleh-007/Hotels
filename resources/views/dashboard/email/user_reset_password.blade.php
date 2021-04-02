@@ -1,5 +1,8 @@
 @component('mail::message')
 # Reset Account
+<div class="login-logo">
+    <a href="{{ url('')}}"><img src="{{ url('')}}/design/adminlte/dist/img/logo.png" alt="logo"></a>
+</div>
 
 Welcome {{ $data['data']->name }}
 
