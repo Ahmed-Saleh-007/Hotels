@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\UserResetPassword;
 use App\Models\User;
+use Auth;
 use Illuminate\Http\Request;
 
 use DB;
@@ -148,7 +149,7 @@ class UserAuthentication extends Controller
             DB::table('password_resets')->where('email', $check_token->email)->delete();
 
             //auto login after reseting password
-            admin()->attempt(['email' => $check_token->email , 'password' => request('password')], true);
+            Auth::attempt(['email' => $check_token->email , 'password' => request('password')], true);
 
             return redirect('/dashboard/home');
             
