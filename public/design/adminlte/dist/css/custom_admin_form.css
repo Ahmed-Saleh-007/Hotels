@@ -112,7 +112,7 @@
     padding: 5px 9px;
 }
 
-.social .btn-face {
+.social .btn-face, .social .btn-google {
     font-family: Raleway-Bold;
     font-size: 16px;
     line-height: 1.2;
@@ -126,7 +126,15 @@
     color: #fff;
 }
 
+.social .btn-face {
+    background-color: #3b5998;
+}
 
-.social .btn-face i {
+.social .btn-google {
+    background-color: #DD4B39;
+}
+
+
+.social .btn-face i, .social .btn-google i {
     padding: 0 10px;
 }

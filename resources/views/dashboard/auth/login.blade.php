@@ -80,6 +80,26 @@
 
     <a href="{{ route('dashboard.forgot_password')}}" class="forget">I forgot my password</a><br>
 
+    <div class="hr-container">
+        <hr>
+        <label>Or</label>
+    </div>
+    
+    <div class="social row">
+        <div class="col-sm-6">
+            <a href="" class="btn-face m-b-10">
+                <i class="fab fa-facebook-square"></i>
+                Facebook
+            </a>
+        </div>
+        <div class="col-sm-6">
+          <a href="" class="btn-google m-b-10">
+              <i class="fab fa-google-plus-square"></i>
+              Google
+          </a>
+      </div>
+    </div>
+
     <a href="{{ route('dashboard.registration.create')}}" class="register">Create new account <i class="fa fa-arrow-right"></i> </a>
 
 </div>
