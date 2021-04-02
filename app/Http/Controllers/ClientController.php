@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ApprovedClientDatatable;
-use App\DataTables\ClientDatatable;
-use App\Http\Requests\ClientRequest;
-use App\Http\Requests\StoreClientRequest;
-use App\Http\Requests\UpdateClientRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\DataTables\ClientDatatable;
+use App\Http\Requests\ClientRequest;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\ClientGreeting;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
+use App\DataTables\ApprovedClientDatatable;
+
 
 class ClientController extends Controller
 {
@@ -169,6 +171,10 @@ class ClientController extends Controller
             'is_approved' => 1 ,
             'approved_by' => $approved_by
         ]);
+
+        $delay = now()->addSeconds(5);
+        $client = User::find($user->id);
+        $client->notify((new ClientGreeting())->delay($delay));
 
         return response()->json(['success' => trans('admin.client_approved_successfully')]);
     

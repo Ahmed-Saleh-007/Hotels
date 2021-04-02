@@ -57,11 +57,25 @@ You should have  `composer` installed. If you don't install composer from [here]
     ```sh
     php artisan storage:link
     ```
-12. Open up the server
+12. check your device that can connect to mailtrap through telnet
+    ```sh
+    telnet smtp.mailtrap.io 465
+    ```
+    If you don't enable telnet
+    You have to go to Control Panel>Programs>Turn Windows features on or off. Then, check "Telnet Client" and save the changes. You might have to wait about a few minutes before the change could take effect.
+12. Start schedule to send missing email
+    ```sh
+    php artisan schedule:work
+    ```
+13. Start queue to send notifications
+    ```sh
+    php artisan queue:work
+    ```
+14. Open up the server
     ```sh
     php artisan serve
     ```
-13. Open your browser on this url ``` http://localhost:8000```
+15. Open your browser on this url ``` http://localhost:8000```
 
 ### License
 MIT License

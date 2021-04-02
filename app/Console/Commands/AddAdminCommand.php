@@ -9,15 +9,15 @@ use Cerbero\CommandValidator\ValidatesInput;
 
 class AddAdminCommand extends Command
 {
-    // use ValidatesInput;
-    // protected function rules()
-    // {
-    //     return [
-    //         'name'     => 'required',
-    //         'email'    => 'required|email|unique:users',
-    //         'password' => 'required|min:6'
-    //     ];
-    // }
+    use ValidatesInput;
+    protected function rules()
+    {
+        return [
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users',
+            'password' => 'required|min:6'
+        ];
+    }
     /**
      * The name and signature of the console command.
      *

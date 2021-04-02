@@ -1,19 +1,23 @@
 <?php
 
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ReceptionistController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ClientStatisticsController;
+use App\Models\User;
+use App\Notifications\ClientMissing;
+use App\Notifications\ClientGreeting;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserAuthentication;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FloorController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserAuthentication;
+use Illuminate\Support\Facades\Notification;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReceptionistController;
+use App\Http\Controllers\ClientStatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -156,7 +160,17 @@ Route::post('/register', [RegisterController::class , 'store']) ->name('dashboar
 //================================================================================================================================//
 
 //===========testing only============//
-
+// Route::get('/mnotify',function() {
+//         $delay = now()->addSeconds(3);
+//         $client = User::find(1);
+//         $client->notify((new ClientMissing())->delay($delay));
+//     return 'missing';
+// });
+// Route::get('/gnotify',function() {
+//     $delay = now()->addSeconds(3);
+//     User::find(1)->notify((new ClientGreeting)->delay($delay));
+//     return 'greeting';
+// });
 //===================================//
 
 //===============================Routes to change language============================//

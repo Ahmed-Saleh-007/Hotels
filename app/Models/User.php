@@ -39,6 +39,7 @@ national_id
         'country',
         'email',
         'password',
+        'last_login'
     ];
 
     /**

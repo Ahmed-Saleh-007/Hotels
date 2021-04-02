@@ -28,13 +28,13 @@ class UserAuthentication extends Controller
             'email'     => 'required',
             'password'  => 'required'
         ]);
-
+        
         $rememberme = $request->rememberme == 1 ? true : false;
 
         if( auth()->attempt(['email' => $request->email , 'password' => $request->password], $rememberme)){
 
             $user = User::where('email', $request->email)->first();
-
+            $user->update(['last_login' => now()]);
             if( $user->is_approved == 0 && $user->level == 'client'){
 
                 session()->flash('error', trans('admin.you_are_not_approved_yet'));
