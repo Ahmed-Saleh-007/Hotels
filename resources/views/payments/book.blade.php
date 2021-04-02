@@ -3,7 +3,11 @@
 <div class="container sm">
 <h1 style="text-align:center">Book A Room</h1>
 <form method="POST" action="{{route('stripe.get')}}">
+
     @csrf
+
+    <input type="hidden" id="r_price">          <!-- to calculate total price -->
+
     <div class="form-row">
       <div class="form-group col-md-12">
           {!! Form::label('country' , trans('admin.country')) !!} 
@@ -19,7 +23,9 @@
         <div class="form-group col-md-6">
           {!! Form::label('room_no' , trans('admin.room_no')) !!}
 
-          <span id="room_selector"></span>
+          <select class="form-control" name="room" id="room_selector">
+
+          </select>
 
         </div>
       </div>
@@ -52,8 +58,18 @@
           var diff =  Math.abs(end - start);
           // get days
           var days = Math.ceil(diff/1000 /60/60/24)+1;
-          var room_price = Number($('#room').val())/100;
-          $('#price').val(room_price * days);
+          var room_price = Number($('#r_price').val())/100;
+
+          $('#price').val(room_price * days);               //total price
+       });
+      });
+
+
+      $( document ).ready(function() {
+        $('#room_selector').change(function(){   
+
+          $('#r_price').val($("#room_selector option:selected").data('room_price'));                     
+
        });
       });
 
@@ -61,14 +77,25 @@
       $(document).on('change','#acc_no',function(){
 
         var acc_no = $('#acc_no').val();
+
         if(acc_no > 0){
             $.ajax({
                 url: '{{ route('reserv.create')}}',
                 type:'get',
-                datatype:'html',
+                datatype:'json',
                 data:{acc_no: acc_no, select: ''},
                 success:function(data){
-                    $('#room_selector').html(data);
+
+                  var options = '<option placeholder="..."></option>';
+
+                  for(var i = 0 ; i < data.length ; i++ ){
+
+                    options += `
+                    <option value='${data[i].id}' class="option_selected${data[i].id}"  data-room_price="${data[i].price}" > ${data[i].number} </option>`;
+
+                  }
+
+                  $('#room_selector').html(options);
                 }
             });
 

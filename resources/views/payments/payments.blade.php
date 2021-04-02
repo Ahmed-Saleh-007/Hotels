@@ -44,12 +44,12 @@
   
                     <form role="form" action="{{route('stripe.post')}}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                         @csrf
-                        <input type="text" value="{{request()->room}}" name="room" hidden>
-                        <input type="text" value="{{request()->acc_no}}" name="acc_no" hidden>
+                        <input type="text" value="{{request()->room}}"    name="room" hidden>
+                        <input type="text" value="{{request()->acc_no}}"  name="acc_no" hidden>
                         <input type="text" value="{{request()->country}}" name="country" hidden>
-                        <input type="text" value="{{request()->from}}" name="from" hidden>
-                        <input type="text" value="{{request()->to}}" name="to" hidden>
-                        <input type="text" value="{{request()->price}}" name="totalprice" hidden>
+                        <input type="text" value="{{request()->from}}"    name="from" hidden>
+                        <input type="text" value="{{request()->to}}"      name="to" hidden>
+                        <input type="text" value="{{request()->price}}"   name="totalprice" hidden>
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label>

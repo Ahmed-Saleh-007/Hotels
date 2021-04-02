@@ -28,7 +28,6 @@ class ReservationController extends Controller
 
     public function book(Request $request) {
         
-
         $contries_info = countries();
 
         $countries_names = array();
@@ -38,6 +37,7 @@ class ReservationController extends Controller
             $countries_names[$country['name']] = $country['name'];
 
         }
+
         return view('payments.book', ['countries' => $countries_names]);
     }
 
@@ -47,14 +47,24 @@ class ReservationController extends Controller
     }
 
 
+    //getting related rooms according to number of accomapies
     public function create()
     {
         if(request()->has('acc_no')){
 
-            $select=request()->has('select')?request('select'):'';
+            // $select=request()->has('select')?request('select'):'';
 
-            return Form::select('room' ,Room::where('capacity' , '>=', request('acc_no'))
-            ->pluck('number','price'),$select,['class' => 'form-control','id' => 'room', 'placeholder'=>'...']);
+
+            $rooms = Room::where('capacity' , '>=', request('acc_no'))->get();
+            
+
+            return response()->json($rooms);
+
+            //  Form::select('room' ,Room::where('capacity' , '>=', request('acc_no'))
+            // ->pluck('number','price'),$select,['class' => 'form-control','id' => 'room', 'data-room_number' => Room::where('capacity' , '>=', request('acc_no'))
+            // ->pluck('number'), 'placeholder'=>'...']);
+
         }
+
     }
 }

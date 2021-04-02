@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use Stripe;
 use Session;
 use App\DataTables\ReservationDataTable;
+use App\Models\Room;
 
 class StripeController extends Controller
 {
@@ -34,6 +35,8 @@ class StripeController extends Controller
      */
     public function stripePost(Request $request)
     {  
+
+
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         Stripe\Charge::create([
                 "amount" => floatval(request('totalprice')),
@@ -42,14 +45,16 @@ class StripeController extends Controller
         ]);
 
         Reservation::create ([
-            "client_id" => 1,
-            "room_id"   => 1,
+            "client_id" => auth()->user()->id,
+            "room_id"   => request('room'),
             "country"   => request('country'),
             "acc_no"    => request('acc_no'),
             "from"      => request('from'),
             "to"        => request('to'),
             "price"     => intval(request('totalprice'))*100
         ]);
+
+        Room::find(request('room'))->update(['is_available' => 0 ]);
 
         Session::flash('success', 'Payment successful!');
        
