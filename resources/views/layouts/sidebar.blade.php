@@ -30,9 +30,9 @@
                             
                         </div>
                         <div class="info">
-                            <a href="#" class="d-block">
+                            <span  class="d-block text-light">
                                 {{ isset( auth()->user()->name )  ? auth()->user()->name : ''  }}
-                            </a>
+                            </span>
                         </div>
                     </div>
 
@@ -46,7 +46,7 @@
                                 @role('admin')
                                     
                                     <li class="nav-item">
-                                        <a href="{{ url('/') }}" class="nav-link active">
+                                        <a href="{{ url('/') }}" class="nav-link active" style="background-color: #444c54">
                                             <i class="far fa-circle text-gray nav-icon"></i>
                                             <p>{{ trans('admin.dashboard') }}</p>
                                         </a>
