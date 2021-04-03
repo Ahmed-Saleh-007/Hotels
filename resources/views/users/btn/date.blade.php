@@ -1,1 +1,1 @@
-{{ $created_at }}
+{{ explode('T', $created_at)[0] }}

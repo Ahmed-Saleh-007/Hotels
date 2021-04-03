@@ -71,10 +71,14 @@ class ClientStatisticsController extends Controller
     
 
         $users =  User::select(DB::raw("COUNT(*) as count,country as country"))
-                        ->whereIn('id', $clientIds)
-                        ->whereNotNull('country')
-                        ->groupBy('country')
-                        ->pluck('count', 'country');
+
+        ->whereIn('id', $clientIds)
+        ->where('level', 'client')
+        ->whereNotNull('country')
+        ->whereYear('created_at', $year)
+        ->groupBy('country')
+        ->pluck('count', 'country');
+
 
         $colors_array = array();
 

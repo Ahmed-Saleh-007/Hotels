@@ -19,8 +19,10 @@ class UserDatatable extends DataTable
             ->addColumn('checkbox', 'users.btn.checkbox')
             ->addColumn('actions', 'users.btn.actions')
             ->addColumn('avatar_image', 'users.btn.avatar_image')
+            ->addColumn('date', 'users.btn.date')
             ->rawColumns([
                 'checkbox',
+                'date',
                 'actions',
                 'avatar_image',
             ]);
@@ -47,8 +49,7 @@ class UserDatatable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->addAction(['width' => '80px'])
-                    //->parameters($this->getBuilderParameters());
+
                     ->parameters([
                         'dom'        => 'Blfrtip',
                         'lengthMenu' => [[10, 25, 50, 100], [10, 25, 50, 100]],
@@ -144,8 +145,8 @@ class UserDatatable extends DataTable
 			],
             
             [
-				'name'  =>  'created_at',
-				'data'  => 'created_at',
+				'name'  =>  'date',
+				'data'  =>  'date',
 				'title' => trans('admin.created_at'),
 			], [
 				'name'       => 'actions',

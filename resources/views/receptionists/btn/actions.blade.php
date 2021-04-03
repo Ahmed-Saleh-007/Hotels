@@ -5,7 +5,7 @@
     <i class="fa fa-eye" style="opacity: 0.9;font-size: 16px;margin: 0 5px;color: #080;"></i>
   </a>
 
-  @if (auth()->user()->id == $created_by)
+  @if (auth()->user()->id == $created_by || auth()->user()->level == 'admin')
 
     <!-- Trigger the edit modal with a button -->
     <a href="" class="edit-ajax" data-toggle="modal" data-target="#ajax_edit" data-ajax="{{$id}}">

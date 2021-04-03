@@ -182,6 +182,7 @@ Route::get('lang/{lang}', function ($lang) {                            //
 Route::get('/auth/google/redirect', [SocialiteController::class , 'redirect_to_google'])->name('dashboard.google_redirect');
 Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from_google']);
 
+
 Route::get('/site', function () {
     return view('site');
 })->name('site.home');
@@ -191,3 +192,11 @@ Route::get('/pending', function () {
 Route::get('/banning', function () {
     return view('site.banning');
 })->name('site.banning');
+
+
+//========== testing for heroku ===========//
+Route::get('/linkstorage', function () {
+    \Artisan::call('storage:link');
+
+    dd('linked');
+});
