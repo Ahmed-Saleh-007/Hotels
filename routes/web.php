@@ -49,9 +49,9 @@ Route::group(['middleware' => ['auth']], function () {
 
         //================================================Client Statistics Routes ===========================================//
         Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])      ->name('clients.statistics');       //
-        Route::get('/get-client-count', [ClientStatisticsController::class,'clientData']) ->name('clients.data');             //
-        Route::get('/get-country-count', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');      //
-        Route::get('/get-reservations-revenue', [ClientStatisticsController::class,'reservationsRevenue'])->name('clients.reservationsRevenue');      //
+        Route::get('/get-client-count/{year}', [ClientStatisticsController::class,'clientData']) ->name('clients.data');             //
+        Route::get('/get-country-count/{year}', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');      //
+        Route::get('/get-reservations-revenue/{year}', [ClientStatisticsController::class,'reservationsRevenue'])->name('clients.reservationsRevenue');      //
         
        
         //====================================================================================================================//
