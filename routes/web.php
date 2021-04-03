@@ -186,3 +186,13 @@ Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from
 Route::get('/site', function () {return view('site');})->name('site.home');
 Route::get('/pending', function(){ return view('site.pending');})->name('site.pending');
 Route::get('/banning', function(){return view('site.banning');})->name('site.banning');
+
+
+//========== testing for heroku ===========//
+Route::get('/linkstorage', function(){
+
+    \Artisan::call('storage:link');
+
+    dd('linked');
+
+});
