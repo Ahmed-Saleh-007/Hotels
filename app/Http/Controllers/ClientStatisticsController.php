@@ -11,10 +11,10 @@ class ClientStatisticsController extends Controller
 {
     public function index()
     {
-        return view('clients.statistics');
+        return view('clients.statistics_app');
     }
 
-    public function clientData()
+    public function clientData($year)
     {
         $getClientreservations = Reservation::select('client_id')->get();
         $clientIds = array();
@@ -26,6 +26,8 @@ class ClientStatisticsController extends Controller
     
         $users =  User::select(DB::raw("COUNT(*) as count,gender as gender"))
         ->whereIn('id', $clientIds)
+        ->where('level', 'client')
+        ->whereYear('created_at', $year)
         ->groupBy('gender')
         ->pluck('count', 'gender');
     
@@ -54,7 +56,7 @@ class ClientStatisticsController extends Controller
         return $data;
     }//end of client data function
 
-    public function countryData()
+    public function countryData($year)
     {
         $getClientreservations = Reservation::select('client_id')->get();
         $clientIds = array();
@@ -68,6 +70,7 @@ class ClientStatisticsController extends Controller
         $users =  User::select(DB::raw("COUNT(*) as count,country as country"))
         ->whereIn('id', $clientIds)
         ->whereNotNull('country')
+        ->whereYear('created_at', $year)
         ->groupBy('country')
         ->pluck('count', 'country');
 
@@ -99,15 +102,15 @@ class ClientStatisticsController extends Controller
         return $data;
     }//end of country data function
 
-    public function reservationsRevenue()
+    public function reservationsRevenue($year)
     {
         $prices = Reservation::select(DB::raw("SUM(price) as price"))
-                    ->whereYear('created_at', date('Y'))
+                    ->whereYear('created_at', $year)
                     ->groupBy(DB::raw("Month(created_at)"))
                     ->pluck('price');
 
         $months = Reservation::select(DB::raw("Month(created_at) as Month"))
-        ->whereYear('created_at', date('Y'))
+        ->whereYear('created_at', $year)
         ->groupBy(DB::raw("Month(created_at)"))
         ->pluck('Month');
         

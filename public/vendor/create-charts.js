@@ -1,16 +1,16 @@
-(function ($) {
 
-    var charts = {
-        init: function () {
-   
-            this.ajaxGetClientCount();
-			this.ajaxGetCountryCount();
-            this.ajaxGetReservationsRevenue();
+
+     var charts = {
+        init: function (year) {
+   console.log("year = " +year);
+            this.ajaxGetClientCount(year);
+			this.ajaxGetCountryCount(year);
+            this.ajaxGetReservationsRevenue(year);
 
         },
 
-        ajaxGetClientCount: function () {
-            var urlPath = '/get-client-count';
+        ajaxGetClientCount: function (year = 2021) {
+            var urlPath = '/get-client-count/'+year;
             var request = $.ajax({
                 method: 'GET',
                 url: urlPath
@@ -25,8 +25,8 @@
             });
         },
 
-		ajaxGetCountryCount: function () {
-            var urlPath = '/get-country-count';
+		ajaxGetCountryCount: function (year = 2021) {
+            var urlPath = '/get-country-count/'+year;
             var request = $.ajax({
                 method: 'GET',
                 url: urlPath
@@ -41,8 +41,8 @@
             });
         },
 
-        ajaxGetReservationsRevenue: function () {
-            var urlPath = '/get-reservations-revenue';
+        ajaxGetReservationsRevenue: function (year = 2021) {
+            var urlPath = '/get-reservations-revenue/'+year;
             var request = $.ajax({
                 method: 'GET',
                 url: urlPath
@@ -142,4 +142,4 @@
 
     charts.init();
 
-})(jQuery);
+
