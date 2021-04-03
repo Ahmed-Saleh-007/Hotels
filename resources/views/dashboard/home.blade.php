@@ -15,7 +15,7 @@
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="{{ route('managers.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{ route('managers.index') }}" class="small-box-footer">{{ trans('admin.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -30,7 +30,7 @@
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="{{ route('receptionists.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{ route('receptionists.index') }}" class="small-box-footer">{{ trans('admin.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -45,7 +45,7 @@
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="{{ route('clients.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{ route('clients.index') }}" class="small-box-footer">{{ trans('admin.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
@@ -60,7 +60,7 @@
         <div class="icon">
           <i class="ion ion-person"></i>
         </div>
-        <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="{{ route('users.index') }}" class="small-box-footer">{{ trans('admin.more_info') }} <i class="fas fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

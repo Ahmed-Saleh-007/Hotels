@@ -114,7 +114,7 @@ class ReservationDataTable extends DataTable
 			],[
 				'name'  => 'price_in_dollar',
 				'data'  => 'price_in_dollar',
-				'title' => 'Price',
+				'title' => trans('admin.price'),
 			], [
 				'name'       => 'actions',
 				'data'       => 'actions',

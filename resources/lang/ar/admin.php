@@ -114,7 +114,7 @@ return [
 	'floors'							=> 'طوابق',
 	'rooms'								=> 'غرف ',
 	'floor_room'						=> 'الطابق_الغرفه',
-	'managers_'                         => 'المديرين_',
+	'managers_'                         => 'المديرين',
 	'clients_'                          => 'العملاء',
 	'receptionists_'                    => 'موظفو الاستقبال    ',
 	'approve_this_client'               => 'الموافقة على هذا العميل',
@@ -129,5 +129,21 @@ return [
 	'statistics_chart'                  => 'الإحصائيات',
 	'charts'                            => 'خرايط',
 	'line_chart'                        => 'خط الرسم البياني ',
-    
+	'acc_no'							=> 'عدد المرافقين',
+	'room_no'							=> 'رقم الغرفة',
+	'reserv'							=> 'الحجوزات',
+	'myreserv'							=> 'حجوزاتى',
+	'reservid'							=> 'رقم الحجز',
+	'book'								=> 'احجز غرفة',
+	'client'							=> 'العميل',
+	'client_name'						=> 'اسم العميل',
+	'to'								=> 'إلى',
+	'from'								=> 'من',
+	'book_room'							=> 'احجز غرفة',
+	'all_reserv'                        => 'كل الحجوزات',
+	'can_not_delete_this_room'          => 'هذه الغرفة محجوزة لايمكنك حذفها', 
+	'can_not_delete_this_floor'         => 'هذا الطابق به غرف لا يمكنك حذفه',
+    'more_info'							=> 'عرض المزيد',
+	'banned'                            => 'صفحة الحظر'
+
 ];

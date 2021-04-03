@@ -7,13 +7,14 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FloorController;
 use App\Http\Controllers\ClientController;
-use App\Http\Controllers\ManagerController;
-use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserAuthentication;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReceptionistController;
 use App\Http\Controllers\ClientStatisticsController;
 use App\Models\Reservation;
@@ -143,7 +144,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/profile', [ProfileController::class , 'update']) ->name('profile.save');
 });
 
-
 //=====================================login & registeration & authentication routes==============================================//
 Route::get('/login', [UserAuthentication::class , 'login'])               ->name('dashboard.login');            //
 Route::post('/login', [UserAuthentication::class , 'dologin'])             ->name('dashboard.login');            //
@@ -173,9 +173,16 @@ Route::get('/', [HomeController::class , 'index'])->name('dashboard.home');
 //===================================//
 
 //===============================Routes to change language============================//
-Route::get('lang/{lang}', function ($lang) {                                          //
+Route::get('lang/{lang}', function ($lang) {                            //
     session()->has('lang') ? session()->forget('lang') : '';                          //
     $lang == 'ar' ? session()->put('lang', 'ar') : session()->put('lang', 'en');      //
     return back();                                                                    //
 });                                                                                   //
 //====================================================================================//
+
+Route::get('/auth/google/redirect', [SocialiteController::class , 'redirect_to_google'])->name('dashboard.google_redirect'); 
+Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from_google']);
+
+Route::get('/site', function () {return view('site');})->name('site.home');
+Route::get('/pending', function(){ return view('site.pending');})->name('site.pending');
+Route::get('/banning', function(){return view('site.banning');})->name('site.banning');

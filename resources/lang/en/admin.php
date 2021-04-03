@@ -145,5 +145,8 @@ return [
 	'book_room'							=> 'Book Room',
 	'all_reserv'                        => 'All Reservations',
 	'can_not_delete_this_room'          => 'This room is reserved, you can\'t delete it', 
-	'can_not_delete_this_floor'         => 'This Floor has room(s), you can\'t delete it'
+	'can_not_delete_this_floor'         => 'This Floor has room(s), you can\'t delete it',
+	'more_info'							=> 'More info',
+	'Member Since'						=> 'Member Since',
+	'banned'                            => 'Banned page'
 ];
