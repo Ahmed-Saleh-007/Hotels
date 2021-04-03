@@ -16,7 +16,9 @@ class ClientStatisticsController extends Controller
 
     public function clientData($year)
     {
-        $getClientreservations = Reservation::select('client_id')->get();
+        $getClientreservations = Reservation::select('client_id')
+                                            ->whereYear('created_at', $year)
+                                             ->get();
         $clientIds = array();
         foreach ($getClientreservations as $client) {
             $clientIds [] = $client['client_id'];
@@ -25,11 +27,10 @@ class ClientStatisticsController extends Controller
     
     
         $users =  User::select(DB::raw("COUNT(*) as count,gender as gender"))
-        ->whereIn('id', $clientIds)
-        ->where('level', 'client')
-        ->whereYear('created_at', $year)
-        ->groupBy('gender')
-        ->pluck('count', 'gender');
+                            ->whereIn('id', $clientIds)
+                            ->where('level', 'client')
+                            ->groupBy('gender')
+                            ->pluck('count', 'gender');
     
     
         
@@ -58,7 +59,9 @@ class ClientStatisticsController extends Controller
 
     public function countryData($year)
     {
-        $getClientreservations = Reservation::select('client_id')->get();
+        $getClientreservations = Reservation::select('client_id')
+                                        ->whereYear('created_at', $year)
+                                        ->get();
         $clientIds = array();
         foreach ($getClientreservations as $client) {
             $clientIds [] = $client['client_id'];
@@ -68,11 +71,10 @@ class ClientStatisticsController extends Controller
     
 
         $users =  User::select(DB::raw("COUNT(*) as count,country as country"))
-        ->whereIn('id', $clientIds)
-        ->whereNotNull('country')
-        ->whereYear('created_at', $year)
-        ->groupBy('country')
-        ->pluck('count', 'country');
+                        ->whereIn('id', $clientIds)
+                        ->whereNotNull('country')
+                        ->groupBy('country')
+                        ->pluck('count', 'country');
 
         $colors_array = array();
 
@@ -110,9 +112,9 @@ class ClientStatisticsController extends Controller
                     ->pluck('price');
 
         $months = Reservation::select(DB::raw("Month(created_at) as Month"))
-        ->whereYear('created_at', $year)
-        ->groupBy(DB::raw("Month(created_at)"))
-        ->pluck('Month');
+                    ->whereYear('created_at', $year)
+                    ->groupBy(DB::raw("Month(created_at)"))
+                    ->pluck('Month');
         
 
         $pricesPerMonth = array(0,0,0,0,0,0,0,0,0,0,0,0);
@@ -130,6 +132,60 @@ class ClientStatisticsController extends Controller
             'data'    => $pricesPerMonth,
             'max'     => $max_no
         ];
+        return $data;
+    }//end of reservations Revenue function
+
+
+    
+
+    public function topReservationsClients($year)
+    {
+        $getClientreservationsPrice = Reservation::select(DB::raw("SUM(price) as price , client_id as client_id"))
+                                        ->orderBy('price', 'desc')
+                                        ->groupBy('client_id')
+                                        ->whereYear('created_at', $year)
+                                        ->paginate(10)
+                                        ->pluck('price', 'client_id');
+
+       
+        
+        $clientIds = array();
+        $priceArray = array();
+       
+
+        $getClientreservationsPrice = json_decode($getClientreservationsPrice);
+        foreach ($getClientreservationsPrice as $client_id => $price) {
+            $clientIds [] = $client_id;
+            $priceArray     [] = (int)$price/100;
+        }
+
+        
+
+        $users =  User::select(DB::raw("name as name"))
+        ->whereIn('id', $clientIds)
+        ->pluck('name');
+        
+        $colors_array = array();
+
+        for ($i = 0 ; $i < $users->count() ; $i++) {
+            $colors_array[] = 'rgb(' . rand(0, 255) . ',' . rand(0, 255) . ','  . rand(0, 255) . ')';
+        }
+
+        $users = json_decode($users);
+
+        $data = array();
+
+        $labels  = $users;
+        $content = $priceArray;
+
+
+        $data = [
+            'id'      => 'myChart_3',
+            'colors'  => $colors_array,
+            'labels'  => $labels,
+            'data'    => $content
+        ];
+        
         return $data;
     }
 }//end of controller

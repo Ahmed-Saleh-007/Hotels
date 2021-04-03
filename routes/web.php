@@ -47,14 +47,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/receptionists/{user}/unban', [ReceptionistController::class, 'unban_receptionist'])->name('receptionists.unban');  //
         //================================================================================================================================//
 
-        //================================================Client Statistics Routes ===========================================//
-        Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])      ->name('clients.statistics');       //
-        Route::get('/get-client-count/{year}', [ClientStatisticsController::class,'clientData']) ->name('clients.data');             //
-        Route::get('/get-country-count/{year}', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');      //
-        Route::get('/get-reservations-revenue/{year}', [ClientStatisticsController::class,'reservationsRevenue'])->name('clients.reservationsRevenue');      //
-        
-       
-        //====================================================================================================================//
+        //================================================Client Statistics Routes ====================================================================================//
+        Route::get('/client/statistcs', [ClientStatisticsController::class,'index'])      ->name('clients.statistics');                                                //
+        Route::get('/get-client-count/{year}', [ClientStatisticsController::class,'clientData']) ->name('clients.data');                                               //
+        Route::get('/get-country-count/{year}', [ClientStatisticsController::class,'countryData'])->name('clients.countryData');                                       //
+        Route::get('/get-reservations-revenue/{year}', [ClientStatisticsController::class,'reservationsRevenue'])->name('clients.reservationsRevenue');                //
+        Route::get('/get-top-reservations-clients/{year}', [ClientStatisticsController::class,'topReservationsClients'])->name('clients.topReservationsClients');      //
+        //=============================================================================================================================================================//
     });
 
     Route::group(['middleware' => ['role:admin|manager|receptionist' ] ], function () {
@@ -180,9 +179,15 @@ Route::get('lang/{lang}', function ($lang) {                            //
 });                                                                                   //
 //====================================================================================//
 
-Route::get('/auth/google/redirect', [SocialiteController::class , 'redirect_to_google'])->name('dashboard.google_redirect'); 
+Route::get('/auth/google/redirect', [SocialiteController::class , 'redirect_to_google'])->name('dashboard.google_redirect');
 Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from_google']);
 
-Route::get('/site', function () {return view('site');})->name('site.home');
-Route::get('/pending', function(){ return view('site.pending');})->name('site.pending');
-Route::get('/banning', function(){return view('site.banning');})->name('site.banning');
+Route::get('/site', function () {
+    return view('site');
+})->name('site.home');
+Route::get('/pending', function () {
+    return view('site.pending');
+})->name('site.pending');
+Route::get('/banning', function () {
+    return view('site.banning');
+})->name('site.banning');

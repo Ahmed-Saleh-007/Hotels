@@ -6,6 +6,7 @@
             this.ajaxGetClientCount(year);
 			this.ajaxGetCountryCount(year);
             this.ajaxGetReservationsRevenue(year);
+            this.ajaxGetTopReservationsClients(year);
 
         },
 
@@ -52,6 +53,21 @@
                 console.log(response);
 				
                 charts.createLineChart(response);
+            });
+        },
+
+        ajaxGetTopReservationsClients: function (year = 2021) {
+            var urlPath = '/get-top-reservations-clients/'+year;
+          
+            var request = $.ajax({
+                method: 'GET',
+                url: urlPath
+            });
+
+            request.done(function (response) {
+                console.log(response);
+				
+                charts.createClientPieChart(response);
             });
         },
 
