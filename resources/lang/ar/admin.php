@@ -144,4 +144,6 @@ return [
 	'can_not_delete_this_room'          => 'هذه الغرفة محجوزة لايمكنك حذفها', 
 	'can_not_delete_this_floor'         => 'هذا الطابق به غرف لا يمكنك حذفه',
     'more_info'							=> 'عرض المزيد',
+	'banned'                            => 'صفحة الحظر'
+
 ];

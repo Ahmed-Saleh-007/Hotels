@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\RegisterRequest;
 use App\Mail\UserResetPassword;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
-
 use DB;
 use Illuminate\Support\Facades\Mail;
-
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
-
 class UserAuthentication extends Controller
 {
 
@@ -32,26 +27,29 @@ class UserAuthentication extends Controller
         
         $rememberme = $request->rememberme == 1 ? true : false;
 
-        if( Auth::attempt(['email' => $request->email , 'password' => $request->password], $rememberme)){
+        $user = User::where('email', $request->email)->first();
 
-            $user = User::where('email', $request->email)->first();
-            $user->update(['last_login' => now()]);
-            if( $user->is_approved == 0 && $user->level == 'client'){
+        if( !empty($user) && $user->is_banned == 1){
 
-                session()->flash('error', trans('admin.you_are_not_approved_yet'));
-                return redirect()->route('dashboard.login');
+            return redirect()->route('site.banning');
 
-            }else{
-
-                return redirect('/');
-
-            }
-
-        }else{
-            session()->flash('error', trans('admin.invalid_email_or_password'));
-            return redirect()->route('dashboard.login');
         }
+        else{
+            if (Auth::attempt(['email' => $request->email , 'password' => $request->password], $rememberme)) {
+                
+                $user->update(['last_login' => now()]);
 
+                if ($user->is_approved == 0 && $user->level == 'client') {
+                    session()->flash('success', trans('admin.you_are_not_approved_yet'));
+                    return redirect()->route('dashboard.login');
+                } else {
+                    return redirect('/');
+                }
+            } else {
+                session()->flash('error', trans('admin.invalid_email_or_password'));
+                return redirect()->route('dashboard.login');
+            }
+        }
     }
 
     public function logout()
@@ -85,7 +83,6 @@ class UserAuthentication extends Controller
                 'created_at' => Carbon::now()
             ]);
 
-            //sending mail to my gmail (bassamsaad771@gmail.com)
             Mail::to($admin->email)->send(new UserResetPassword(['data' => $admin , 'token' => $token]));
             
             session()->flash('success', trans('admin.the_reset_link_sent_successfully'));
@@ -100,7 +97,6 @@ class UserAuthentication extends Controller
 
     }
 
-    //does not work
     public function reset_password($token)
     {
         
@@ -111,7 +107,7 @@ class UserAuthentication extends Controller
 
         if (!empty($check_token))
         {
-            // dd($check_token);
+
             return view('dashboard.auth.reset_password', ['data' => $check_token]);
 
         } else {

@@ -144,7 +144,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/profile', [ProfileController::class , 'update']) ->name('profile.save');
 });
 
-
 //=====================================login & registeration & authentication routes==============================================//
 Route::get('/login', [UserAuthentication::class , 'login'])               ->name('dashboard.login');            //
 Route::post('/login', [UserAuthentication::class , 'dologin'])             ->name('dashboard.login');            //
@@ -184,11 +183,6 @@ Route::get('lang/{lang}', function ($lang) {                            //
 Route::get('/auth/google/redirect', [SocialiteController::class , 'redirect_to_google'])->name('dashboard.google_redirect'); 
 Route::get('/auth/google/callback', [SocialiteController::class , 'callback_from_google']);
 
-
-
-
-Route::get('/site', function () {
-    return view('site');
-});
-
-
+Route::get('/site', function () {return view('site');})->name('site.home');
+Route::get('/pending', function(){ return view('site.pending');})->name('site.pending');
+Route::get('/banning', function(){return view('site.banning');})->name('site.banning');

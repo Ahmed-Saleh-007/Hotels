@@ -29,9 +29,7 @@ class RegisterController extends Controller
             
         ]);
 
-        session()->flash('success' , 'Account registered successfully, we will send approved message to you soon');
-
-        return back();
+        return redirect()->route('site.pending');
 
     }//end of register function
 

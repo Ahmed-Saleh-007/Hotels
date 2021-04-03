@@ -56,62 +56,65 @@
 
                             </li>
 
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        {{ trans('admin.users') }}
-                                        @if (direction() == 'rtl')
-                                        <i class="right fas fa-angle-right"></i>
-                                        @else
-                                        <i class="right fas fa-angle-left"></i>
-                                        @endif
-                                    </p>
-                                </a>
 
-                                <ul class="nav nav-treeview">
+                            @role('admin|receptionist|manager')
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-users"></i>
+                                        <p>
+                                            {{ trans('admin.users') }}
+                                            @if (direction() == 'rtl')
+                                            <i class="right fas fa-angle-right"></i>
+                                            @else
+                                            <i class="right fas fa-angle-left"></i>
+                                            @endif
+                                        </p>
+                                    </a>
 
-                                @role('admin')
+                                    <ul class="nav nav-treeview">
 
-                                    <li class="nav-item">
-                                        <a href="{{ route('users.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-users text-success"></i>
-                                            <p>{{ trans('admin.all_users') }}</p>
-                                        </a>
-                                    </li>
+                                    @role('admin')
 
-                                @endrole
+                                        <li class="nav-item">
+                                            <a href="{{ route('users.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-users text-success"></i>
+                                                <p>{{ trans('admin.all_users') }}</p>
+                                            </a>
+                                        </li>
 
-                                @role('admin')
-                                    <li class="nav-item">
-                                        <a href="{{ route('managers.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-users text-warning"></i>
-                                            <p>{{ trans('admin.managers') }}</p>
-                                        </a>
-                                    </li>
-                                @endrole
+                                    @endrole
 
-                                @role('admin|manager')
-                                    <li class="nav-item">
-                                        <a href="{{ route('receptionists.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-users text-info"></i>
-                                            <p>{{ trans('admin.receptionists') }}</p>
-                                        </a>
-                                    </li>
-                                @endrole
+                                    @role('admin')
+                                        <li class="nav-item">
+                                            <a href="{{ route('managers.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-users text-warning"></i>
+                                                <p>{{ trans('admin.managers') }}</p>
+                                            </a>
+                                        </li>
+                                    @endrole
 
-                                
-                                @role('admin|receptionist|manager')
-                                    <li class="nav-item">
-                                        <a href="{{ route('clients.index') }}" class="nav-link">
-                                            <i class="nav-icon fas fa-users text-default"></i>
-                                            <p>{{ trans('admin.clients') }}</p>
-                                        </a>
-                                    </li>
-                                @endrole
+                                    @role('admin|manager')
+                                        <li class="nav-item">
+                                            <a href="{{ route('receptionists.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-users text-info"></i>
+                                                <p>{{ trans('admin.receptionists') }}</p>
+                                            </a>
+                                        </li>
+                                    @endrole
 
-                                </ul>
-                            </li>
+                                    
+                                    @role('admin|receptionist|manager')
+                                        <li class="nav-item">
+                                            <a href="{{ route('clients.index') }}" class="nav-link">
+                                                <i class="nav-icon fas fa-users text-default"></i>
+                                                <p>{{ trans('admin.clients') }}</p>
+                                            </a>
+                                        </li>
+                                    @endrole
+
+                                    </ul>
+                                </li>
+                            @endrole
 
                             @role('receptionist')
                             <li class="nav-item">
@@ -203,15 +206,6 @@
 
                                 </li>
 
-                                {{-- <li class="nav-item">
-                                    
-                                    <a href="#" class="nav-link">
-                                        <i class="nav-icon fas fa-chart-pie text-cyan"></i>
-                                        <p>{{ __('admin.line_chart') }}</p>
-                                    </a>
-
-                                </li> --}}
-
                             @endrole
 
                             <li class="nav-item has-treeview">
@@ -240,12 +234,16 @@
                                             </p>
                                         </a>
                                     </li>
+
+
                                     <li class="nav-item">
                                         <a href="{{ route('reserv.book') }}" class="nav-link">
                                             <i class='fas fa-ticket-alt'></i>
                                             <p>{{ trans('admin.book') }}</p>
                                         </a>
                                     </li> 
+
+
                                 </ul>
                             </li>
 
