@@ -26,6 +26,7 @@ class ClientStatisticsController extends Controller
     
         $users =  User::select(DB::raw("COUNT(*) as count,gender as gender"))
         ->whereIn('id', $clientIds)
+        ->where('level','client')
         ->groupBy('gender')
         ->pluck('count', 'gender');
     
@@ -67,6 +68,7 @@ class ClientStatisticsController extends Controller
 
         $users =  User::select(DB::raw("COUNT(*) as count,country as country"))
         ->whereIn('id', $clientIds)
+        ->where('level','client')
         ->whereNotNull('country')
         ->groupBy('country')
         ->pluck('count', 'country');
