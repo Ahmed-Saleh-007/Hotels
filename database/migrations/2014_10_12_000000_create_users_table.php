@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('mobile')->nullable();
-            $table->enum('gender', ['male', 'female']);
+            $table->enum('gender', ['male', 'female'])->default('male');
             $table->enum('level', [ 'admin','manager', 'receptionist', 'client' ])->default('client');
             $table->string('avatar_image')->default('avatar.png');
             $table->boolean('is_approved')->default(0);
