@@ -35,8 +35,8 @@ class EmailSendJob implements ShouldQueue
     public function handle()
     {
         
-        //$users = User::where('level','client')->where('last_login', '<=', Carbon::now()->subMonth()->toDateTimeString())->get();
         $users = User::where('level','client')->where('last_login', '<=', Carbon::now()->toDateTimeString())->get();
+        //$users = User::where('level','client')->where('last_login', '<=', Carbon::now()->subMonth()->toDateTimeString())->get();
         foreach($users as $user) {
             $user->notify((new ClientMissing()));
         }
